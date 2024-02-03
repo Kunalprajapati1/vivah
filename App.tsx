@@ -14,7 +14,10 @@ import Image from './src/Image';
 import Land from './src/Land';
 import Front from './src/Front';
 import Upload from './src/Upload';
-import Profile from './src/Profile';
+import Data from './src/Data';
+import User from './src/User';
+import User2 from './src/User2';
+
 
 const Stack = createStackNavigator();
 
@@ -39,8 +42,11 @@ const App = () => {
       <Stack.Screen name="Land" component={Land} />
       <Stack.Screen name="Front" component={Front} />
       <Stack.Screen name="Upload" component={Upload} />
-      <Stack.Screen name="Profile" component={Profile} />
-      
+      <Stack.Screen name="Data" component={Data} />
+      <Stack.Screen name="User" component={User} />
+      <Stack.Screen name="User2" component={User2} />
+
+     
       
 
 

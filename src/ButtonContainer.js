@@ -45,25 +45,27 @@ const ButtonContainer = () => {
       <View style={styles.overlay}>
         <View style={styles.buttonContainer}>
           <IconButton onPress={() => navigateToPage('Home')} source={require('../assets/home.gif')} />
-          <IconButton
-            onPress={() => navigateToPage('Faltu')}
-            source={require('../assets/shopping.gif')}
-            style={styles.aboutButton}
-          />
+         
           <View style={styles.centerIconContainer}>
             <IconButton
-              onPress={() => navigateToPage('Donate')}
-              source={require('../assets/donoicon2.png')}
+              onPress={() => navigateToPage('Upload')}
+              source={require('../assets/upload.gif')}
               style={[styles.donateButton, styles.donateIcon]}
               rotate={true}
             />
           </View>
-          <IconButton
+          {/* <IconButton
             onPress={() => navigateToPage('Search')}
             source={require('../assets/search.gif')}
             style={styles.searchButton}
+          /> */}
+          <IconButton onPress={() => navigateToPage('Login')} source={require('../assets/premium.png')} 
+          style={styles.profileButton} />
+           <IconButton
+            onPress={() => navigateToPage('User')}
+            source={require('../assets/account.gif')}
+            style={styles.aboutButton}
           />
-          <IconButton onPress={() => navigateToPage('Login')} source={require('../assets/account.gif')} style={styles.profileButton} />
         </View>
       </View>
       {/* <View style={styles.men} >
@@ -86,7 +88,7 @@ const styles = StyleSheet.create({
     // marginTop: '190%', // Remove marginTop
   },
   buttonContainer: {
-    backgroundColor: '#000000ff',
+    backgroundColor: '#ffffffff',
     flexDirection: 'row',
     alignItems: 'center',
     position: 'absolute',
@@ -108,7 +110,7 @@ const styles = StyleSheet.create({
   },
   button: {
     borderRadius: 20,
-    width: 70,
+    width: 100,
     height: 40,
     alignItems: 'center',
     justifyContent: 'center',
@@ -126,13 +128,13 @@ const styles = StyleSheet.create({
     width: 70,
     height: 70,
     borderRadius: 90,
-    backgroundColor: '#000000',
-    marginBottom: 45,
+    backgroundColor: '#ffffff',
+    marginBottom: 0,
   },
   icon: {
     width: 24,
     height: 28,
-    tintColor: 'white',
+    tintColor: '#000000',
   },
 });
 

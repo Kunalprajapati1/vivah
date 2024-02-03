@@ -74,7 +74,8 @@ const ProfileInfo = ({ title, options, onSelect }) => {
   );
 };
 
-const Status = ({ navigation }) => {
+const Status = ({ navigation,route }) => {
+  const { uniqueId } = route.params;
   const maritalStatusOptions = ['Never Married', 'Divorced', 'Widowed', 'Single'];
   const heightOptions = ['4ft 5in', '4ft 6in', '4ft 7in', '4ft 8in', '4ft 9in', '4ft 10in', '4ft 11in', '5ft', '5ft 1in', '5ft 2in', '5ft 3in', '5ft 4in', '5ft 5in', '5ft 6in', '5ft 7in', '5ft 8in', '5ft 9in', '5ft 10in', '5ft 11in', '6ft', '6ft 1in', '6ft 2in', '6ft 3in', '6ft 4in', '6ft 5in', '6ft 6in', '6ft 7in', '6ft 8in', '6ft 9in', '6ft 10in', '6ft 11in', '7ft'];
   const dietOptions = ['Veg', 'Non-Veg', 'Eggetarian', 'Jain', 'Vegan'];
@@ -92,15 +93,16 @@ const Status = ({ navigation }) => {
 
   const handleContinue = async () => {
     try {
-      const profileRef = firestore().collection('ProfileFor'); // Change to your collection name
-      await profileRef.add({
+      const profileForRef = firestore().collection('ProfileFor');
+       // Change to your collection name
+      await profileForRef.doc(uniqueId).update({
         maritalStatus: maritalStatus, // Replace with your state variable
         height: height, // Replace with your state variable
         diet: diet, // Replace with your state variable
       });
   
       // Navigate to the next screen (adjust 'NextScreen' to your actual screen name)
-      navigation.navigate('Highest');
+      navigation.navigate('Highest',{uniqueId});
     } catch (error) {
       console.error('Error adding profile data:', error);
       Alert.alert('Error', 'Failed to submit. Please try again.');

@@ -5,18 +5,15 @@ import { initializeApp } from '@react-native-firebase/app';
 import firestore from '@react-native-firebase/firestore';
 
 
-const Highest = () => {
+const Highest = ({route,navigation}) => {
+  const {uniqueId}=route.params;
   const [qualification, setQualification] = useState('');
   const [selectedOption, setSelectedOption] = useState('');
   const [collegeName, setCollegeName] = useState('');
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [searchText, setSearchText] = useState('');
 
-  const navigation = useNavigation();
-
-  const navigateToPage = (pageName) => {
-    navigation.navigate(pageName);
-  };
+ 
   const categories = [
     'Engineering',
     'Arts/Design',
@@ -93,13 +90,13 @@ const Highest = () => {
   
     try {
       const highestEducationRef = firestore().collection('ProfileFor');
-      await highestEducationRef.add({
+      await highestEducationRef.doc(uniqueId).update({
         qualification: qualification, // Replace with your state variable
         collegeName: collegeName, // Replace with your state variable
       });
   
       // Navigate to the next screen (adjust 'NextScreen' to your actual screen name)
-      navigateToPage('Work');
+      navigation.navigate('Work', { uniqueId});
     } catch (error) {
       console.error('Error adding highest education data:', error);
       Alert.alert('Error', 'Failed to submit. Please try again.');

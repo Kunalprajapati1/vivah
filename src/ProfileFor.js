@@ -30,25 +30,35 @@ const ProfileFor = ({navigation}) => {
     setSelectedGender(gender);
   };
 
-    const handleContinue = async () => {
-      if (!selectedGender) {
-        Alert.alert('Incomplete Information', 'Please select a gender.');
-      } else {
-        try {
-          const profileForRef = firestore().collection('ProfileFor');
-          await profileForRef.add({
-            selectedOption: selectedOption, // Use selectedOption instead of details.Options
-            selectedGender: selectedGender, // Use selectedGender instead of details.gender
-          });
-    
-          // Navigate to 'NameDetail' without showing an alert
-          navigation.navigate('NameDetail');
-        } catch (error) {
-          console.error('Error adding profile data:', error);
-          Alert.alert('Error', 'Failed to submit. Please try again.');
-        }
+   let generatedUniqueId = null;
+
+const handleContinue = async () => {
+  if (!selectedGender) {
+    Alert.alert('Incomplete Information', 'Please select a gender.');
+  } else {
+    try {
+      const profileForRef = firestore().collection('ProfileFor');
+
+      // If the unique ID is not generated yet, generate it
+      if (!generatedUniqueId) {
+        // Generate the unique ID using Firebase
+        const docRef = await profileForRef.add({
+          selectedOption: selectedOption,
+          selectedGender: selectedGender,
+        });
+
+        // Set the generated unique ID to use in the next page
+        generatedUniqueId = docRef.id;
       }
-    };
+
+      // Navigate to 'NameDetail' with the generated unique ID
+      navigation.navigate('NameDetail', { uniqueId: generatedUniqueId });
+    } catch (error) {
+      console.error('Error adding profile data:', error);
+      Alert.alert('Error', 'Failed to submit. Please try again.');
+    }
+  }
+};
   const isContinueDisabled = !selectedGender;
 
   return (

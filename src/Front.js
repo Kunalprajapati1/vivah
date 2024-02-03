@@ -6,25 +6,23 @@ import firestore from '@react-native-firebase/firestore';
 const Front = () => {
   const [postData, setPostData] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedImages, setSelectedImages] = useState([]);
 
   useEffect(() => {
-    // Fetch the data from Firestore and update the state
     const fetchPosts = () => {
       const unsubscribe = firestore().collection('Post').onSnapshot((snapshot) => {
         const posts = snapshot.docs.map(doc => doc.data());
         setPostData(posts);
       });
-  
-      // Cleanup the listener when the component unmounts
+
       return () => unsubscribe();
     };
-  
+
     fetchPosts();
   }, []);
 
-  const handleImageClick = (imageUrl) => {
-    setSelectedImage(imageUrl);
+  const handleImageClick = (imageUrls) => {
+    setSelectedImages(imageUrls);
     setModalVisible(true);
   };
 
@@ -32,8 +30,8 @@ const Front = () => {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      {postData.map((post, index) => (
-        <TouchableOpacity key={index} onPress={() => handleImageClick(post.photos.length > 0 ? post.photos[0] : null)}>
+     {postData.map((post, index) => (
+        <TouchableOpacity key={index} onPress={() => handleImageClick(post.photos)}>
           <View style={styles.postContainer}>
             {post.photos.length > 0 ? (
               <Image
@@ -57,28 +55,28 @@ const Front = () => {
           </View>
         </TouchableOpacity>
       ))}
-
-      <Modal
+ <Modal
         animationType="slide"
         transparent={false}
         visible={modalVisible}
         onRequestClose={() => {
           setModalVisible(false);
-          setSelectedImage(null);
+          setSelectedImages([]);
         }}
       >
-        <View style={styles.modalContainer}>
-          <TouchableOpacity onPress={() => setModalVisible(false)}>
-            <Text style={styles.closeButton}>⌫</Text>
-          </TouchableOpacity>
-          {selectedImage && (
+        <ScrollView horizontal
+          pagingEnabled
+          contentContainerStyle={styles.modalScrollView}
+        >
+          {selectedImages.map((imageUrl, index) => (
             <Image
-              source={{ uri: selectedImage }}
+              key={index}
+              source={{ uri: imageUrl }}
               style={styles.fullImage}
               resizeMode="contain"
             />
-          )}
-        </View>
+          ))}
+        </ScrollView>
       </Modal>
     </ScrollView>
   );
@@ -151,6 +149,13 @@ marginLeft:20,
     top:60,
     marginLeft:'70%',
     marginBottom: 20,
+  },
+  modalScrollView: {
+    flexGrow: 1,
+    flexDirection: 'row',
+  paddingHorizontal: 10,
+
+   
   },
   fullImage: {
     width: '100%',

@@ -1,60 +1,31 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, ActivityIndicator } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, TextInput, Image, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Modal from 'react-native-modal';
-import { GoogleSignin, statusCodes } from '@react-native-community/google-signin';
-import auth from '@react-native-firebase/auth';
-import firestore from '@react-native-firebase/firestore';
 
 const Home = () => {
   const navigation = useNavigation();
   const [loading, setLoading] = useState(false);
 
-  // Initialize Google Sign In
-  const configureGoogleSignIn = async () => {
-    await GoogleSignin.configure({
-      webClientId: '916285535946-b8ki81edmfqfge0vlc8b4c924e3s2tmu.apps.googleusercontent.com', // Replace with your web client ID from the Firebase Console
-    });
-  };
-
-  useEffect(() => {
-    configureGoogleSignIn();
-  }, []); // Run the configuration only once when the component mounts
-
-  const signInWithGoogle = async () => {
+  const navigateToPage = async (pageName) => {
     try {
-      await GoogleSignin.hasPlayServices();
-      const userInfo = await GoogleSignin.signIn();
-      const credential = auth.GoogleAuthProvider.credential(userInfo.idToken);
-
       setLoading(true);
 
-      // Sign in with Firebase using Google credentials
-      const userCredential = await auth().signInWithCredential(credential);
+      // Simulate some asynchronous task (e.g., API request)
+      await someAsyncTask();
 
-      // Store user data in Firestore
-      await storeUserDataInFirestore(userCredential.user);
-
-      setLoading(false);
-
-      // Navigate to the desired screen
-      navigation.navigate('ProfileFor');
-    } catch (error) {
-      console.error('Google Sign In Error', error);
+      // After the task is done, navigate to the 'ProfileFor' screen
+      navigation.navigate(pageName);
+    } finally {
       setLoading(false);
     }
   };
 
-  const storeUserDataInFirestore = async (user) => {
-    try {
-      await firestore().collection('users').doc(user.uid).set({
-        displayName: user.displayName,
-        email: user.email,
-        // Add other user data as needed
-      });
-    } catch (error) {
-      console.error('Error storing user data in Firestore', error);
-    }
+  const someAsyncTask = () => {
+    return new Promise((resolve) => {
+      // Simulate an asynchronous task (e.g., API request)
+      setTimeout(resolve, 2000); // Adjust the delay as needed
+    });
   };
 
   return (
@@ -67,30 +38,30 @@ const Home = () => {
       <View style={styles.contentContainer}>
         <Text style={styles.title}>New to Vivah ?</Text>
 
-        {/* Your existing code for email and mobile sign-up */}
-        <TouchableOpacity onPress={() => navigation.navigate('ProfileFor')} style={styles.googleContainer}>
+        <TouchableOpacity onPress={() => navigateToPage('ProfileFor')} style={styles.googleContainer}>
           <Image source={require('../assets/email.png')} style={styles.icon} />
           <Text style={styles.googleText}>Sign up with Email</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => navigation.navigate('Land')} style={styles.googleContainer}>
+        <TouchableOpacity onPress={() => navigateToPage('Land')} style={styles.googleContainer}>
           <Image source={require('../assets/smartphone.png')} style={styles.icon} />
           <Text style={styles.googleText}>Sign up with Mobile</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={signInWithGoogle} style={styles.googleContainer}>
+
+        <TouchableOpacity onPress={() => navigateToPage('Land')} style={styles.googleContainer}>
           <Image source={require('../assets/google.png')} style={styles.icon} />
           <Text style={styles.googleText}>Sign up with Google</Text>
         </TouchableOpacity>
-
+        
         <Text style={{ textDecorationLine: 'underline', fontSize: 18, textAlign: 'center', color: '#000ea3', fontFamily: "Regular" }}>
           Already have an account? Log in
         </Text>
 
         <Modal isVisible={loading}>
-          <View style={styles.loadingContainer}>
-            <View style={styles.loadingContent}>
-              <ActivityIndicator size="large" color="hsl(59, 82%, 65%)" />
-              <Text style={styles.load}>Let's add your details for registration</Text>
+        <View style={styles.loadingContainer}>
+          <View style={styles.loadingContent}>
+            <ActivityIndicator size="100px" color="hsl(59, 82%, 65%)" />
+            <Text style={styles.load} >Let's add your details for registration</Text>
             </View>
           </View>
         </Modal>

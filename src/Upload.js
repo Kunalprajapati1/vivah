@@ -1,11 +1,11 @@
-import React, { useState,useEffect } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, ScrollView } from 'react-native';
-import ImagePicker from 'react-native-image-crop-picker';
-// import { request, PERMISSIONS } from 'react-native-permissions';
+import React, { useState, useEffect } from 'react';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, ScrollView, Alert } from 'react-native';
+
 import { initializeApp } from '@react-native-firebase/app';
 import firestore from '@react-native-firebase/firestore';
-
-const Upload = ({navigation}) => {
+import storage from '@react-native-firebase/storage';
+import ImagePicker from 'react-native-image-crop-picker';
+const Upload = ({ navigation }) => {
   const [details, setDetails] = useState({
     name: '',
     age: '',
@@ -24,15 +24,16 @@ const Upload = ({navigation}) => {
 
   useEffect(() => {
     const firebaseConfig = {
-        apiKey: "AIzaSyAAvxsDg18a7O7bVnc_JHFGoX8J3Bo18ZM",
-        authDomain: 'vivah-57f3a.firebaseapp.com',
-        projectId: "vivah-57f3a",
-        storageBucket: "vivah-57f3a.appspot.com",
-        messagingSenderId: '916285535946',
-        appId: "1:916285535946:android:25db1a55a9bcf1dd916633",
-      };
+      apiKey: "YOUR_API_KEY",
+      authDomain: 'vivah-57f3a.firebaseapp.com',
+      projectId: "vivah-57f3a",
+      storageBucket: "vivah-57f3a.appspot.com",
+      messagingSenderId: '916285535946',
+      appId: "1:916285535946:android:25db1a55a9bcf1dd916633",
+    };
     initializeApp(firebaseConfig);
   }, []);
+
   const handleInputChange = (field, value) => {
     setDetails({ ...details, [field]: value });
   };
@@ -40,16 +41,34 @@ const Upload = ({navigation}) => {
   const handleGenderChange = (gender) => {
     setDetails({ ...details, gender });
   };
-
   const handlePhotoUpload = async () => {
     try {
       const response = await ImagePicker.openPicker({
         multiple: true,
         mediaType: 'photo',
       });
-
+  
       if (response && response.length > 0) {
-        setDetails({ ...details, photos: [...details.photos, ...response.map(photo => photo.path)] });
+        const storageRef = storage().ref();
+        const folderPath = 'images';
+  
+        const photoURLs = []; // To store the URLs of uploaded photos
+  
+        for (let index = 0; index < response.length; index++) {
+          const photo = response[index];
+          const imageName = `user_${index + 1}_${Date.now()}`;
+          const imageRef = storageRef.child(`${folderPath}/${imageName}`);
+  
+          await imageRef.putFile(photo.path);
+          const imageUrl = await imageRef.getDownloadURL();
+  
+          photoURLs.push(imageUrl);
+        }
+  
+        setDetails((prevDetails) => ({
+          ...prevDetails,
+          photos: [...prevDetails.photos, ...photoURLs],
+        }));
       }
     } catch (error) {
       console.log('ImagePicker Error: ', error);
@@ -77,8 +96,7 @@ const Upload = ({navigation}) => {
           education: details.education,
           photos: details.photos,
         });
-  
-        // Navigate to 'NameDetail' without showing an alert
+
         navigation.navigate('Land');
       } catch (error) {
         console.error('Error adding profile data:', error);
@@ -86,6 +104,7 @@ const Upload = ({navigation}) => {
       }
     }
   };
+
   return (
     <ScrollView contentContainerStyle={styles.scrollView}>
       <View style={styles.container}>

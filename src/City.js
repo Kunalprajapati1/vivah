@@ -14,7 +14,9 @@ import { Picker } from '@react-native-picker/picker';
 import { useNavigation } from '@react-navigation/native';
 import { initializeApp } from '@react-native-firebase/app';
 import firestore from '@react-native-firebase/firestore';
-const MyComponent = ({navigation}) => {
+
+const MyComponent = ({navigation,route}) => {
+  const { uniqueId } = route.params;
   const [selectedState, setSelectedState] = useState('');
   const [selectedCity, setSelectedCity] = useState('');
   const [selectedSubCommunity, setSelectedSubCommunity] = useState('');
@@ -22,20 +24,22 @@ const MyComponent = ({navigation}) => {
   const [isCityModalVisible, setIsCityModalVisible] = useState(false);
   const [stateSearch, setStateSearch] = useState('');
   const [citySearch, setCitySearch] = useState('');
+ 
+ 
   const handleContinue = async () => {
     if (!selectedSubCommunity) {
       Alert.alert('Incomplete Information', 'Please select a gender.');
     } else {
       try {
         const profileForRef = firestore().collection('ProfileFor');
-        await profileForRef.add({
+        await profileForRef.doc(uniqueId).update({
           selectedState: selectedState,
           selectedCity: selectedCity,
           selectedSubCommunity: selectedSubCommunity,
         });
   
         // Navigate to 'Status' without showing an alert
-        navigation.navigate('Status');
+        navigation.navigate('Status', { uniqueId});
       } catch (error) {
         console.error('Error adding profile data:', error);
         Alert.alert('Error', 'Failed to submit. Please try again.');

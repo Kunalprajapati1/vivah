@@ -6,7 +6,8 @@ import { useNavigation } from '@react-navigation/native';
 import { initializeApp } from '@react-native-firebase/app';
 import firestore from '@react-native-firebase/firestore';
 
-const Work = () => {
+const Work = ({navigation,route}) => {
+  const { uniqueId } = route.params;
   const [workWith, setWorkWith] = useState('');
   const [workAs, setWorkAs] = useState('');
   const [isWorkWithModalVisible, setIsWorkWithModalVisible] = useState(false);
@@ -18,7 +19,7 @@ const Work = () => {
   const [profileCreated, setProfileCreated] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const navigation = useNavigation();
+  // const navigation = useNavigation();
 
   const workWithOptions = ['Private', 'Government', 'Defence', 'Business', 'Not Working', 'Others'];
   const workAsOptions = [
@@ -75,26 +76,17 @@ const Work = () => {
   
     try {
       const addWorkDataFunction = firestore().collection('ProfileFor');
-      const result = await addWorkDataFunction.add({
-        workWith: workWith, // Replace with your state variable
-      workAs: workAs, // Replace with your state variable
-      workWithOtherDetails: workWithOtherDetails, // Replace with your state variable
-      workAsOtherDetails: workAsOtherDetails, 
+      await addWorkDataFunction.doc(uniqueId).update({
+        workWith: workWith,
+        workAs: workAs,
+        workWithOtherDetails: workWithOtherDetails,
+        workAsOtherDetails: workAsOtherDetails,
       });
-
-      if (result && result.id) {
-        setProfileCreated(true);
   
-        // You can add additional logic here if needed
+      setProfileCreated(true);
   
-        // Navigate to the home page after a brief delay (for UI visibility)
-        setTimeout(() => {
-          navigation.navigate('Land');
-        }, 1500); // 2000 milliseconds (2 seconds) delay before navigation
-      } else {
-        console.error('Failed to add work data:', result);
-        // Handle error scenario
-      }
+      // Navigate to the home page after the data has been updated
+      navigation.navigate('Data', { uniqueId});
     } catch (error) {
       console.error('Error calling addWorkData function:', error);
       // Handle error scenario

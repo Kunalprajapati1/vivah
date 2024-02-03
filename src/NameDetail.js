@@ -3,8 +3,8 @@ import { StyleSheet, View, Text, Image, TextInput, TouchableOpacity, Alert, Scro
 
 import { initializeApp } from '@react-native-firebase/app';
 import firestore from '@react-native-firebase/firestore';
-
-const NameDetail = ({navigation}) => {
+const NameDetail = ({ route, navigation }) => {
+  const { uniqueId } = route.params;
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [dayOfBirth, setDayOfBirth] = useState('');
@@ -26,23 +26,25 @@ const NameDetail = ({navigation}) => {
 
 
   const isContinueDisabled = !firstName || !lastName || !dayOfBirth || !monthOfBirth || !yearOfBirth;
-
   const handleContinue = async () => {
     if (isContinueDisabled) {
       Alert.alert('Incomplete Information', 'Please fill in all the fields.');
     } else {
       try {
         const donationRef = firestore().collection('ProfileFor');
-        await donationRef.add({
+  
+        // Use uniqueId when updating the document in Firestore
+        await donationRef.doc(uniqueId).update({
           firstName: firstName,
           lastName: lastName,
           dayOfBirth: dayOfBirth,
           monthOfBirth: monthOfBirth,
           yearOfBirth: yearOfBirth,
         });
-        navigation.navigate('Email');
+  
+        navigation.navigate('Email', { uniqueId});
       } catch (error) {
-        console.error('Error adding donation:', error);
+        console.error('Error updating donation:', error);
         Alert.alert('Error', 'Failed to submit. Please try again.');
       }
     }

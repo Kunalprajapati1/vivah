@@ -45,11 +45,7 @@ const ButtonContainer = () => {
       <View style={styles.overlay}>
         <View style={styles.buttonContainer}>
           <IconButton onPress={() => navigateToPage('Home')} source={require('../assets/home.gif')} />
-          <IconButton
-            onPress={() => navigateToPage('Faltu')}
-            source={require('../assets/account.gif')}
-            style={styles.aboutButton}
-          />
+         
           <View style={styles.centerIconContainer}>
             <IconButton
               onPress={() => navigateToPage('Upload')}
@@ -63,7 +59,13 @@ const ButtonContainer = () => {
             source={require('../assets/search.gif')}
             style={styles.searchButton}
           /> */}
-          <IconButton onPress={() => navigateToPage('Login')} source={require('../assets/premium.png')} style={styles.profileButton} />
+          <IconButton onPress={() => navigateToPage('Login')} source={require('../assets/premium.png')} 
+          style={styles.profileButton} />
+           <IconButton
+            onPress={() => navigateToPage('User')}
+            source={require('../assets/account.gif')}
+            style={styles.aboutButton}
+          />
         </View>
       </View>
       {/* <View style={styles.men} >

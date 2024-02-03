@@ -4,7 +4,10 @@ import { Picker } from '@react-native-picker/picker';
 
 import { initializeApp } from '@react-native-firebase/app';
 import firestore from '@react-native-firebase/firestore';
-const Email = ({navigation}) => {
+const Email = ({navigation,route}) => {
+
+  const { uniqueId } = route.params;
+
   const [email, setEmail] = useState('');
   const [mobileNumber, setMobileNumber] = useState('');
   const [selectedReligion, setSelectedReligion] = useState('');
@@ -26,16 +29,18 @@ const Email = ({navigation}) => {
     } else {
       try {
         const profileForRef = firestore().collection('ProfileFor');
-        await profileForRef.add({
+  
+        // Use uniqueId when updating the document in Firestore
+        await profileForRef.doc(uniqueId).update({
           email: email,
           selectedReligion: selectedReligion,
           mobileNumber: mobileNumber,
         });
   
         // Navigate to 'City' without showing an alert
-        navigation.navigate('City');
+        navigation.navigate('City', { uniqueId});
       } catch (error) {
-        console.error('Error adding profile data:', error);
+        console.error('Error updating profile data:', error);
         Alert.alert('Error', 'Failed to submit. Please try again.');
       }
     }
