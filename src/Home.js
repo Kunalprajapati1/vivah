@@ -82,7 +82,13 @@ const Home = () => {
           <Text style={styles.googleText}>Sign up with Google</Text>
         </TouchableOpacity>
 
-        <Text style={{ textDecorationLine: 'underline', fontSize: 18, textAlign: 'center', color: '#000ea3', fontFamily: "Regular" }}>
+        {/* <TouchableOpacity onPress={() => navigation.navigate('Login')} style={styles.googleContainer}>
+          <Image source={require('../assets/smartphone.png')} style={styles.icon} />
+          <Text style={styles.googleText}>Login</Text>
+        </TouchableOpacity> */}
+
+
+        <Text onPress={() => navigation.navigate('Login')} style={{ textDecorationLine: 'underline', fontSize: 18, textAlign: 'center', color: '#000ea3', fontFamily: "Regular" }}>
           Already have an account? Log in
         </Text>
 

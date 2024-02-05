@@ -19,7 +19,7 @@ const MyComponent = ({navigation,route}) => {
   const { uniqueId } = route.params;
   const [selectedState, setSelectedState] = useState('');
   const [selectedCity, setSelectedCity] = useState('');
-  const [selectedSubCommunity, setSelectedSubCommunity] = useState('');
+  const [Community, setCommunity] = useState('');
   const [isStateModalVisible, setIsStateModalVisible] = useState(false);
   const [isCityModalVisible, setIsCityModalVisible] = useState(false);
   const [stateSearch, setStateSearch] = useState('');
@@ -27,7 +27,7 @@ const MyComponent = ({navigation,route}) => {
  
  
   const handleContinue = async () => {
-    if (!selectedSubCommunity) {
+    if (!Community) {
       Alert.alert('Incomplete Information', 'Please select a gender.');
     } else {
       try {
@@ -35,7 +35,7 @@ const MyComponent = ({navigation,route}) => {
         await profileForRef.doc(uniqueId).update({
           selectedState: selectedState,
           selectedCity: selectedCity,
-          selectedSubCommunity: selectedSubCommunity,
+          Community: Community,
         });
   
         // Navigate to 'Status' without showing an alert
@@ -180,13 +180,13 @@ const MyComponent = ({navigation,route}) => {
 
       {/* Sub-community Input Section */}
       <View style={styles.inputContainer}>
-        <Text style={styles.label}>Select Sub-community:</Text>
+        <Text style={styles.label}>community:</Text>
         <Picker
           style={styles.picker}
-          selectedValue={selectedSubCommunity}
-          onValueChange={(itemValue) => setSelectedSubCommunity(itemValue)}
+          selectedValue={Community}
+          onValueChange={(itemValue) => setCommunity(itemValue)}
         >
-          <Picker.Item label="Select Sub-community" value="" />
+          <Picker.Item label="community" value="" />
           <Picker.Item label="Prajapati" value="Prajapati" />
           <Picker.Item label="Kumhar" value="Kumhar" />
         </Picker>

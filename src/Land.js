@@ -62,7 +62,7 @@ const ButtonContainer = () => {
           <IconButton onPress={() => navigateToPage('Login')} source={require('../assets/premium.png')} 
           style={styles.profileButton} />
            <IconButton
-            onPress={() => navigateToPage('User')}
+            onPress={() => navigateToPage('Login')}
             source={require('../assets/account.gif')}
             style={styles.aboutButton}
           />

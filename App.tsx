@@ -17,6 +17,8 @@ import Upload from './src/Upload';
 import Data from './src/Data';
 import User from './src/User';
 import User2 from './src/User2';
+import Login from './src/Login';
+import Chat from './src/Chat';
 
 
 const Stack = createStackNavigator();
@@ -45,6 +47,8 @@ const App = () => {
       <Stack.Screen name="Data" component={Data} />
       <Stack.Screen name="User" component={User} />
       <Stack.Screen name="User2" component={User2} />
+      <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="Chat" component={Chat} />
 
      
       
