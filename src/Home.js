@@ -59,10 +59,10 @@ const Home = () => {
 
   return (
     <View style={styles.container}>
-      <Image
+      {/* <Image
         source={require('../assets/homebg.png')}
         style={styles.backgroundImage}
-      />
+      /> */}
       <Text style={styles.topText}>Vivah</Text>
       <View style={styles.contentContainer}>
         <Text style={styles.title}>New to Vivah ?</Text>

@@ -12,7 +12,20 @@
           "package_name": "com.vivah"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "916285535946-ur6mj9o8k385asv18vooa24dq1gsn3vj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vivah",
+            "certificate_hash": "1da06cc51c29943d176a85faa9272400b56119ae"
+          }
+        },
+        {
+          "client_id": "916285535946-b8ki81edmfqfge0vlc8b4c924e3s2tmu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAAvxsDg18a7O7bVnc_JHFGoX8J3Bo18ZM"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "916285535946-b8ki81edmfqfge0vlc8b4c924e3s2tmu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
