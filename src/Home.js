@@ -58,29 +58,54 @@ const Home = () => {
   };
 
   return (
+    <>
+
+   
     <View style={styles.container}>
+      <View>
+      <View style={{ alignContent:'center', marginTop:0   }}>
+       <Text style={{ fontFamily:'DMSerifDisplay-Regular',fontSize: 90,textAlign:'center', color:'white', }}>
+          Sanyog
+        </Text>
+        </View>
+      
+      <View style={{  width: '100%', marginTop:'30%'}}>
+      <View>
+        <Text style={{fontSize: 20, fontFamily:'Montserrat-SemiBold',color: '#ffffff',textAlign:'center', paddingHorizontal:3,   }}>Start Your Sanyog Journey by making a new Account</Text>
+
+      </View>
+        <View style={{textAlign:'center',  alignItems:'center'}}>
+      <TouchableOpacity onPress={() => navigation.navigate('Land')} style={{flexDirection: 'row', width: '100%', marginTop:19, alignItems: 'center', backgroundColor: '#ffffff',borderRadius: 25,marginBottom: 20 ,  fontFamily:'Montserrat-SemiBold'}}>
+          <Image source={require('../assets/smartphone.png')} style={styles.icon} />
+          <Text style={{ flex: 1, color:'#f79595' ,fontSize:18, paddingHorizontal: 20, fontFamily:'Montserrat-SemiBold', }}>Sign up with Mobile</Text>
+        </TouchableOpacity>
+
+        </View>
+        <Text onPress={() => navigation.navigate('Login')} style={{ textDecorationLine: 'underline', fontSize: 18, marginTop:20, textAlign: 'center', color: '#e05654', fontFamily: "Montserrat-SemiBold" }}>
+          Already have an account? Log in
+        </Text>
+      </View>
+      
+      </View>
+
       {/* <Image
         source={require('../assets/homebg.png')}
         style={styles.backgroundImage}
       /> */}
-      <Text style={styles.topText}>Vivah</Text>
+      {/* <Text style={{fontFamily:'Montserrat-SemiBold', fontSize: 26, fontFamily:'Montserrat-SemiBold', fontWeight: 'bold', color: '#fff', textAlign:'center', bottom:'40%',}}>Vivah</Text> */}
       <View style={styles.contentContainer}>
-        <Text style={styles.title}>New to Vivah ?</Text>
 
         {/* Your existing code for email and mobile sign-up */}
-        <TouchableOpacity onPress={() => navigation.navigate('ProfileFor')} style={styles.googleContainer}>
+        {/* <TouchableOpacity onPress={() => navigation.navigate('ProfileFor')} style={styles.googleContainer}>
           <Image source={require('../assets/email.png')} style={styles.icon} />
           <Text style={styles.googleText}>Sign up with Email</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
-        <TouchableOpacity onPress={() => navigation.navigate('Land')} style={styles.googleContainer}>
-          <Image source={require('../assets/smartphone.png')} style={styles.icon} />
-          <Text style={styles.googleText}>Sign up with Mobile</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={signInWithGoogle} style={styles.googleContainer}>
+        
+        {/* <TouchableOpacity onPress={signInWithGoogle} style={styles.googleContainer}>
           <Image source={require('../assets/google.png')} style={styles.icon} />
           <Text style={styles.googleText}>Sign up with Google</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
         {/* <TouchableOpacity onPress={() => navigation.navigate('Login')} style={styles.googleContainer}>
           <Image source={require('../assets/smartphone.png')} style={styles.icon} />
@@ -88,9 +113,7 @@ const Home = () => {
         </TouchableOpacity> */}
 
 
-        <Text onPress={() => navigation.navigate('Login')} style={{ textDecorationLine: 'underline', fontSize: 18, textAlign: 'center', color: '#000ea3', fontFamily: "Regular" }}>
-          Already have an account? Log in
-        </Text>
+        
 
         <Modal isVisible={loading}>
           <View style={styles.loadingContainer}>
@@ -102,15 +125,18 @@ const Home = () => {
         </Modal>
       </View>
     </View>
+    </>
   );
 };
 
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor:'#f79595',
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'flex-end', // Align content at the bottom
+    justifyContent: 'space-around',
+    fontFamily:'Montserrat-SemiBold' // Align content at the bottom
   },
   backgroundImage: {
     flex: 1,
@@ -119,6 +145,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
   topText: {
+    fontFamily:'Montserrat-SemiBold',
     fontSize: 26,
     fontWeight: 'bold',
     color: '#fff',
@@ -127,9 +154,10 @@ const styles = StyleSheet.create({
    
   },
   contentContainer: {
+    
     width: '100%',
     paddingHorizontal: 20,
-    paddingBottom: 20, // Added padding to lift content off the bottom
+    // paddingBottom: 20, // Added padding to lift content off the bottom
   },
   title: {
     fontSize: 24,

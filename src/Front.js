@@ -2,8 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity, Modal } from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import { useNavigation } from '@react-navigation/native';
+import { TextInput } from 'react-native-gesture-handler';
 
 const Front = () => {
+
+  const navigateToPersonDetails = (personData) => {
+    navigation.navigate('PersonDetails', {  personData, profileForDisplayOrder });
+  };
+
   const [profileForData, setProfileForData] = useState([]);
   const [postData, setPostData] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
@@ -70,22 +76,54 @@ const Front = () => {
     'email',
     'mobileNumber',
   ];
-
+  const [searchQuery, setSearchQuery] = useState('');
   const postDisplayOrder = [
     'name', 'gender', 'age', 'dob', 'religion', 'caste', 'education', 'email', 'mobileNumber',
   ];
 
   return (
+    <>
+    <View>
+    <View style={{ marginTop:40, marginLeft:30 }}>
+<TouchableOpacity onPress={()=>{navigation.navigate('Menu')}}>
+
+<Image style={{ width:30, height:30, }} source={require('./assets/app_images/menu.png')}/>
+</TouchableOpacity>
+    </View>
+    <Text style={{ fontSize:45,  marginLeft:30 ,fontFamily:'DMSerifDisplay-Regular', color:'black', marginTop:'8%', }}>
+Discover Your Stories
+    </Text>
+    <View style={{ marginHorizontal: 30, marginTop: 20 }}>
+          <View style={styles.searchContainer}>
+            <Image style={styles.searchIcon} source={require('./assets/app_images/loupe.png')} />
+            <TextInput
+              style={styles.input}
+              placeholder="Search..."
+              placeholderTextColor="gray"
+              onChangeText={text => setSearchQuery(text)} 
+            />
+          </View>
+        </View>
+    </View>
+
     <ScrollView contentContainerStyle={styles.container}>
-      {profileForData && profileForData.length > 0 &&
-        profileForData.map((data, index) => (
-          <TouchableOpacity key={index} onPress={() => handleImageClick(data.photos)}>
-            <View style={styles.postContainer}>
-              <Image
-                source={data.photos && data.photos.length > 0 ? { uri: data.photos[0] } : require('../assets/user.png')}
-                style={styles.profilePhoto}
-              />
-              <View style={styles.postDetails}>
+  <Text style={{ fontSize: 25, marginLeft: 20, fontFamily: 'DMSerifDisplay-Regular', color: 'black', marginTop: '5%' }}>
+    Near You
+  </Text>
+  {profileForData && profileForData.length > 0 &&
+    profileForData.map((data, index) => (
+      <TouchableOpacity key={index} onPress={() => navigateToPersonDetails(data)}>
+        <View style={styles.postContainer}>
+          <Image
+            source={data.photos && data.photos.length > 0 ? { uri: data.photos[0] } : require('./assets/app_images/user.png')}
+            style={styles.profilePhoto}
+          />
+          <View style={styles.textOverlay}>
+            <Text style={styles.overlayText}>
+              {data.firstName} {data.lastName}
+            </Text>
+          </View>
+              {/* <View style={styles.postDetails}>
                 <Text style={styles.userName} >
                   {data.firstName}
                 </Text>
@@ -96,8 +134,8 @@ const Front = () => {
                     </TouchableOpacity>
                   ))}
                 </View>
-              </View>
-              <TouchableOpacity onPress={navigateToChat} style={styles.chatt}>
+              </View> */}
+              {/* <TouchableOpacity onPress={navigateToChat} style={styles.chatt}>
                <Text>Click to Chat to Person</Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={navigateToChat} style={styles.smallImageContainer}>
@@ -105,21 +143,26 @@ const Front = () => {
                   source={require('../assets/chat.png')} // Replace with your small image source
                   style={styles.smallImage}
                 />
-              </TouchableOpacity>
+              </TouchableOpacity> */}
             </View>
           </TouchableOpacity>
         ))
       }
-
+      
       {postData && postData.length > 0 &&
         postData.map((data, index) => (
           <TouchableOpacity key={index} onPress={() => handleImageClick(data.photos)}>
             <View style={styles.postContainer}>
               <Image
-                source={data.photos && data.photos.length > 0 ? { uri: data.photos[0] } : require('../assets/user.png')}
+                source={data.photos && data.photos.length > 0 ? { uri: data.photos[0] } : require('./assets/app_images/user.png')}
                 style={styles.profilePhoto}
               />
-              <View style={styles.postDetails}>
+               <View style={styles.textOverlay}>
+            <Text style={styles.overlayText}>
+              {data.name}
+            </Text>
+          </View>
+              {/* <View style={styles.postDetails}>
                 <Text style={styles.userName} >
                   {data.name}
                 </Text>
@@ -130,8 +173,8 @@ const Front = () => {
                     </TouchableOpacity>
                   ))}
                 </View>
-              </View>
-              <TouchableOpacity onPress={navigateToChat} style={styles.chatt}>
+              </View> */}
+              {/* <TouchableOpacity onPress={navigateToChat} style={styles.chatt}>
                <Text>Click to Chat to Person</Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={navigateToChat} style={styles.smallImageContainer}>
@@ -139,7 +182,7 @@ const Front = () => {
                   source={require('../assets/chat.png')} // Replace with your small image source
                   style={styles.smallImage}
                 />
-              </TouchableOpacity>
+              </TouchableOpacity> */}
             </View>
           </TouchableOpacity>
         ))
@@ -166,29 +209,79 @@ const Front = () => {
         </ScrollView>
       </Modal>
     </ScrollView>
+    </>
   );
 };
 const styles = StyleSheet.create({
+  container: {
+    paddingBottom:20,
+    marginBottom:20,
+  },
+  postContainer: {
+    position: 'relative',
+  },
+  profilePhoto: {
+    width: 100, // Adjust as needed
+    height: 100, // Adjust as needed
+  },
+  textOverlay: {
+    
+    position: 'absolute',
+    bottom: 50,
+    width: '100%',
+    left: 9,
+    right: 0,
+    borderTopLeftRadius: 0,  // Adjust the value to control the sharpness of the point
+    borderTopRightRadius: 0, // Adjust the value to control the sharpness of the point
+    borderBottomLeftRadius: 70,
+    borderBottomRightRadius: 70,
+    backgroundColor: 'rgba(0, 0, 0, 0.773)', // Adjust the background color and opacity as needed
+    padding: 30, // Adjust as needed
+  },
+  overlayText: {
+    color: 'white', // Adjust the text color as needed
+    fontSize: 20, // Adjust the font size as needed
+    fontFamily: 'Montserrat-SemiBold',
+  },
+  searchContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    paddingHorizontal: 10,
+    borderRadius: 25,
+    marginTop: 10,
+  },
+  searchIcon: {
+    width: 20,
+    height: 20,
+    marginRight: 10,
+  },
+  input: {
+    flex: 1,
+    color: 'black',
+  },
   container: {
     padding: 16,
   },
   postContainer: {
     flexDirection: 'column',
-    marginBottom: 20,
-    borderWidth: 2,
-    borderColor: '#00000097',
+    // marginBottom: 20,
+    // borderWidth: 2,
+    // borderColor: '#00000097',
     borderRadius: 10,
     padding: 10,
     position: 'relative', // Added position relative for the small image positioning
     width: '100%',
   },
   profilePhoto: {
-    marginTop: '10%',
-    width: '80%',
-    height: 180,
+    marginTop: '3%',
+    width: '100%',
+    height: 400,
     marginBottom: 40,
-    borderRadius: 10,
-    marginLeft: 35,
+    borderRadius: 70,
+    // marginLeft: 35,
   },
   postDetails: {
     flex: 1,
@@ -200,7 +293,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 5,
     marginLeft: 20,
-    textTransform: 'uppercase',
+    // textTransform: 'uppercase',
     color: 'black',
   },
   detailsContainer: {
@@ -211,7 +304,7 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     fontSize: 17,
     lineHeight: 45,
-    textTransform: 'uppercase',
+    // textTransform: 'uppercase',
   },
   modalScrollView: {
     flexGrow: 1,

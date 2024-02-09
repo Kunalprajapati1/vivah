@@ -79,6 +79,7 @@ const ButtonContainer = () => {
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor:'#f7eff0',
     flex: 1,
     position: 'relative', // Set position to 'relative'
   },
@@ -88,16 +89,18 @@ const styles = StyleSheet.create({
     // marginTop: '190%', // Remove marginTop
   },
   buttonContainer: {
-    backgroundColor: '#ffffffff',
+    backgroundColor: '#1c202d',
     flexDirection: 'row',
     alignItems: 'center',
     position: 'absolute',
     height: 70,
     width: '100%',
-    borderRadius: 0,
-    zIndex: 2, // Ensure the button container appears above other content
-    bottom: 0, // Stick to the bottom
-  },
+    borderTopLeftRadius: 50,  // Adjust the value to control the sharpness of the point
+    borderTopRightRadius: 50, // Adjust the value to control the sharpness of the point
+    borderBottomLeftRadius: 0,
+    borderBottomRightRadius: 0,
+    zIndex: 2,
+    bottom: 0,},
 
   men:{
     zIndex: 2,
@@ -128,13 +131,13 @@ const styles = StyleSheet.create({
     width: 70,
     height: 70,
     borderRadius: 90,
-    backgroundColor: '#ffffff',
+    // backgroundColor: '#ffffff',
     marginBottom: 0,
   },
   icon: {
     width: 24,
     height: 28,
-    tintColor: '#000000',
+    tintColor: '#ffffff',
   },
 });
 

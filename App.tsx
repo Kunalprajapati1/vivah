@@ -19,6 +19,9 @@ import User from './src/User';
 import User2 from './src/User2';
 import Login from './src/Login';
 import Chat from './src/Chat';
+import Landing from './src/Landing';
+import Menu from './src/components/Menu';
+import PersonDetails from './src/components/PersonDetails';
 
 
 const Stack = createStackNavigator();
@@ -27,12 +30,15 @@ const App = () => {
   return (
     <NavigationContainer>
     <Stack.Navigator
-      initialRouteName="Home"
+      initialRouteName="Landing"
       screenOptions={{
         headerShown: false, 
       }}
     >
+      <Stack.Screen name="Landing" component={Landing} />
+      <Stack.Screen name="PersonDetails" component={PersonDetails} />
       <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="Menu" component={Menu} />
       <Stack.Screen name="ProfileFor" component={ProfileFor} />
       <Stack.Screen name="NameDetail" component={NameDetail} />
       <Stack.Screen name="Email" component={Email} />
