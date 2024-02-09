@@ -295,6 +295,7 @@ const styles = StyleSheet.create({
   profilePhoto2: {
     marginTop: '3%',
     width: '60%',
+    tintColor:'#970577',
     height: 220,
     marginBottom: 40,
     borderRadius: 70,
