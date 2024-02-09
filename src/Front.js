@@ -114,10 +114,14 @@ Discover Your Stories
     profileForData.map((data, index) => (
       <TouchableOpacity key={index} onPress={() => navigateToPersonDetails(data)}>
         <View style={styles.postContainer}>
-          <Image
+          {/* <Image
             source={data.photos && data.photos.length > 0 ? { uri: data.photos[0] } : require('./assets/app_images/user.png')}
             style={styles.profilePhoto}
-          />
+          /> */}
+          <Image
+  source={data.photos && data.photos.length > 0 ? { uri: data.photos[0] } : require('./assets/app_images/user.png')}
+  style={data.photos && data.photos.length > 0 ? styles.profilePhoto : styles.profilePhoto2}
+/>
           <View style={styles.textOverlay}>
             <Text style={styles.overlayText}>
               {data.firstName} {data.lastName}
@@ -153,10 +157,15 @@ Discover Your Stories
         postData.map((data, index) => (
           <TouchableOpacity key={index} onPress={() => handleImageClick(data.photos)}>
             <View style={styles.postContainer}>
-              <Image
+              {/* <Image
                 source={data.photos && data.photos.length > 0 ? { uri: data.photos[0] } : require('./assets/app_images/user.png')}
                 style={styles.profilePhoto}
-              />
+              /> */}
+
+<Image
+  source={data.photos && data.photos.length > 0 ? { uri: data.photos[0] } : require('./assets/app_images/user.png')}
+  style={data.photos && data.photos.length > 0 ? styles.profilePhoto : styles.profilePhoto2}
+/>
                <View style={styles.textOverlay}>
             <Text style={styles.overlayText}>
               {data.name}
@@ -282,6 +291,14 @@ const styles = StyleSheet.create({
     marginBottom: 40,
     borderRadius: 70,
     // marginLeft: 35,
+  },
+  profilePhoto2: {
+    marginTop: '3%',
+    width: '60%',
+    height: 220,
+    marginBottom: 40,
+    borderRadius: 70,
+    marginLeft: '20%',
   },
   postDetails: {
     flex: 1,
