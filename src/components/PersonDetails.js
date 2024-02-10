@@ -153,18 +153,21 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'flex-start',
     marginRight: 20,
-    marginBottom: 10,
+
+    marginBottom: 15,
   },
   fieldText: {
     fontFamily: 'Montserrat-Regular',
     fontSize: 17,
-    lineHeight: 25,
+    lineHeight: 45,
+    
     marginBottom: 5,
   },
   valueText: {
     fontFamily: 'Montserrat-Regular',
     color: '#e2d0d0',
-    fontSize: 17,
+    fontSize: 19,
+    
     lineHeight: 25,
   },
   line: {
@@ -174,9 +177,9 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   chatButton: {
-    backgroundColor: '#4CAF50',
+    backgroundColor: '#e05654',
     padding: 10,
-    borderRadius: 5,
+    borderRadius: 35,
     marginTop: 10,
   },
   chatButtonText: {

@@ -22,7 +22,9 @@ import Chat from './src/Chat';
 import Landing from './src/Landing';
 import Menu from './src/components/Menu';
 import PersonDetails from './src/components/PersonDetails';
+
 import EditSaveProfile from './src/components/EditSaveProfile';
+import PersonDetails2 from './src/components/PersonDetails2';
 
 
 const Stack = createStackNavigator();
@@ -57,6 +59,7 @@ const App = () => {
       <Stack.Screen name="User2" component={User2} />
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="Chat" component={Chat} />
+      <Stack.Screen name="PersonDetails2" component={PersonDetails2} />
 
      
       

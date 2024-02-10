@@ -17,6 +17,10 @@ const Front = () => {
     navigation.navigate('PersonDetails', {personData, profileForDisplayOrder});
   };
 
+  const navigateToPersonDetails2 = personData => {
+    navigation.navigate('PersonDetails2', {personData,  postDisplayOrder});
+  };
+
   const [profileForData, setProfileForData] = useState([]);
   const [postData, setPostData] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
@@ -88,6 +92,7 @@ const Front = () => {
     'mobileNumber',
   ];
   const [searchQuery, setSearchQuery] = useState('');
+ 
   const postDisplayOrder = [
     'name',
     'gender',
@@ -230,9 +235,9 @@ const Front = () => {
           postData.length > 0 &&
           postData.map((data, index) => (
             <TouchableOpacity
-              key={index}
-              onPress={() => handleImageClick(data.photos)}>
-              <View style={styles.postContainer}>
+            key={index}
+            onPress={() => navigateToPersonDetails2(data)}>
+            <View style={styles.postContainer}>
                 {/* <Image
                 source={data.photos && data.photos.length > 0 ? { uri: data.photos[0] } : require('./assets/app_images/user.png')}
                 style={styles.profilePhoto}
