@@ -1,13 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity, Modal } from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  ScrollView,
+  TouchableOpacity,
+  Modal,
+} from 'react-native';
 import firestore from '@react-native-firebase/firestore';
-import { useNavigation } from '@react-navigation/native';
-import { TextInput } from 'react-native-gesture-handler';
+import {useNavigation} from '@react-navigation/native';
+import {TextInput} from 'react-native-gesture-handler';
 
 const Front = () => {
-
-  const navigateToPersonDetails = (personData) => {
-    navigation.navigate('PersonDetails', {  personData, profileForDisplayOrder });
+  const navigateToPersonDetails = personData => {
+    navigation.navigate('PersonDetails', {personData, profileForDisplayOrder});
   };
 
   const [profileForData, setProfileForData] = useState([]);
@@ -17,10 +24,12 @@ const Front = () => {
 
   useEffect(() => {
     const fetchProfileForData = () => {
-      const unsubscribe = firestore().collection('ProfileFor').onSnapshot((snapshot) => {
-        const profiles = snapshot.docs.map(doc => doc.data());
-        setProfileForData(profiles);
-      });
+      const unsubscribe = firestore()
+        .collection('ProfileFor')
+        .onSnapshot(snapshot => {
+          const profiles = snapshot.docs.map(doc => doc.data());
+          setProfileForData(profiles);
+        });
 
       return () => unsubscribe();
     };
@@ -30,10 +39,12 @@ const Front = () => {
 
   useEffect(() => {
     const fetchPostData = () => {
-      const unsubscribe = firestore().collection('Post').onSnapshot((snapshot) => {
-        const posts = snapshot.docs.map(doc => doc.data());
-        setPostData(posts);
-      });
+      const unsubscribe = firestore()
+        .collection('Post')
+        .onSnapshot(snapshot => {
+          const posts = snapshot.docs.map(doc => doc.data());
+          setPostData(posts);
+        });
 
       return () => unsubscribe();
     };
@@ -41,7 +52,7 @@ const Front = () => {
     fetchPostData();
   }, []);
 
-  const handleImageClick = (imageUrls) => {
+  const handleImageClick = imageUrls => {
     setSelectedImages(imageUrls);
     setModalVisible(true);
   };
@@ -78,56 +89,119 @@ const Front = () => {
   ];
   const [searchQuery, setSearchQuery] = useState('');
   const postDisplayOrder = [
-    'name', 'gender', 'age', 'dob', 'religion', 'caste', 'education', 'email', 'mobileNumber',
+    'name',
+    'gender',
+    'age',
+    'dob',
+    'religion',
+    'caste',
+    'education',
+    'email',
+    'mobileNumber',
   ];
 
   return (
     <>
-    <View>
-    <View style={{ marginTop:40, marginLeft:30 }}>
-<TouchableOpacity onPress={()=>{navigation.navigate('Menu')}}>
-
-<Image style={{ width:30, height:30, }} source={require('./assets/app_images/menu.png')}/>
-</TouchableOpacity>
-    </View>
-    <Text style={{ fontSize:45,  marginLeft:30 ,fontFamily:'DMSerifDisplay-Regular', color:'black', marginTop:'8%', }}>
-Discover Your Stories
+      <View>
+      <View style={{marginTop: 40, flexDirection: 'row', marginLeft: 30}}>
+  {/* <TouchableOpacity
+    onPress={() => {
+      navigation.navigate('Menu');
+    }}
+    style={{flexDirection: 'row', alignItems: 'center', flex: 1}}> */}
+    <Text style={{flex: 1, fontFamily:'DMSerifDisplay-Regular', color:'#e05654',  fontSize:50,  }}>
+      Sanyog
     </Text>
-    <View style={{ marginHorizontal: 30, marginTop: 20 }}>
+    {/* </TouchableOpacity> */}
+    <TouchableOpacity
+    onPress={() => {
+      navigation.navigate('Menu');
+    }}
+    style={{flexDirection: 'row', alignItems: 'center', flex: 1}}>
+    <Image
+      style={{width: 30, height: 30, tintColor: '#000000',  marginLeft:'60%'}}
+      source={require('./assets/app_images/menu.png')}
+    />
+  </TouchableOpacity>
+</View>
+        <Text
+          style={{
+            fontSize: 25,
+            marginLeft: 30,
+            fontFamily: 'DMSerifDisplay-Regular',
+            color: '#000000',
+            marginTop: '8%',
+          }}>
+          Discover Your Story
+        </Text>
+        <View style={{marginHorizontal: 30, marginTop: 20}}>
           <View style={styles.searchContainer}>
-            <Image style={styles.searchIcon} source={require('./assets/app_images/loupe.png')} />
+            <Image
+              style={styles.searchIcon}
+              source={require('./assets/app_images/loupe.png')}
+            />
             <TextInput
               style={styles.input}
               placeholder="Search..."
               placeholderTextColor="gray"
-              onChangeText={text => setSearchQuery(text)} 
+              onChangeText={text => setSearchQuery(text)}
             />
           </View>
         </View>
-    </View>
+      </View>
 
-    <ScrollView contentContainerStyle={styles.container}>
-  <Text style={{ fontSize: 25, marginLeft: 20, fontFamily: 'DMSerifDisplay-Regular', color: 'black', marginTop: '5%' }}>
-    Near You
-  </Text>
-  {profileForData && profileForData.length > 0 &&
-    profileForData.map((data, index) => (
-      <TouchableOpacity key={index} onPress={() => navigateToPersonDetails(data)}>
-        <View style={styles.postContainer}>
-          {/* <Image
+      <ScrollView contentContainerStyle={styles.container}>
+        <View style={{flexDirection: 'row'}}>
+          <Text
+            style={{
+              fontSize: 35,
+              marginLeft: 20,
+              fontFamily: 'DMSerifDisplay-Regular',
+              color: 'black',
+              marginTop: '5%',
+            }}>
+            People Near You
+          </Text>
+          <Image
+            style={{
+              tintColor: '#e88a8a',
+              width: 20,
+              height: 20,
+              marginLeft: '15%',
+              marginTop: '9%',
+            }}
+            source={require('./assets/app_images/ellipsis.png')}
+          />
+        </View>
+        {profileForData &&
+          profileForData.length > 0 &&
+          profileForData.map((data, index) => (
+            <TouchableOpacity
+              key={index}
+              onPress={() => navigateToPersonDetails(data)}>
+              <View style={styles.postContainer}>
+                {/* <Image
             source={data.photos && data.photos.length > 0 ? { uri: data.photos[0] } : require('./assets/app_images/user.png')}
             style={styles.profilePhoto}
           /> */}
-          <Image
-  source={data.photos && data.photos.length > 0 ? { uri: data.photos[0] } : require('./assets/app_images/user.png')}
-  style={data.photos && data.photos.length > 0 ? styles.profilePhoto : styles.profilePhoto2}
-/>
-          <View style={styles.textOverlay}>
-            <Text style={styles.overlayText}>
-              {data.firstName} {data.lastName}
-            </Text>
-          </View>
-              {/* <View style={styles.postDetails}>
+                <Image
+                  source={
+                    data.photos && data.photos.length > 0
+                      ? {uri: data.photos[0]}
+                      : require('./assets/app_images/user.png')
+                  }
+                  style={
+                    data.photos && data.photos.length > 0
+                      ? styles.profilePhoto
+                      : styles.profilePhoto2
+                  }
+                />
+                <View style={styles.textOverlay}>
+                  <Text style={styles.overlayText}>
+                    {data.firstName} {data.lastName}
+                  </Text>
+                </View>
+                {/* <View style={styles.postDetails}>
                 <Text style={styles.userName} >
                   {data.firstName}
                 </Text>
@@ -139,7 +213,7 @@ Discover Your Stories
                   ))}
                 </View>
               </View> */}
-              {/* <TouchableOpacity onPress={navigateToChat} style={styles.chatt}>
+                {/* <TouchableOpacity onPress={navigateToChat} style={styles.chatt}>
                <Text>Click to Chat to Person</Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={navigateToChat} style={styles.smallImageContainer}>
@@ -148,30 +222,38 @@ Discover Your Stories
                   style={styles.smallImage}
                 />
               </TouchableOpacity> */}
-            </View>
-          </TouchableOpacity>
-        ))
-      }
-      
-      {postData && postData.length > 0 &&
-        postData.map((data, index) => (
-          <TouchableOpacity key={index} onPress={() => handleImageClick(data.photos)}>
-            <View style={styles.postContainer}>
-              {/* <Image
+              </View>
+            </TouchableOpacity>
+          ))}
+
+        {postData &&
+          postData.length > 0 &&
+          postData.map((data, index) => (
+            <TouchableOpacity
+              key={index}
+              onPress={() => handleImageClick(data.photos)}>
+              <View style={styles.postContainer}>
+                {/* <Image
                 source={data.photos && data.photos.length > 0 ? { uri: data.photos[0] } : require('./assets/app_images/user.png')}
                 style={styles.profilePhoto}
               /> */}
 
-<Image
-  source={data.photos && data.photos.length > 0 ? { uri: data.photos[0] } : require('./assets/app_images/user.png')}
-  style={data.photos && data.photos.length > 0 ? styles.profilePhoto : styles.profilePhoto2}
-/>
-               <View style={styles.textOverlay}>
-            <Text style={styles.overlayText}>
-              {data.name}
-            </Text>
-          </View>
-              {/* <View style={styles.postDetails}>
+                <Image
+                  source={
+                    data.photos && data.photos.length > 0
+                      ? {uri: data.photos[0]}
+                      : require('./assets/app_images/user.png')
+                  }
+                  style={
+                    data.photos && data.photos.length > 0
+                      ? styles.profilePhoto
+                      : styles.profilePhoto2
+                  }
+                />
+                <View style={styles.textOverlay}>
+                  <Text style={styles.overlayText}>{data.name}</Text>
+                </View>
+                {/* <View style={styles.postDetails}>
                 <Text style={styles.userName} >
                   {data.name}
                 </Text>
@@ -183,7 +265,7 @@ Discover Your Stories
                   ))}
                 </View>
               </View> */}
-              {/* <TouchableOpacity onPress={navigateToChat} style={styles.chatt}>
+                {/* <TouchableOpacity onPress={navigateToChat} style={styles.chatt}>
                <Text>Click to Chat to Person</Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={navigateToChat} style={styles.smallImageContainer}>
@@ -192,41 +274,44 @@ Discover Your Stories
                   style={styles.smallImage}
                 />
               </TouchableOpacity> */}
-            </View>
-          </TouchableOpacity>
-        ))
-      }
-
-      <Modal
-        animationType="slide"
-        transparent={false}
-        visible={modalVisible}
-        onRequestClose={() => {
-          setModalVisible(false);
-          setSelectedImages([]);
-        }}
-      >
-        <ScrollView horizontal pagingEnabled contentContainerStyle={styles.modalScrollView}>
-          {selectedImages.map((imageUrl, index) => (
-            <Image
-              key={index}
-              source={{ uri: imageUrl }}
-              style={styles.fullImage}
-              resizeMode="contain"
-            />
+              </View>
+            </TouchableOpacity>
           ))}
-        </ScrollView>
-      </Modal>
-    </ScrollView>
+
+        <Modal
+          animationType="slide"
+          transparent={false}
+          visible={modalVisible}
+          onRequestClose={() => {
+            setModalVisible(false);
+            setSelectedImages([]);
+          }}>
+          <ScrollView
+            horizontal
+            pagingEnabled
+            contentContainerStyle={styles.modalScrollView}>
+            {selectedImages.map((imageUrl, index) => (
+              <Image
+                key={index}
+                source={{uri: imageUrl}}
+                style={styles.fullImage}
+                resizeMode="contain"
+              />
+            ))}
+          </ScrollView>
+        </Modal>
+      </ScrollView>
     </>
   );
 };
 const styles = StyleSheet.create({
   container: {
-    paddingBottom:20,
-    marginBottom:20,
+    marginTop: 30,
+    paddingBottom: 20,
+    marginBottom: 20,
   },
   postContainer: {
+    // marginTop:20,
     position: 'relative',
   },
   profilePhoto: {
@@ -234,17 +319,16 @@ const styles = StyleSheet.create({
     height: 100, // Adjust as needed
   },
   textOverlay: {
-    
     position: 'absolute',
     bottom: 50,
     width: '100%',
     left: 9,
     right: 0,
-    borderTopLeftRadius: 0,  // Adjust the value to control the sharpness of the point
+    borderTopLeftRadius: 0, // Adjust the value to control the sharpness of the point
     borderTopRightRadius: 0, // Adjust the value to control the sharpness of the point
     borderBottomLeftRadius: 70,
     borderBottomRightRadius: 70,
-    backgroundColor: 'rgba(0, 0, 0, 0.773)', // Adjust the background color and opacity as needed
+    backgroundColor: 'rgba(0, 0, 0, 1)', // Adjust the background color and opacity as needed
     padding: 30, // Adjust as needed
   },
   overlayText: {
@@ -295,7 +379,7 @@ const styles = StyleSheet.create({
   profilePhoto2: {
     marginTop: '3%',
     width: '60%',
-    tintColor:'#970577',
+    tintColor: '#970577',
     height: 220,
     marginBottom: 40,
     borderRadius: 70,
@@ -303,7 +387,7 @@ const styles = StyleSheet.create({
   },
   postDetails: {
     flex: 1,
-    backgroundColor: '#b0a9a92f'
+    backgroundColor: '#b0a9a92f',
   },
   userName: {
     fontSize: 24,
@@ -334,22 +418,20 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   smallImageContainer: {
-
     top: 5,
     right: 5,
-   alignItems:'flex-end',
+    alignItems: 'flex-end',
   },
   smallImage: {
     width: '30%',
     height: 100,
-    
+
     borderRadius: 15,
   },
-  chatt:{
- top:50,
- left:20,
- textDecorationLine:'underline',
-
+  chatt: {
+    top: 50,
+    left: 20,
+    textDecorationLine: 'underline',
   },
 });
 

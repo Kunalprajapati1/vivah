@@ -8,8 +8,8 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-const PersonDetails = ({ route, navigation }) => {
-  const { params } = route;
+const PersonDetails = ({route, navigation}) => {
+  const {params} = route;
   const personData = params ? params.personData : null;
   const profileForDisplayOrder = params ? params.profileForDisplayOrder : null;
 
@@ -27,12 +27,16 @@ const PersonDetails = ({ route, navigation }) => {
     navigation.navigate('Chat');
   };
 
+  const capitalizeFirstLetter = string => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
+
   return (
     <View style={styles.container}>
       <ImageBackground
         source={
           personData.photos && personData.photos.length > 0
-            ? { uri: personData.photos[0] }
+            ? {uri: personData.photos[0]}
             : require('../assets/app_images/user.png')
         }
         style={styles.backgroundImage}>
@@ -47,18 +51,56 @@ const PersonDetails = ({ route, navigation }) => {
 
           {personData && (
             <View style={styles.postContainer}>
-              <Text style={styles.userName}>{personData.firstName}{personData.lastName}</Text>
+              <Text style={styles.nameText}>
+                {personData.firstName} {personData.lastName}
+              </Text>
               <View style={styles.detailsContainer}>
-                {profileForDisplayOrder.map((key) => (
-                  <TouchableOpacity key={key}>
-                    <Text style={styles.detailText}>{`${key}: ${
-                      personData[key] || 'N/A'
-                    }`}</Text>
-                  </TouchableOpacity>
+                {profileForDisplayOrder.map(key => (
+                  <View key={key} style={styles.columnContainer}>
+                    <Text
+                      style={[
+                        styles.fieldText,
+                        key === 'firstName' ||
+                        key === 'lastName' ||
+                        key === 'selectedGender' ||
+                        key === 'dayOfBirth' ||
+                        key === 'monthOfBirth' ||
+                        key === 'yearOfBirth' ||
+                        key === 'diet' ||
+                        key === 'height' ||
+                        key === 'collegeName' ||
+                        key === 'maritalStatus' ||
+                        key === 'qualification' ||
+                        key === 'selectedState' ||
+                        key === 'selectedCity' ||
+                        key === 'selectedOption' ||
+                        key === 'selectedReligion' ||
+                        key === 'selectedSubCommunity' ||
+                        key === 'workAs' ||
+                        key === 'workAsOtherDetails' ||
+                        key === 'workWith' ||
+                        key === 'workWithOtherDetails' ||
+                        key === 'email' ||
+                        key === 'mobileNumber' ||
+                        /* Add more conditions for questionable fields */ false
+                          ? {color: '#e88a8a'}
+                          : null,
+                      ]}>
+                      {capitalizeFirstLetter(key)}:
+                    </Text>
+                    <Text style={styles.valueText}>
+                      {personData[key] || 'N/A'}
+                    </Text>
+                    <View style={styles.line} />
+                  </View>
                 ))}
               </View>
-              <TouchableOpacity onPress={navigateToChat} style={styles.chatButton}>
-                <Text style={styles.chatButtonText}>Click to Chat to Person</Text>
+              <TouchableOpacity
+                onPress={navigateToChat}
+                style={styles.chatButton}>
+                <Text style={styles.chatButtonText}>
+                  Click to Chat to Person
+                </Text>
               </TouchableOpacity>
             </View>
           )}
@@ -92,26 +134,44 @@ const styles = StyleSheet.create({
     zIndex: 1,
   },
   postContainer: {
-    backgroundColor: 'rgba(248, 223, 238, 0.707)',
+    backgroundColor: 'rgba(0, 0, 0, 0.768)',
     borderRadius: 10,
-    padding: 16,
+    padding: 40,
     marginTop: 20,
   },
-  userName: {
-    fontFamily:'DMSerifDisplay-Regular',
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: 'black',
+  nameText: {
+    fontFamily: 'DMSerifDisplay-Regular',
+    fontSize: 32,
+    color: '#e05654',
     marginBottom: 10,
   },
   detailsContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
+  columnContainer: {
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    marginRight: 20,
     marginBottom: 10,
   },
-  detailText: {
-    fontFamily:'Montserrat-Regular',
-    color: '#000000',
+  fieldText: {
+    fontFamily: 'Montserrat-Regular',
     fontSize: 17,
     lineHeight: 25,
+    marginBottom: 5,
+  },
+  valueText: {
+    fontFamily: 'Montserrat-Regular',
+    color: '#e2d0d0',
+    fontSize: 17,
+    lineHeight: 25,
+  },
+  line: {
+    borderBottomWidth: 1,
+    borderBottomColor: '#e2d0d0',
+    width: '100%',
+    marginBottom: 5,
   },
   chatButton: {
     backgroundColor: '#4CAF50',
@@ -122,11 +182,13 @@ const styles = StyleSheet.create({
   chatButtonText: {
     color: 'white',
     textAlign: 'center',
+    fontFamily: 'Montserrat-Regular',
   },
   errorText: {
     color: 'white',
     fontSize: 18,
     textAlign: 'center',
+    fontFamily: 'Montserrat-Regular',
   },
 });
 

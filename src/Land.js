@@ -3,10 +3,11 @@ import React, { useRef } from 'react';
 import { View, TouchableOpacity, TouchableHighlight, Image, StyleSheet, Animated, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Front from './Front';
+import { useIsFocused } from '@react-navigation/native';
 // import Menuu from './Menuu';
 
 // Reusable IconButton Component
-const IconButton = ({ onPress, source, style, rotate }) => {
+const IconButton = ({ onPress, source, style, rotate, focused }) => {
   const rotateValue = useRef(new Animated.Value(rotate ? 1 : 0)).current;
 
   const handlePress = () => {
@@ -28,13 +29,21 @@ const IconButton = ({ onPress, source, style, rotate }) => {
       onPress={handlePress}
       underlayColor="transparent"
     >
-      <Animated.Image source={source} style={[styles.icon, { transform: [{ rotate: spin }] }]} />
+      <Animated.Image
+        source={source}
+        style={[
+          styles.icon,
+          { transform: [{ rotate: spin }], tintColor: focused ? '#e05654' : '#ffffff' },
+        ]}
+      />
     </TouchableHighlight>
   );
 };
 
+// Usage in ButtonContainer
 const ButtonContainer = () => {
   const navigation = useNavigation();
+  const isFocused = useIsFocused();
 
   const navigateToPage = (pageName) => {
     navigation.navigate(pageName);
@@ -44,39 +53,44 @@ const ButtonContainer = () => {
     <View style={styles.container}>
       <View style={styles.overlay}>
         <View style={styles.buttonContainer}>
-          <IconButton onPress={() => navigateToPage('Home')} source={require('../assets/home.gif')} />
-         
+          <IconButton
+            onPress={() => navigateToPage('Home')}
+            focused={isFocused}
+            source={require('../assets/home.gif')}
+          />
+
           <View style={styles.centerIconContainer}>
             <IconButton
               onPress={() => navigateToPage('Upload')}
+              focused={isFocused}
               source={require('../assets/upload.gif')}
               style={[styles.donateButton, styles.donateIcon]}
               rotate={true}
             />
           </View>
-          {/* <IconButton
-            onPress={() => navigateToPage('Search')}
-            source={require('../assets/search.gif')}
-            style={styles.searchButton}
-          /> */}
-          <IconButton onPress={() => navigateToPage('Login')} source={require('../assets/premium.png')} 
-          style={styles.profileButton} />
-           <IconButton
+          <IconButton
             onPress={() => navigateToPage('Login')}
+            focused={isFocused}
+            source={require('../assets/premium.png')}
+            style={styles.profileButton}
+          />
+          <IconButton
+            onPress={() => navigateToPage('Login')}
+            focused={isFocused}
             source={require('../assets/account.gif')}
             style={styles.aboutButton}
           />
         </View>
       </View>
       {/* <View style={styles.men} >
-<Menuu/></View> */}
+        <Menuu/>
+      </View> */}
       <ScrollView>
         <Front />
       </ScrollView>
     </View>
   );
 };
-
 const styles = StyleSheet.create({
   container: {
     backgroundColor:'#f7eff0',
@@ -89,16 +103,17 @@ const styles = StyleSheet.create({
     // marginTop: '190%', // Remove marginTop
   },
   buttonContainer: {
-    backgroundColor: '#1c202d',
+    backgroundColor: '#1c202df7',
     flexDirection: 'row',
     alignItems: 'center',
     position: 'absolute',
     height: 70,
     width: '100%',
+    tintColor:'#e05654',
     borderTopLeftRadius: 50,  // Adjust the value to control the sharpness of the point
     borderTopRightRadius: 50, // Adjust the value to control the sharpness of the point
-    borderBottomLeftRadius: 0,
-    borderBottomRightRadius: 0,
+    borderBottomLeftRadius: 50,
+    borderBottomRightRadius: 50,
     zIndex: 2,
     bottom: 0,},
 
@@ -132,6 +147,7 @@ const styles = StyleSheet.create({
     height: 70,
     borderRadius: 90,
     // backgroundColor: '#ffffff',
+    tintColor:'#e05654',
     marginBottom: 0,
   },
   icon: {
