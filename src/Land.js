@@ -58,7 +58,12 @@ const ButtonContainer = () => {
             focused={isFocused}
             source={require('../assets/home.gif')}
           />
-
+   <IconButton
+            onPress={() => navigateToPage('Search')}
+            focused={isFocused}
+            source={require('../assets/search.gif')}
+            style={styles.searchButton}
+          />
           <View style={styles.centerIconContainer}>
             <IconButton
               onPress={() => navigateToPage('Upload')}
@@ -75,7 +80,7 @@ const ButtonContainer = () => {
             style={styles.profileButton}
           />
           <IconButton
-            onPress={() => navigateToPage('Login')}
+            onPress={() => navigateToPage('User')}
             focused={isFocused}
             source={require('../assets/account.gif')}
             style={styles.aboutButton}
@@ -134,10 +139,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   searchButton: {
-    marginLeft: 5,
+   right:30,
+   
   },
   profileButton: {
     marginLeft: 5,
+    left:20,
   },
   aboutButton: {
     marginLeft: 5,
@@ -149,6 +156,7 @@ const styles = StyleSheet.create({
     // backgroundColor: '#ffffff',
     tintColor:'#e05654',
     marginBottom: 0,
+  
   },
   icon: {
     width: 24,
