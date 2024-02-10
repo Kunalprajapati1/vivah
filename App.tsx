@@ -22,6 +22,7 @@ import Chat from './src/Chat';
 import Landing from './src/Landing';
 import Menu from './src/components/Menu';
 import PersonDetails from './src/components/PersonDetails';
+import EditSaveProfile from './src/components/EditSaveProfile';
 
 
 const Stack = createStackNavigator();
@@ -36,6 +37,7 @@ const App = () => {
       }}
     >
       <Stack.Screen name="Landing" component={Landing} />
+      <Stack.Screen name="EditSaveProfile" component={EditSaveProfile} />
       <Stack.Screen name="PersonDetails" component={PersonDetails} />
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="Menu" component={Menu} />

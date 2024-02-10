@@ -6,8 +6,8 @@ import storage from '@react-native-firebase/storage';
 import ImageCropPicker from 'react-native-image-crop-picker';
 import { useNavigation } from '@react-navigation/native'; 
 
-const Front = ({ navigation }) => {
-  const [postData, setPostData] = useState([]);
+const EditSaveProfile = ({navigation}) => {
+    const [postData, setPostData] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedImages, setSelectedImages] = useState([]);
   const [displayedUserData, setDisplayedUserData] = useState(null);
@@ -207,12 +207,12 @@ const Front = ({ navigation }) => {
       </View>
     );
   }
-
   return (
-    <>
-     <ScrollView>
-      <ScrollView contentContainerStyle={styles.container}>
-        {displayedUserData ? (
+   <>
+<ScrollView>
+<ScrollView contentContainerStyle={styles.container}>
+
+{displayedUserData ? (
           <>
             <TouchableOpacity onPress={() => handleImageClick(displayedUserData.photos)}>
               <View style={{ /* Styles for the main container */ }}>
@@ -244,7 +244,7 @@ const Front = ({ navigation }) => {
                   </View>
                 ) : (
                   <Image
-                    source={require('../assets/user.png')}
+                    source={require('../../assets/user.png')}
                     style={styles.profileImage2}
                     onLoadEnd={() => setImageLoading(false)}
                   />
@@ -273,11 +273,10 @@ const Front = ({ navigation }) => {
           <Text>No user data to display</Text>
         )}
 
-        <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
+<TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
           <Text style={styles.logoutButtonText}>Log Out</Text>
         </TouchableOpacity>
-
-        <Modal
+<Modal
           animationType="slide"
           transparent={false}
           visible={modalVisible}
@@ -297,165 +296,141 @@ const Front = ({ navigation }) => {
             ))}
           </ScrollView>
         </Modal>
-      </ScrollView>
-    </ScrollView>
-    </>
-  );
-};
+</ScrollView>
+</ScrollView>
+
+
+   </>
+  )
+}
+
+export default EditSaveProfile
 
 const styles = StyleSheet.create({
-  container: {
-    // flex: 1,
-    backgroundColor:'#efefef',
-    marginBottom: 20,
-    padding: 20,
-  },
-  profileImage: {
-    width: 140,
-    height: 140,
-    alignSelf: 'center',
-    borderRadius: 20,
-    marginBottom: 20,
-    bottom:40,
-  },
-  changeImageButton: {
-    backgroundColor: '#4285f4',
-    paddingVertical: 10,
-    width: '60%',
-    top: 160,
-    borderRadius: 8,
-    marginLeft: '20%',
-    // marginTop: 60,
-  },
-  changeImageButtonText: {
-    color: 'white',
-    fontSize: 16,
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-  profileImage2: {
-    marginTop: '10%',
-    width: '50%',
-    height: 180,
-    marginBottom: 40,
-    borderRadius: 10,
-    marginLeft: 90,
-  },
-  fieldContainer: {
-    justifyContent: 'space-between',
-    alignItems: 'flex-start',
-    width: '100%',
-    paddingVertical: 10,
-    borderBottomWidth: 1,
-    borderColor: '#ccc',
-  },
-  fieldColumnContainer: {
-    flexDirection: 'column',
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',
-    width: '100%',
-    paddingVertical: 10,
-    borderBottomWidth: 1,
-    borderColor: '#ccc',
-  },
-  fieldRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    width: '100%',
-    paddingVertical: 12,
-    // borderBottomWidth: 3,
-    // borderColor: '#db34345f',
-  },
-  fieldName: {
-    fontWeight: '500',
-    fontSize: 18,
-    letterSpacing: 3,
-    textTransform: 'capitalize',
-    marginRight: 10,
-  },
-  fieldValue: {
-    flex: 1,
-    fontSize: 16,
-    marginRight: 30,
-    letterSpacing: 3,
-    color:'#db3442',
-    // textTransform: 'capitalize',
-    textAlign: 'right',
-  },
-  editableFieldValue: {
-    flex: 1,
-    fontSize: 16,
-    textAlign: 'right',
-    borderBottomWidth: 1,
-    borderColor: '#ccc',
-    color: '#db3442',
-  },
-  modalScrollView: {
-    flexGrow: 1,
-    flexDirection: 'row',
-    paddingHorizontal: 10,
-  },
-  fullImage: {
-    width: '100%',
-    height: '100%',
-  },
-  editButton: {
-    backgroundColor: '#db3447',
-    paddingVertical: 10,
-    width: '60%',
-    top: 150,
-    borderRadius: 8,
-    marginLeft: '20%',
-    marginTop: 20,
-  },
-  editButtonText: {
-    color: 'white',
-    fontSize: 16,
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-  logoutButton: {
-    marginTop: 20,
-    fontFamily:'Montserrat-Regular',
-    // marginLeft: '70%',
-    padding: 10,
-    paddingHorizontal:70,
-    backgroundColor: 'red',
-    borderRadius: 5,
-    alignSelf: 'center',
-  },
-  logoutButtonText: {
-    color: 'white',
-    fontSize: 16,
-  },
-});
+    container: {
+        // flex: 1,
+        backgroundColor:'#efefef',
+        marginBottom: 20,
+        padding: 20,
+      },
+      profileImage: {
+        width: 140,
+        height: 140,
+        alignSelf: 'center',
+        borderRadius: 20,
+        marginBottom: 20,
+        bottom:40,
+      },
+      changeImageButton: {
+        backgroundColor: '#4285f4',
+        paddingVertical: 10,
+        width: '60%',
+        top: 160,
+        borderRadius: 8,
+        marginLeft: '20%',
+        // marginTop: 60,
+      },
+      changeImageButtonText: {
+        color: 'white',
+        fontSize: 16,
+        fontWeight: 'bold',
+        textAlign: 'center',
+      },
+      profileImage2: {
+        marginTop: '10%',
+        width: '50%',
+        height: 180,
+        marginBottom: 40,
+        borderRadius: 10,
+        marginLeft: 90,
+      },
+      fieldContainer: {
+        justifyContent: 'space-between',
+        alignItems: 'flex-start',
+        width: '100%',
+        paddingVertical: 10,
+        borderBottomWidth: 1,
+        borderColor: '#ccc',
+      },
+      fieldColumnContainer: {
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        alignItems: 'flex-start',
+        width: '100%',
+        paddingVertical: 10,
+        borderBottomWidth: 1,
+        borderColor: '#ccc',
+      },
+      fieldRow: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        width: '100%',
+        paddingVertical: 12,
+        // borderBottomWidth: 3,
+        // borderColor: '#db34345f',
+      },
+      fieldName: {
+        fontWeight: '500',
+        fontSize: 18,
+        letterSpacing: 3,
+        textTransform: 'capitalize',
+        marginRight: 10,
+      },
+      fieldValue: {
+        flex: 1,
+        fontSize: 16,
+        marginRight: 30,
+        letterSpacing: 3,
+        color:'#db3442',
+        // textTransform: 'capitalize',
+        textAlign: 'right',
+      },
+      editableFieldValue: {
+        flex: 1,
+        fontSize: 16,
+        textAlign: 'right',
+        borderBottomWidth: 1,
+        borderColor: '#ccc',
+        color: '#db3442',
+      },
+      modalScrollView: {
+        flexGrow: 1,
+        flexDirection: 'row',
+        paddingHorizontal: 10,
+      },
+      fullImage: {
+        width: '100%',
+        height: '100%',
+      },
+      editButton: {
+        backgroundColor: '#db3447',
+        paddingVertical: 10,
+        width: '60%',
+        top: 150,
+        borderRadius: 8,
+        marginLeft: '20%',
+        marginTop: 20,
+      },
+      editButtonText: {
+        color: 'white',
+        fontSize: 16,
+        fontWeight: 'bold',
+        textAlign: 'center',
+      },
+      logoutButton: {
+        marginTop: 20,
+        fontFamily:'Montserrat-Regular',
+        // marginLeft: '70%',
+        padding: 10,
+        paddingHorizontal:70,
+        backgroundColor: 'red',
+        borderRadius: 5,
+        alignSelf: 'center',
+      },
+      logoutButtonText: {
+        color: 'white',
+        fontSize: 16,
+      },
 
-export default Front;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+})

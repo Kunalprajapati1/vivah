@@ -109,11 +109,14 @@ const Upload = ({ navigation }) => {
     <ScrollView contentContainerStyle={styles.scrollView}>
       <View style={styles.container}>
         <Text style={styles.title}>Post All Your Correct Details for a Match</Text>
+<View style={{ marginTop:'15%' }}>
+
 
         <Text style={styles.label}>Name:</Text>
         <TextInput
           style={styles.input}
           placeholder="Enter your name"
+          placeholderTextColor="#ffffff"
           onChangeText={(text) => handleInputChange('name', text)}
         />
 
@@ -121,6 +124,7 @@ const Upload = ({ navigation }) => {
         <TextInput
           style={styles.input}
           placeholder="Enter your age"
+          placeholderTextColor="#ffffff"
           keyboardType="numeric"
           onChangeText={(text) => handleInputChange('age', text)}
         />
@@ -131,6 +135,7 @@ const Upload = ({ navigation }) => {
             style={[styles.dateInput, styles.dateInputWithBorder]}
             placeholder="DD"
             keyboardType="numeric"
+            placeholderTextColor="#1c202df7"
             maxLength={2}
             onChangeText={(text) => handleInputChange('day', text)}
           />
@@ -138,6 +143,7 @@ const Upload = ({ navigation }) => {
             style={[styles.dateInput, styles.dateInputWithBorder]}
             placeholder="MM"
             keyboardType="numeric"
+            placeholderTextColor="#1c202df7"
             maxLength={2}
             onChangeText={(text) => handleInputChange('month', text)}
           />
@@ -145,6 +151,7 @@ const Upload = ({ navigation }) => {
             style={[styles.dateInput, styles.dateInputWithBorder]}
             placeholder="YYYY"
             keyboardType="numeric"
+            placeholderTextColor="#1c202df7"
             maxLength={4}
             onChangeText={(text) => handleInputChange('year', text)}
           />
@@ -153,6 +160,7 @@ const Upload = ({ navigation }) => {
         <Text style={styles.label}>Caste:</Text>
         <TextInput
           style={styles.input}
+          placeholderTextColor="#ffffff"
           placeholder="Enter your caste"
           onChangeText={(text) => handleInputChange('caste', text)}
         />
@@ -161,6 +169,7 @@ const Upload = ({ navigation }) => {
         <TextInput
           style={styles.input}
           placeholder="Enter your religion"
+          placeholderTextColor="#ffffff"
           onChangeText={(text) => handleInputChange('religion', text)}
         />
 
@@ -193,6 +202,7 @@ const Upload = ({ navigation }) => {
         <TextInput
           style={styles.input}
           placeholder="Enter your mobile number"
+          placeholderTextColor="#ffffff"
           keyboardType="phone-pad"
           onChangeText={(text) => handleInputChange('mobileNumber', text)}
         />
@@ -201,6 +211,7 @@ const Upload = ({ navigation }) => {
         <TextInput
           style={styles.input}
           placeholder="Enter your email"
+          placeholderTextColor="#ffffff"
           keyboardType="email-address"
           onChangeText={(text) => handleInputChange('email', text)}
         />
@@ -209,6 +220,7 @@ const Upload = ({ navigation }) => {
         <TextInput
           style={styles.input}
           placeholder="Enter your address"
+          placeholderTextColor="#ffffff"
           onChangeText={(text) => handleInputChange('address', text)}
         />
 
@@ -216,6 +228,8 @@ const Upload = ({ navigation }) => {
         <TextInput
           style={styles.input}
           placeholder="Enter your education"
+          placeholderTextColor="#ffffff"
+
           onChangeText={(text) => handleInputChange('education', text)}
         />
 
@@ -224,7 +238,7 @@ const Upload = ({ navigation }) => {
           style={styles.button2}
           onPress={handlePhotoUpload}
         >
-          <Text style={styles.buttonText}>Upload Photo</Text>
+          <Text style={styles.buttonText1}>Upload Photo</Text>
         </TouchableOpacity>
 
         <ScrollView horizontal style={styles.photoScrollView}>
@@ -239,7 +253,7 @@ const Upload = ({ navigation }) => {
         >
           <Text style={styles.buttonText}>Post</Text>
         </TouchableOpacity>
-      </View>
+      </View></View>
     </ScrollView>
   );
 };
@@ -249,42 +263,47 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
   container: {
-    padding: 16,
+    backgroundColor:'#1c202df7',
+    padding: 40,
   },
   title:{
-fontSize:34,
-letterSpacing:2,
-textAlign:'center',
-textDecorationLine:'underline',
-fontWeight:'600',
-color:'black',
+    fontFamily:'DMSerifDisplay-Regular',
+fontSize:44,
+// fontWeight:20,
+// letterSpacing:2,
+textAlign:'left',
+// textDecorationLine:'underline',
+// fontWeight:'600',
+color:'#ffacab',
 
 
 
   },
   label: {
+    fontFamily:'Montserrat-Regular',
     fontWeight: '300',
-    fontSize: 24,
+    fontSize: 20,
     marginTop: 20,
     letterSpacing:1,
-    color:'black',
+    color:'#ffffff',
     marginBottom: 25,
   },
   input: {
-    height: 60,
+    height: 40,
+    fontFamily:'Montserrat-Regular',
     
     letterSpacing:2,
-    borderColor: '#000000',
-    borderWidth: 2,
-    marginBottom: 10,
+    // borderColor: '#000000',
+    // borderWidth: 2,
+    // marginBottom: 10,
     borderRadius: 10,
-     backgroundColor: '#f2f2f2',
+     backgroundColor: '#f2f2f27e',
     paddingHorizontal: 15,
-    paddingHorizontal: 38,
+    // paddingHorizontal: 38,
   },
   button: {
-    backgroundColor: '#c9e418df',
-    
+    backgroundColor: '#e05654',
+    color:'white',
     letterSpacing:2,
     padding: 10,
     borderRadius: 25,
@@ -292,15 +311,23 @@ color:'black',
     marginBottom: 30,
   },
   button2: {
-    backgroundColor: '#6f67678c',
+    backgroundColor: '#ffd3d2',
     padding: 10,
     borderRadius: 25,
     alignItems: 'center',
     marginTop:'5%',
     marginBottom: 30,
   },
+  buttonText1: {
+    color: '#e05654',
+    fontFamily:'Montserrat-Regular',
+    letterSpacing:2,
+    fontSize: 16,
+  },
   buttonText: {
-    color: 'black',
+    color: '#ffffff',
+    fontFamily:'Montserrat-Regular',
+
     letterSpacing:2,
     fontSize: 16,
   },
@@ -352,11 +379,12 @@ flexDirection:'row',
   },
 
   selectedGenderMale: {
-    backgroundColor: '#11d5ab',
+    color:'white',
+    backgroundColor: '#e05654',
   },
 
   selectedGenderFemale: {
-    backgroundColor: '#11d5ab',
+    backgroundColor: '#e05654',
   },
   genderText: {
     fontSize: 15,
