@@ -334,12 +334,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   profileImage2: {
-    marginTop: '10%',
-    width: '50%',
-    height: 180,
-    marginBottom: 40,
-    borderRadius: 10,
-    marginLeft: 90,
+    width: 140,
+    height: 140,
+    alignSelf: 'center',
+    borderRadius: 20,
+    marginBottom: 20,
+    bottom:40,
   },
   fieldContainer: {
     justifyContent: 'space-between',
