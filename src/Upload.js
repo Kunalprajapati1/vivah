@@ -274,7 +274,7 @@ fontSize:46,
 textAlign:'left',
 // textDecorationLine:'underline',
 // fontWeight:'600',
-color:'#ffacab',
+color:'#e46f6d',
 
 
 
@@ -286,14 +286,15 @@ color:'#ffacab',
     marginTop: 20,
     letterSpacing:1,
     color:'#ffffff',
-    marginBottom: 25,
+    marginBottom: 10,
     textDecorationLine:'underline',
   },
   input: {
+    color:'white',
     height: 52,
     fontFamily:'Montserrat-Regular',
     
-    letterSpacing:2,
+    letterSpacing:1,
     // borderColor: '#000000',
     // borderWidth: 2,
     // marginBottom: 10,

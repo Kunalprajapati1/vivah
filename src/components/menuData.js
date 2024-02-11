@@ -1,7 +1,7 @@
 const menuList = [
     {
         id:1,
-        name: 'About Sanyog',
+        name: 'About Sanjog',
 
     },
     {

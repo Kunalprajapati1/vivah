@@ -238,8 +238,13 @@ const Search = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <TextInput
-        style={styles.input}
+    <View style={styles.searchContainer}>
+            <Image
+              style={styles.searchIcon}
+              source={require('../assets/app_images/loupe.png')}
+            />
+               <TextInput
+        // style={styles.input}
         placeholder="Search for users"
         onChangeText={(text) => {
           setSearchTerm(text);
@@ -247,6 +252,16 @@ const Search = ({ navigation }) => {
         }}
         value={searchTerm}
       />
+          </View>
+           {/* <TextInput
+        style={styles.input}
+        placeholder="Search for users"
+        onChangeText={(text) => {
+          setSearchTerm(text);
+          handleSearch(text);
+        }}
+        value={searchTerm}
+      /> */}
 
       <FlatList
         data={searchResults}
@@ -286,6 +301,21 @@ const Search = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
+  searchContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    paddingHorizontal: 10,
+    borderRadius: 25,
+    marginTop: 10,
+  },
+  searchIcon: {
+    width: 20,
+    height: 20,
+    marginRight: 10,
+  },
   container: {
     flex: 1,
     padding: 16,
@@ -295,8 +325,8 @@ const styles = StyleSheet.create({
     fontFamily:'Montserrat-Regular',
     borderRadius: 30,
     height: 50,
-    borderColor: 'gray',
-    borderWidth: 1,
+    // borderColor: 'gray',
+    // borderWidth: 1,
     marginBottom: 28,
     paddingHorizontal: 39,
   },
@@ -304,8 +334,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     padding: 16,
-    borderBottomWidth: 3,
-    borderBottomColor: '#9b0f0f',
+    // borderBottomWidth: 3,
+    // borderBottomColor: '#9b0f0f',
   },
   userImage: {
     width: 50,
@@ -314,9 +344,9 @@ const styles = StyleSheet.create({
     marginRight: 16,
   },
   usernameText: {
-    fontSize: 18,
-    letterSpacing:3,
-   fontFamily:'DMSerifDisplay-Regular',
+    fontSize: 17,
+    // letterSpacing:3,
+   fontFamily:'Montserrat-SemiBold',
   },
 });
 

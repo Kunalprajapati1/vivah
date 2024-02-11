@@ -44,7 +44,7 @@ const NameDetail = ({ route, navigation }) => {
   
         navigation.navigate('Email', { uniqueId});
       } catch (error) {
-        console.error('Error updating donation:', error);
+        console.error('Error updating donation', error);
         Alert.alert('Error', 'Failed to submit. Please try again.');
       }
     }
@@ -52,16 +52,25 @@ const NameDetail = ({ route, navigation }) => {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <ProfileImage />
+
+    <View style={{ marginTop:90}}>
+      {/* <ProfileImage /> */}
 
       <View style={styles.inputSection}>
-        <Text style={styles.title}>Your Details: </Text>
-        <InputLabel label="First Name:" value={firstName} onChangeText={setFirstName} />
-        <InputLabel label="Last Name:" value={lastName} onChangeText={setLastName} />
+        <Text style={{   fontSize: 36,
+    bottom: 5,
+    color: '#e05654',
+    fontFamily:'DMSerifDisplay-Regular'
+    }}>Enter Your Details </Text>
+    <View style={{ marginTop:20 }}>
+        <InputLabel  label="First Name" value={firstName} onChangeText={setFirstName} />
+        <InputLabel label="Last Name" value={lastName} onChangeText={setLastName} />
+
+    </View>
       </View>
 
       <DOBInputContainer
-        label="Date of Birth:"
+        label="Date of Birth"
         dayValue={dayOfBirth}
         monthValue={monthOfBirth}
         yearValue={yearOfBirth}
@@ -71,12 +80,14 @@ const NameDetail = ({ route, navigation }) => {
       />
 
       <ContinueButton onPress={handleContinue} disabled={isContinueDisabled} />
+      </View>
     </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor:'#fbd1d1',
     flex: 1,
     padding: 20,
     alignItems: 'center',
@@ -96,25 +107,32 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   dobInputs: {
+    // backgroundColor:'yellow',
+    width: "85%",
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
   title: {
     fontSize: 36,
     bottom: 5,
-    color: '#2c3e50',
+    color: '#e05654',
+    fontFamily:'Montserrat-SemiBold'
+
   },
   label: {
     top: 10,
     fontSize: 16,
     marginBottom: 25,
-    color: '#2c3e50',
+    color: '#e05654',
+    fontFamily:'Montserrat-SemiBold'
+
   },
   label2: {
     top: 10,
-    fontSize: 36,
+    fontSize: 16,
     marginBottom: 25,
-    color: '#2c3e50',
+    color: '#e05654',
+    fontFamily:'Montserrat-SemiBold'
   },
   input: {
     borderWidth: 1,
@@ -127,15 +145,22 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
   },
   continueButton: {
+paddingHorizontal:20,
     padding: 15,
-    borderRadius: 35,
+    borderRadius: 15,
+    marginLeft:10,
     marginTop: 20,
     width: '80%',
   },
   continueButtonText: {
     color: '#fff',
     fontSize: 18,
+    paddingHorizontal:80,
     textAlign: 'center',
+  },
+  dobInputPlaceholder: {
+    // other styles for the placeholder
+    color: 'white', // Set the placeholder text color to white
   },
 });
 
@@ -151,6 +176,7 @@ const InputLabel = ({ label, value, onChangeText }) => (
     <TextInput
       style={styles.input}
       placeholder={`Enter your ${label.toLowerCase().replace(':', '')}`}
+      placeholderTextColor='#2b2b2b'
       value={value}
       onChangeText={onChangeText}
     />
@@ -161,9 +187,15 @@ const DOBInputContainer = ({ label, dayValue, monthValue, yearValue, onDayChange
   <View style={styles.dobContainer}>
     <Text style={styles.label2}>{label}</Text>
     <View style={styles.dobInputs}>
-      <DOBInput placeholder="DD" value={dayValue} onChangeText={onDayChange} />
-      <DOBInput placeholder="MM" value={monthValue} onChangeText={onMonthChange} />
-      <DOBInput placeholder="YYYY" value={yearValue} onChangeText={onYearChange} />
+      <DOBInput placeholder="DD" value={dayValue} 
+      placeholderTextColor='white'
+       onChangeText={onDayChange} />
+      <DOBInput placeholder="MM" value={monthValue} 
+      placeholderTextColor={styles.dobInputPlaceholder.color}
+       onChangeText={onMonthChange} />
+      <DOBInput placeholder="YYYY" value={yearValue} 
+      placeholderTextColor={styles.dobInputPlaceholder.color}
+       onChangeText={onYearChange} />
     </View>
   </View>
 );
@@ -181,7 +213,7 @@ const DOBInput = ({ placeholder, value, onChangeText }) => (
 const ContinueButton = ({ onPress, disabled }) => (
   <TouchableOpacity
     onPress={onPress}
-    style={[styles.continueButton, { backgroundColor: disabled ? '#95a5a6' : '#34dbcd' }]}
+    style={[styles.continueButton, { backgroundColor: disabled ? '#232337' : '#2e2c4d' }]}
     disabled={disabled}
   >
     <Text style={styles.continueButtonText}>Continue</Text>

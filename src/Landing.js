@@ -53,11 +53,12 @@ const Landing = ({navigation}) => {
             Find your
           </Text>
           <Text style={styles.text2}>
-            Perfect match!
+            Perfect match! With  
+            <Text style={{  color:'#262037' }}> Sanjog</Text>
           </Text>
-          <Text style={styles.text3}>
+          {/* <Text style={styles.text3}>
             Join Us And associate with millions of people
-          </Text>
+          </Text> */}
         </View>
         <View style={{width:'30%',   height:'15%', marginTop:'70%', marginLeft:'75%'}}>
 <TouchableOpacity onPress={()=> {navigation.navigate('Home')}}>

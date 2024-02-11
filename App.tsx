@@ -27,6 +27,7 @@ import EditSaveProfile from './src/components/EditSaveProfile';
 import PersonDetails2 from './src/components/PersonDetails2';
 import Search from './src/components/Search';
 import WatchUser from './src/components/WatchUser';
+import Premium from './src/components/Premium';
 
 
 const Stack = createStackNavigator();
@@ -40,30 +41,31 @@ const App = () => {
         headerShown: false, 
       }}
     >
-      <Stack.Screen name="Landing" component={Landing} />
-      <Stack.Screen name="EditSaveProfile" component={EditSaveProfile} />
-      <Stack.Screen name="PersonDetails" component={PersonDetails} />
-      <Stack.Screen name="Home" component={Home} />
-      <Stack.Screen name="Menu" component={Menu} />
-      <Stack.Screen name="ProfileFor" component={ProfileFor} />
-      <Stack.Screen name="NameDetail" component={NameDetail} />
-      <Stack.Screen name="Email" component={Email} />
-      <Stack.Screen name="City" component={City} />
-      <Stack.Screen name="Status" component={Status} />
-      <Stack.Screen name="Highest" component={Highest} />
-      <Stack.Screen name="Work" component={Work} />
-      <Stack.Screen name="Image" component={Image} />
-      <Stack.Screen name="Land" component={Land} />
-      <Stack.Screen name="Front" component={Front} />
-      <Stack.Screen name="Upload" component={Upload} />
-      <Stack.Screen name="Data" component={Data} />
-      <Stack.Screen name="User" component={User} />
-      <Stack.Screen name="User2" component={User2} />
-      <Stack.Screen name="Login" component={Login} />
-      <Stack.Screen name="Chat" component={Chat} />
-      <Stack.Screen name="PersonDetails2" component={PersonDetails2} />
-      <Stack.Screen name="Search" component={Search} />
-      <Stack.Screen name="WatchUser" component={WatchUser} />
+      <Stack.Screen name="Landing" component={Landing}/>
+      <Stack.Screen name="Premium" component={Premium}/>
+      <Stack.Screen name="EditSaveProfile" component={EditSaveProfile}/>
+      <Stack.Screen name="PersonDetails" component={PersonDetails}/>
+      <Stack.Screen name="Home" component={Home}/>
+      <Stack.Screen name="Menu" component={Menu}/>
+      <Stack.Screen name="ProfileFor" component={ProfileFor}/>
+      <Stack.Screen name="NameDetail" component={NameDetail}/>
+      <Stack.Screen name="Email" component={Email}/>
+      <Stack.Screen name="City" component={City}/>
+      <Stack.Screen name="Status" component={Status}/>
+      <Stack.Screen name="Highest" component={Highest}/>
+      <Stack.Screen name="Work" component={Work}/>
+      <Stack.Screen name="Image" component={Image}/>
+      <Stack.Screen name="Land" component={Land}/>
+      <Stack.Screen name="Front" component={Front}/>
+      <Stack.Screen name="Upload" component={Upload}/>
+      <Stack.Screen name="Data" component={Data}/>
+      <Stack.Screen name="User" component={User}/>
+      <Stack.Screen name="User2" component={User2}/>
+      <Stack.Screen name="Login" component={Login}/>
+      <Stack.Screen name="Chat" component={Chat}/>
+      <Stack.Screen name="PersonDetails2" component={PersonDetails2}/>
+      <Stack.Screen name="Search" component={Search}/>
+      <Stack.Screen name="WatchUser" component={WatchUser}/>
 
 
      

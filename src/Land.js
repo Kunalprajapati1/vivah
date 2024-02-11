@@ -246,7 +246,7 @@ const ButtonContainer = () => {
             />
           </View>
           <IconButton
-            onPress={() => navigateToPage('Login')}
+            onPress={() => navigateToPage('Premium')}
             focused={isFocused}
             source={require('../assets/premium.png')}
             style={styles.searchButton}

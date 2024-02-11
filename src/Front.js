@@ -115,7 +115,7 @@ const Front = () => {
     }}
     style={{flexDirection: 'row', alignItems: 'center', flex: 1}}> */}
     <Text style={{flex: 1, fontFamily:'DMSerifDisplay-Regular', color:'#e05654',  fontSize:50,  }}>
-      Sanyog
+      Sanjog
     </Text>
     {/* </TouchableOpacity> */}
     <TouchableOpacity
@@ -145,12 +145,19 @@ const Front = () => {
               style={styles.searchIcon}
               source={require('./assets/app_images/loupe.png')}
             />
-            <TextInput
+            <TouchableOpacity onPress={()=>{navigation.navigate('Search')}}>
+            <View
               style={styles.input}
               placeholder="Search..."
               placeholderTextColor="gray"
               onChangeText={text => setSearchQuery(text)}
-            />
+            >
+              <Text style={{ marginTop:10}}>
+                Search
+              </Text>
+            </View>
+
+            </TouchableOpacity>
           </View>
         </View>
       </View>
@@ -167,16 +174,19 @@ const Front = () => {
             }}>
             People Near You
           </Text>
+          <TouchableOpacity>
+
           <Image
             style={{
-              tintColor: '#e88a8a',
+              tintColor: '#e27272',
               width: 20,
               height: 20,
-              marginLeft: '15%',
-              marginTop: '9%',
+              marginLeft: '35%',
+              marginTop: '20%',
             }}
             source={require('./assets/app_images/ellipsis.png')}
           />
+          </TouchableOpacity>
         </View>
         {profileForData &&
           profileForData.length > 0 &&
@@ -351,11 +361,11 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     marginTop: 10,
   },
-  searchIcon: {
-    width: 20,
-    height: 20,
-    marginRight: 10,
-  },
+    searchIcon: {
+      width: 20,
+      height: 20,
+      marginRight: 10,
+    },
   input: {
     flex: 1,
     color: 'black',

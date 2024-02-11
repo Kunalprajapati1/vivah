@@ -57,7 +57,9 @@ const Email = ({ navigation, route }) => {
   };
 
   return (
-    <ScrollView>
+    <>
+    <View style={{backgroundColor:'#2b2b2b'}}>
+    <ScrollView style={{backgroundColor:'#2b2b2b'}}>
       <View style={styles.container}>
         <Image
           source={require('../assets/secure.png')}
@@ -124,10 +126,13 @@ const Email = ({ navigation, route }) => {
         </TouchableOpacity>
       </View>
     </ScrollView>
+    </View>
+    </>
   );
 };
 const styles = StyleSheet.create({
   container: {
+    backgroundColor:'#2b2b2b',
     flex: 1,
     padding: 20,
     alignItems: 'center',

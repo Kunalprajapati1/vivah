@@ -93,6 +93,8 @@ const Login = () => {
   };
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding">
+        <Text style={{ fontSize:40, color:'white', fontFamily:'Montserrat-SemiBold' }}>Welcome Back!</Text>
+
       <View style={styles.cont}>
         {/* <Image source={require('../src/assets/app_images/login.png')} style={styles.logo} /> */}
         <Text style={styles.loginText}>Login</Text>
@@ -101,6 +103,8 @@ const Login = () => {
           style={styles.input}
           placeholder="Email"
           keyboardType="email-address"
+          placeholderTextColor='#e05654'
+
           autoCapitalize="none"
           value={email}
           onChangeText={(text) => setEmail(text)}
@@ -109,6 +113,7 @@ const Login = () => {
         <TextInput
           style={styles.input}
           placeholder="Password"
+          placeholderTextColor='#e05654'
           secureTextEntry={true}
           value={password}
           onChangeText={(text) => setPassword(text)}
@@ -119,17 +124,45 @@ const Login = () => {
         <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
           {loading ? <ActivityIndicator size="small" color="#ffffff" /> : <Text style={styles.loginButtonText}>Login</Text>}
         </TouchableOpacity>
+        <View style={{  top:60,width:70, height:70, marginTop:'0%',}}>
+        <Image
+          source={require('./assets/app_images/balloon.png')} // Replace with the actual path to your image
+          style={{ width:'350%', height:'350%'}} // Define the styles for your image
+        />
+        </View>
+        <View style={{  top:80,width:70, height:70, marginTop:'0%',}}>
+        <Image
+          source={require('./assets/app_images/balloon.png')} // Replace with the actual path to your image
+          style={{ width:'100%', height:'100%'}} // Define the styles for your image
+        />
+        </View>
+        <View style={{  top:80,width:70, height:70, marginTop:'0%',}}>
+        <Image
+          source={require('./assets/app_images/balloon.png')} // Replace with the actual path to your image
+          style={{ width:'150%', height:'150%'}} // Define the styles for your image
+        />
+        </View>
+        <View style={{ marginLeft:'80%',  bottom:45,width:70, height:70, marginTop:'0%',}}>
+        <Image
+          source={require('./assets/app_images/balloon.png')} // Replace with the actual path to your image
+          style={{ width:'150%', height:'150%'}} // Define the styles for your image
+        />
+        </View>
       </View>
     </KeyboardAvoidingView>
   );
 };
 
 const styles = StyleSheet.create({
+  loginButtonText:{
+    fontFamily: "Montserrat-SemiBold",
+
+  },
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#6aacad8c',
+    backgroundColor: '#e05654',
 
   },
   loginButton: {
@@ -137,7 +170,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'rgba(255, 255, 255, 0.7)',
     padding: 10,
-    borderRightWidth: 18,
+    // borderRightWidth: 18,
     borderRadius: 35,
     marginTop: 20,
     width: '100%',
@@ -146,16 +179,16 @@ const styles = StyleSheet.create({
   loginText: {
     marginTop:50,
     fontSize: 20,
-    fontWeight: 'bold',
-    color: '#7242d8',
+    // fontWeight: 'bold',
+    color: '#ffffff',
     marginBottom: 16,
-    fontFamily: "Montserrat-Regular",
+    fontFamily: "Montserrat-SemiBold",
   },
   input: {
     height: 50,
     width: '100%',
     backgroundColor: 'rgba(255, 255, 255, 0.7)',
-    borderRadius: 35,
+    borderRadius: 15,
     padding: 10,
     marginBottom: 16,
     color: '#333',
@@ -163,11 +196,11 @@ const styles = StyleSheet.create({
   },
   cont:{
     width: '93%',
-    backgroundColor: 'rgba(76, 120, 186, 0.543)',
-    borderRadius: 80,
+    // backgroundColor: '#e77575',
+    // borderRadius: 80,
     padding: 20,
-    borderBottomLeftRadius: 2,
-    borderBottomRightRadius: 2,
+    // borderBottomLeftRadius: 2,
+    // borderBottomRightRadius: 2,
     height: '70%',
     borderTopLeftRadius: 2,
     alignItems: 'center',
@@ -182,7 +215,7 @@ const styles = StyleSheet.create({
   for:{
 
     fontFamily: 'Montserrat-SemiBold', 
-    color: '#000000', 
+    color: '#ebc5c5', 
     textDecorationLine: 'underline',
     
      letterSpacing: 1,
