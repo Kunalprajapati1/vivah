@@ -14,19 +14,22 @@ const Email = ({ navigation, route }) => {
   const [mobileNumber, setMobileNumber] = useState('');
   const [selectedReligion, setSelectedReligion] = useState('');
   const [password, setPassword] = useState('');
+  const [isPasswordVisible, setPasswordVisible] = useState(false);
 
   useEffect(() => {
     const firebaseConfig = {
       apiKey: "AIzaSyAAvxsDg18a7O7bVnc_JHFGoX8J3Bo18ZM",
-      authDomain: 'vivah-57f3a.firebaseapp.com',
-      projectId: "vivah-57f3a",
-      storageBucket: "vivah-57f3a.appspot.com",
+      authDomain: 'Sanjog-57f3a.firebaseapp.com',
+      projectId: "Sanjog-57f3a",
+      storageBucket: "Sanjog-57f3a.appspot.com",
       messagingSenderId: '916285535946',
       appId: "1:916285535946:android:25db1a55a9bcf1dd916633",
     };
     initializeApp(firebaseConfig, {auth: true}); // Include the auth module
   }, []);
-
+  const togglePasswordVisibility = () => {
+    setPasswordVisible(!isPasswordVisible);
+  };
   const handleContinue = async () => {
     if (!selectedReligion) {
       Alert.alert('Incomplete Information', 'Please select a religion.');
@@ -77,6 +80,8 @@ const Email = ({ navigation, route }) => {
             keyboardType="email-address"
             accessibilityLabel="Email Input"
           />
+            <View style={styles.passwordContainer}>
+
           <TextInput
             style={styles.input}
             placeholder="Password"
@@ -84,6 +89,12 @@ const Email = ({ navigation, route }) => {
             value={password}
             onChangeText={(text) => setPassword(text)}
           />
+          <TouchableWithoutFeedback onPress={togglePasswordVisibility}>
+                <View style={styles.eyeIcon}>
+                  <Text style={styles.eyeIcon}>{isPasswordVisible ? '👁️' : '👁️‍🗨'}</Text>
+                </View>
+              </TouchableWithoutFeedback>
+        </View>
         </View>
 
         <View style={styles.inputSection2}>
@@ -131,6 +142,10 @@ const Email = ({ navigation, route }) => {
   );
 };
 const styles = StyleSheet.create({
+  passwordContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   container: {
     backgroundColor:'#2b2b2b',
     flex: 1,

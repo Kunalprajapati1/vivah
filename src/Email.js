@@ -22,13 +22,16 @@ const Email = ({navigation, route}) => {
   const [mobileNumber, setMobileNumber] = useState('');
   const [selectedReligion, setSelectedReligion] = useState('');
   const [password, setPassword] = useState('');
-
+  const [isPasswordVisible, setPasswordVisible] = useState(false);
+  const togglePasswordVisibility = () => {
+    setPasswordVisible(!isPasswordVisible);
+  };
   useEffect(() => {
     const firebaseConfig = {
       apiKey: 'AIzaSyAAvxsDg18a7O7bVnc_JHFGoX8J3Bo18ZM',
-      authDomain: 'vivah-57f3a.firebaseapp.com',
-      projectId: 'vivah-57f3a',
-      storageBucket: 'vivah-57f3a.appspot.com',
+      authDomain: 'Sanjog-57f3a.firebaseapp.com',
+      projectId: 'Sanjog-57f3a',
+      storageBucket: 'Sanjog-57f3a.appspot.com',
       messagingSenderId: '916285535946',
       appId: '1:916285535946:android:25db1a55a9bcf1dd916633',
     };
@@ -88,16 +91,24 @@ const Email = ({navigation, route}) => {
             accessibilityLabel="Email Input"
           />
           <Text style={styles.label}>Password</Text>
+          <View style={styles.passwordContainer}>
           
           <TextInput
             style={styles.input}
             placeholderTextColor='#ffffff33'
             
             placeholder="Password"
-            secureTextEntry={true}
+            secureTextEntry={!isPasswordVisible}
+
             value={password}
             onChangeText={text => setPassword(text)}
           />
+            <TouchableOpacity onPress={togglePasswordVisibility}>
+                <View style={styles.eyeIcon}>
+                  <Text style={styles.eyeIcon}>{isPasswordVisible ? '👁️' : '👁️‍🗨'}</Text>
+                </View>
+              </TouchableOpacity>
+        </View>
         </View>
 
         <View style={styles.inputSection2}>
@@ -130,9 +141,9 @@ const Email = ({navigation, route}) => {
             style={styles.picker}
             accessibilityLabel="Religion Picker">
             <Picker.Item style={{ color:'#e05654', fontFamily:'Montserrat-Regular'}} label="Select your religion →"  />
-            <Picker.Item label="Hindu" value="Hindu" />
-            <Picker.Item label="Christian" value="Christian" />
-            <Picker.Item label="Muslim" value="Muslim" />
+            <Picker.Item style={{ color:'#e05654', fontFamily:'Montserrat-Regular'}}  label="Hindu" value="Hindu" />
+            <Picker.Item  style={{ color:'#e05654', fontFamily:'Montserrat-Regular'}} label="Christian" value="Christian" />
+            <Picker.Item style={{ color:'#e05654', fontFamily:'Montserrat-Regular'}}  label="Muslim" value="Muslim" />
           </Picker>
         </View>
 
@@ -147,6 +158,15 @@ const Email = ({navigation, route}) => {
   );
 };
 const styles = StyleSheet.create({
+  eyeIcon: {
+    marginLeft: -17,
+    marginTop: -10,
+    fontSize: 22,
+  },
+  passwordContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   container: {
     marginTop:40,
     flex: 1,

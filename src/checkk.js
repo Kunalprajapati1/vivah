@@ -34,9 +34,9 @@ const Home = () => {
         source={require('../assets/homebg.png')}
         style={styles.backgroundImage}
       />
-      <Text style={styles.topText}>Vivah</Text>
+      <Text style={styles.topText}>Sanjog</Text>
       <View style={styles.contentContainer}>
-        <Text style={styles.title}>New to Vivah ?</Text>
+        <Text style={styles.title}>New to Sanjog ?</Text>
 
         <TouchableOpacity onPress={() => navigateToPage('ProfileFor')} style={styles.googleContainer}>
           <Image source={require('../assets/email.png')} style={styles.icon} />

@@ -1,4 +1,4 @@
-package com.vivah
+package com.Sanjog
 
 import android.app.Application
 import com.facebook.react.PackageList

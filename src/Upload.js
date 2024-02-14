@@ -25,9 +25,9 @@ const Upload = ({ navigation }) => {
   useEffect(() => {
     const firebaseConfig = {
       apiKey: "YOUR_API_KEY",
-      authDomain: 'vivah-57f3a.firebaseapp.com',
-      projectId: "vivah-57f3a",
-      storageBucket: "vivah-57f3a.appspot.com",
+      authDomain: 'Sanjog-57f3a.firebaseapp.com',
+      projectId: "Sanjog-57f3a",
+      storageBucket: "Sanjog-57f3a.appspot.com",
       messagingSenderId: '916285535946',
       appId: "1:916285535946:android:25db1a55a9bcf1dd916633",
     };

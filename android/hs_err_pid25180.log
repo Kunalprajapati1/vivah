@@ -198,8 +198,8 @@ Java Threads: ( => current thread )
   0x00000151b94c0270 JavaThread "Cache worker for file hash cache (C:\Users\panch\.gradle\caches\8.3\fileHashes)" [_thread_in_vm, id=11856, stack(0x0000002350d00000,0x0000002350e00000)]
   0x00000151b94c0c90 JavaThread "File watcher server" daemon [_thread_in_native, id=23796, stack(0x0000002350e00000,0x0000002350f00000)]
   0x00000151b94c11a0 JavaThread "File watcher consumer" daemon [_thread_blocked, id=15768, stack(0x0000002350f00000,0x0000002351000000)]
-  0x00000151b94bdf00 JavaThread "Cache worker for checksums cache (C:\Users\panch\Desktop\Vivah\vivah\android\.gradle\8.3\checksums)" [_thread_blocked, id=8616, stack(0x0000002351000000,0x0000002351100000)]
-  0x00000151b9f647e0 JavaThread "Cache worker for file hash cache (C:\Users\panch\Desktop\Vivah\vivah\android\.gradle\8.3\fileHashes)" [_thread_blocked, id=5868, stack(0x0000002351100000,0x0000002351200000)]
+  0x00000151b94bdf00 JavaThread "Cache worker for checksums cache (C:\Users\panch\Desktop\Sanjog\Sanjog\android\.gradle\8.3\checksums)" [_thread_blocked, id=8616, stack(0x0000002351000000,0x0000002351100000)]
+  0x00000151b9f647e0 JavaThread "Cache worker for file hash cache (C:\Users\panch\Desktop\Sanjog\Sanjog\android\.gradle\8.3\fileHashes)" [_thread_blocked, id=5868, stack(0x0000002351100000,0x0000002351200000)]
   0x00000151b9f64cf0 JavaThread "Cache worker for cache directory md-supplier (C:\Users\panch\.gradle\caches\8.3\md-supplier)" [_thread_blocked, id=20616, stack(0x0000002351200000,0x0000002351300000)]
   0x00000151b9f60b20 JavaThread "Cache worker for file content cache (C:\Users\panch\.gradle\caches\8.3\fileContent)" [_thread_blocked, id=13120, stack(0x0000002351300000,0x0000002351400000)]
   0x00000151b9f61030 JavaThread "Cache worker for cache directory md-rule (C:\Users\panch\.gradle\caches\8.3\md-rule)" [_thread_blocked, id=16156, stack(0x0000002351500000,0x0000002351600000)]
@@ -211,13 +211,13 @@ Java Threads: ( => current thread )
   0x00000151b9f5dd90 JavaThread "Cache worker for kotlin-dsl (C:\Users\panch\.gradle\caches\8.3\kotlin-dsl)" [_thread_blocked, id=12676, stack(0x0000002351c00000,0x0000002351d00000)]
   0x00000151b9f5ecc0 JavaThread "Unconstrained build operations" [_thread_blocked, id=20176, stack(0x0000002351d00000,0x0000002351e00000)]
   0x00000151b9f65710 JavaThread "Unconstrained build operations Thread 2" [_thread_blocked, id=18128, stack(0x0000002351e00000,0x0000002351f00000)]
-  0x00000151b9f5e7b0 JavaThread "Cache worker for dependencies-accessors (C:\Users\panch\Desktop\Vivah\vivah\android\.gradle\8.3\dependencies-accessors)" [_thread_blocked, id=23292, stack(0x0000002351f00000,0x0000002352000000)]
-  0x00000151b9f62980 JavaThread "Cache worker for Build Output Cleanup Cache (C:\Users\panch\Desktop\Vivah\vivah\node_modules\@react-native\gradle-plugin\.gradle\buildOutputCleanup)" [_thread_blocked, id=11768, stack(0x0000002352000000,0x0000002352100000)]
+  0x00000151b9f5e7b0 JavaThread "Cache worker for dependencies-accessors (C:\Users\panch\Desktop\Sanjog\Sanjog\android\.gradle\8.3\dependencies-accessors)" [_thread_blocked, id=23292, stack(0x0000002351f00000,0x0000002352000000)]
+  0x00000151b9f62980 JavaThread "Cache worker for Build Output Cleanup Cache (C:\Users\panch\Desktop\Sanjog\Sanjog\node_modules\@react-native\gradle-plugin\.gradle\buildOutputCleanup)" [_thread_blocked, id=11768, stack(0x0000002352000000,0x0000002352100000)]
   0x00000151b9f5f1d0 JavaThread "Unconstrained build operations Thread 3" [_thread_blocked, id=2628, stack(0x0000002352100000,0x0000002352200000)]
   0x00000151b9f62470 JavaThread "Unconstrained build operations Thread 4" [_thread_blocked, id=19288, stack(0x0000002352200000,0x0000002352300000)]
   0x00000151b9f5f6e0 JavaThread "Unconstrained build operations Thread 5" [_thread_blocked, id=10276, stack(0x0000002352300000,0x0000002352400000)]
   0x00000151b9f5fbf0 JavaThread "Memory manager" [_thread_blocked, id=19776, stack(0x0000002352400000,0x0000002352500000)]
-  0x00000151b9f63dc0 JavaThread "Cache worker for Build Output Cleanup Cache (C:\Users\panch\Desktop\Vivah\vivah\android\.gradle\buildOutputCleanup)" [_thread_blocked, id=21656, stack(0x0000002352500000,0x0000002352600000)]
+  0x00000151b9f63dc0 JavaThread "Cache worker for Build Output Cleanup Cache (C:\Users\panch\Desktop\Sanjog\Sanjog\android\.gradle\buildOutputCleanup)" [_thread_blocked, id=21656, stack(0x0000002352500000,0x0000002352600000)]
   0x00000151b9f61f60 JavaThread "ForkJoinPool.commonPool-worker-1" daemon [_thread_blocked, id=3312, stack(0x0000002352600000,0x0000002352700000)]
   0x00000151bcf6ffa0 JavaThread "ForkJoinPool.commonPool-worker-2" daemon [_thread_blocked, id=11988, stack(0x0000002352700000,0x0000002352800000)]
   0x00000151bcf75fd0 JavaThread "ForkJoinPool.commonPool-worker-3" daemon [_thread_blocked, id=24548, stack(0x0000002352800000,0x0000002352900000)]
@@ -228,7 +228,7 @@ Java Threads: ( => current thread )
   0x00000151bcf755b0 JavaThread "Execution worker" [_thread_blocked, id=18308, stack(0x0000002352d00000,0x0000002352e00000)]
   0x00000151bcf74170 JavaThread "Execution worker Thread 2" [_thread_blocked, id=2708, stack(0x0000002352e00000,0x0000002352f00000)]
   0x00000151bcf709c0 JavaThread "Execution worker Thread 3" [_thread_blocked, id=5256, stack(0x0000002352f00000,0x0000002353000000)]
-  0x00000151bcf74680 JavaThread "Cache worker for execution history cache (C:\Users\panch\Desktop\Vivah\vivah\node_modules\@react-native\gradle-plugin\.gradle\8.3\executionHistory)" [_thread_blocked, id=12772, stack(0x0000002353000000,0x0000002353100000)]
+  0x00000151bcf74680 JavaThread "Cache worker for execution history cache (C:\Users\panch\Desktop\Sanjog\Sanjog\node_modules\@react-native\gradle-plugin\.gradle\8.3\executionHistory)" [_thread_blocked, id=12772, stack(0x0000002353000000,0x0000002353100000)]
   0x00000151bcf750a0 JavaThread "Unconstrained build operations Thread 6" [_thread_blocked, id=8320, stack(0x0000002353100000,0x0000002353200000)]
   0x00000151bcf73c60 JavaThread "Unconstrained build operations Thread 7" [_thread_in_native, id=15380, stack(0x0000002353200000,0x0000002353300000)]
   0x00000151bcf704b0 JavaThread "Unconstrained build operations Thread 8" [_thread_blocked, id=13988, stack(0x0000002353300000,0x0000002353400000)]
@@ -265,7 +265,7 @@ Java Threads: ( => current thread )
   0x00000151bbeecec0 JavaThread "Unconstrained build operations Thread 38" [_thread_blocked, id=12412, stack(0x0000002355400000,0x0000002355500000)]
   0x00000151bbeec9b0 JavaThread "Unconstrained build operations Thread 39" [_thread_blocked, id=16324, stack(0x0000002355500000,0x0000002355600000)]
   0x00000151bbeed3d0 JavaThread "Unconstrained build operations Thread 40" [_thread_blocked, id=16836, stack(0x0000002355600000,0x0000002355700000)]
-  0x00000151bbee5f60 JavaThread "Cache worker for execution history cache (C:\Users\panch\Desktop\Vivah\vivah\android\.gradle\8.3\executionHistory)" [_thread_blocked, id=8872, stack(0x0000002355700000,0x0000002355800000)]
+  0x00000151bbee5f60 JavaThread "Cache worker for execution history cache (C:\Users\panch\Desktop\Sanjog\Sanjog\android\.gradle\8.3\executionHistory)" [_thread_blocked, id=8872, stack(0x0000002355700000,0x0000002355800000)]
 
 Other Threads:
   0x00000151feee5730 VMThread "VM Thread" [stack: 0x000000234f100000,0x000000234f200000] [id=20088]
@@ -1353,8 +1353,8 @@ Log output configuration:
 
 Environment Variables:
 JAVA_HOME=C:\Program Files\Microsoft\jdk-17.0.8.7-hotspot
-CLASSPATH=C:\Users\panch\Desktop\Vivah\vivah\android\\gradle\wrapper\gradle-wrapper.jar
-PATH=C:\Users\panch\Desktop\Vivah\vivah\node_modules\.bin;C:\Users\panch\Desktop\Vivah\vivah\node_modules\.bin;C:\Users\panch\Desktop\Vivah\node_modules\.bin;C:\Users\panch\Desktop\node_modules\.bin;C:\Users\panch\node_modules\.bin;C:\Users\node_modules\.bin;C:\node_modules\.bin;C:\Users\panch\AppData\Roaming\npm\node_modules\npm\node_modules\@npmcli\run-script\lib\node-gyp-bin;C:\Users\panch\Desktop\Vivah\vivah\node_modules\.bin;C:\Users\panch\Desktop\Vivah\node_modules\.bin;C:\Users\panch\Desktop\node_modules\.bin;C:\Users\panch\node_modules\.bin;C:\Users\node_modules\.bin;C:\node_modules\.bin;C:\Users\panch\AppData\Roaming\npm\node_modules\npm\node_modules\@npmcli\run-script\lib\node-gyp-bin;C:\Program Files\Microsoft\jdk-17.0.8.7-hotspot\bin;C:\Program Files\Microsoft\jdk-11.0.20.8-hotspot\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\MinGW\bin;C:\Program Files\dotnet\;C:\MinGW\bin;C:\Program Files\Git LFS;C:\Program Files\MongoDB\mongosh-1.10.1-win32-x64\bin;C:\Program Files\MySQL\MySQL Server 8.0\bin;C:\ProgramData\chocolatey\bin;C:\Program Files\nodejs\;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\;C:\Program Files\Git\cmd;C:\Users\panch\AppData\Local\Android\Sdk\platform-tools;C:\Users\panch\AppData\Local\Android\Sdk\tools;C:\Users\panch\AppData\Local\Programs\Python\Launcher\;C:\Users\panch\AppData\Local\Microsoft\WindowsApps;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2022.1.4\bin;;C:\Users\panch\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\panch\AppData\Local\Microsoft\WindowsApps;C:\Program Files\MongoDB\Server\6.0\bin;C:\Users\panch\AppData\Roaming\npm;C:\Users\panch\AppData\Local\GitHubDesktop\bin
+CLASSPATH=C:\Users\panch\Desktop\Sanjog\Sanjog\android\\gradle\wrapper\gradle-wrapper.jar
+PATH=C:\Users\panch\Desktop\Sanjog\Sanjog\node_modules\.bin;C:\Users\panch\Desktop\Sanjog\Sanjog\node_modules\.bin;C:\Users\panch\Desktop\Sanjog\node_modules\.bin;C:\Users\panch\Desktop\node_modules\.bin;C:\Users\panch\node_modules\.bin;C:\Users\node_modules\.bin;C:\node_modules\.bin;C:\Users\panch\AppData\Roaming\npm\node_modules\npm\node_modules\@npmcli\run-script\lib\node-gyp-bin;C:\Users\panch\Desktop\Sanjog\Sanjog\node_modules\.bin;C:\Users\panch\Desktop\Sanjog\node_modules\.bin;C:\Users\panch\Desktop\node_modules\.bin;C:\Users\panch\node_modules\.bin;C:\Users\node_modules\.bin;C:\node_modules\.bin;C:\Users\panch\AppData\Roaming\npm\node_modules\npm\node_modules\@npmcli\run-script\lib\node-gyp-bin;C:\Program Files\Microsoft\jdk-17.0.8.7-hotspot\bin;C:\Program Files\Microsoft\jdk-11.0.20.8-hotspot\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\MinGW\bin;C:\Program Files\dotnet\;C:\MinGW\bin;C:\Program Files\Git LFS;C:\Program Files\MongoDB\mongosh-1.10.1-win32-x64\bin;C:\Program Files\MySQL\MySQL Server 8.0\bin;C:\ProgramData\chocolatey\bin;C:\Program Files\nodejs\;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\;C:\Program Files\Git\cmd;C:\Users\panch\AppData\Local\Android\Sdk\platform-tools;C:\Users\panch\AppData\Local\Android\Sdk\tools;C:\Users\panch\AppData\Local\Programs\Python\Launcher\;C:\Users\panch\AppData\Local\Microsoft\WindowsApps;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2022.1.4\bin;;C:\Users\panch\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\panch\AppData\Local\Microsoft\WindowsApps;C:\Program Files\MongoDB\Server\6.0\bin;C:\Users\panch\AppData\Roaming\npm;C:\Users\panch\AppData\Local\GitHubDesktop\bin
 USERNAME=panch
 LANG=en_US.UTF-8
 OS=Windows_NT

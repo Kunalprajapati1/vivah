@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:916285535946:android:25db1a55a9bcf1dd916633",
         "android_client_info": {
-          "package_name": "com.vivah"
+          "package_name": "com.Sanjog"
         }
       },
       "oauth_client": [
@@ -17,7 +17,7 @@
           "client_id": "916285535946-ur6mj9o8k385asv18vooa24dq1gsn3vj.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.vivah",
+            "package_name": "com.Sanjog",
             "certificate_hash": "1da06cc51c29943d176a85faa9272400b56119ae"
           }
         },

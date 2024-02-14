@@ -50,9 +50,9 @@ const MyComponent = ({navigation,route}) => {
   useEffect(() => {
     const firebaseConfig = {
         apiKey: "AIzaSyAAvxsDg18a7O7bVnc_JHFGoX8J3Bo18ZM",
-        authDomain: 'vivah-57f3a.firebaseapp.com',
-        projectId: "vivah-57f3a",
-        storageBucket: "vivah-57f3a.appspot.com",
+        authDomain: 'Sanjog-57f3a.firebaseapp.com',
+        projectId: "Sanjog-57f3a",
+        storageBucket: "Sanjog-57f3a.appspot.com",
         messagingSenderId: '916285535946',
         appId: "1:916285535946:android:25db1a55a9bcf1dd916633",
       };
@@ -145,6 +145,10 @@ const MyComponent = ({navigation,route}) => {
   
 
   return (
+    <>
+    <View style={{ backgroundColor:'#f4c2c2', padding:30 }} >
+
+   
     <ScrollView contentContainerStyle={styles.container}>
       {/* State Input Section */}
       <Image
@@ -244,30 +248,31 @@ const MyComponent = ({navigation,route}) => {
         </View>
       </Modal>
     </ScrollView>
+    </View>
+    </>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    padding: 16,
+    // padding: 16,
   },
   inputContainer: {
-    marginBottom: 16,
-    borderWidth: 1,
+    // marginBottom: 16,
+    // borderWidth: 1,
     top:50,
-    borderColor: '#ddd',
-    borderRadius: 8,
-    paddingVertical:20,
+    // borderColor: '#ddd',
+    // borderRadius: 8,
+    // paddingVertical:20,
 
     flexDirection: 'column',
   },
   image:{
-    width: 100,
+    width: 120,
     height: 120,
-    marginTop:'10%',
-    borderRadius: 50,
-
-    marginLeft:'35%',
+    // marginTop:'10%',
+    // borderRadius: 50,
+    marginLeft:'34%',
 
 
   },
@@ -280,28 +285,28 @@ const styles = StyleSheet.create({
   },
   continueButtonText: {
     color: '#fff',
-    fontSize: 18,
+    fontSize: 16,
     textAlign: 'center',
   },
   label: {
-    fontSize: 22,
-    color:'black',
+    fontSize: 14,
+    color:'#362546',
     marginBottom:'8%',
   
   },
   pickerContainer: {
-    height: 60,
+    height: 0,
   
     borderWidth: 1,
     borderRadius: 8,
-    justifyContent: 'space-between',
+    // justifyContent: 'space-between',
     paddingHorizontal: 10,
     flexDirection: 'row',
     alignItems: 'center',
   },
   pickerText: {
-    fontSize: 18,
-    color:'black',
+    // fontSize: 18,
+    color:'#cc7676b8',
     
   },
   picker: {
