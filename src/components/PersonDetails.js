@@ -23,8 +23,11 @@ const PersonDetails = ({route, navigation}) => {
     );
   }
 
+  // const navigateToChat = () => {
+  //   navigation.navigate('Chat');
+  // };
   const navigateToChat = () => {
-    navigation.navigate('Chat');
+    navigation.navigate('Chat', { personData });
   };
 
   const capitalizeFirstLetter = string => {
