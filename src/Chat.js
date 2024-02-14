@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { GiftedChat } from 'react-native-gifted-chat';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const Chat = ({ route }) => {
+const Chatt = ({ route }) => {
   const { personData } = route.params;
   const [messages, setMessages] = useState([]);
   const [userDetails, setUserDetails] = useState(null);
@@ -41,4 +41,4 @@ const Chat = ({ route }) => {
   );
 };
 
-export default Chat;
+export default Chatt;
