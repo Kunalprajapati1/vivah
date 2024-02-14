@@ -28,6 +28,7 @@ import PersonDetails2 from './src/components/PersonDetails2';
 import Search from './src/components/Search';
 import WatchUser from './src/components/WatchUser';
 import Premium from './src/components/Premium';
+import ChatCollection from './src/components/ChatCollection';
 
 
 const Stack = createStackNavigator();
@@ -66,6 +67,7 @@ const App = () => {
       <Stack.Screen name="PersonDetails2" component={PersonDetails2}/>
       <Stack.Screen name="Search" component={Search}/>
       <Stack.Screen name="WatchUser" component={WatchUser}/>
+      <Stack.Screen name="ChatCollection" component={ChatCollection}/>
 
 
      
