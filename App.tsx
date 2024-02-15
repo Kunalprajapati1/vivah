@@ -31,6 +31,8 @@ import Premium from './src/components/Premium';
 import ChatCollection from './src/components/ChatCollection';
 import AdminScreen from './src/components/AdminScreen';
 import Adminlogin from './src/components/Adminlogin';
+import ManageUser from './src/components/ManageUser';
+import AddUser from './src/components/AddUser';
 
 
 const Stack = createStackNavigator();
@@ -72,6 +74,8 @@ const App = () => {
       <Stack.Screen name="ChatCollection" component={ChatCollection}/>
       <Stack.Screen name="AdminScreen" component={AdminScreen}/>
       <Stack.Screen name="Adminlogin" component={Adminlogin}/>
+      <Stack.Screen name="ManageUser" component={ManageUser}/>
+      <Stack.Screen name="AddUser" component={AddUser}/>
 
 
      

@@ -1,89 +1,48 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, FlatList, TouchableOpacity, Alert } from 'react-native';
-import firestore from '@react-native-firebase/firestore';
+import React from 'react';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
-const AdminScreen = () => {
-  const [users, setUsers] = useState([]);
-  const [expandedUserId, setExpandedUserId] = useState(null);
-
-  useEffect(() => {
-    const unsubscribe = firestore()
-      .collection('ProfileFor') // Use the correct collection name
-      .onSnapshot((querySnapshot) => {
-        const userList = [];
-        querySnapshot.forEach((documentSnapshot) => {
-          userList.push({
-            id: documentSnapshot.id,
-            ...documentSnapshot.data(),
-          });
-        });
-        setUsers(userList);
-      });
-
-    return () => unsubscribe();
-  }, []);
-
-  const handleDeleteUser = async (userId) => {
-    try {
-      await firestore().collection('ProfileForCommunity').doc(userId).delete();
-
-      setUsers((prevUsers) => prevUsers.filter((user) => user.id !== userId));
-      setExpandedUserId(null);
-
-      Alert.alert('User Deleted', 'The user has been successfully deleted.');
-    } catch (error) {
-      console.error('Error deleting user:', error);
-      Alert.alert('Error', 'Failed to delete the user. Please try again.');
-    }
+const AdminScreen = ({ navigation }) => {
+  const handleLogout = () => {
+    // Implement logout functionality for the admin
+    // For demonstration purposes, you can navigate back to the login screen
+    // or perform any other actions necessary for logging out
   };
 
-  const handleToggleDetails = (userId) => {
-    setExpandedUserId((prevUserId) => (prevUserId === userId ? null : userId));
+  const handleManageUsers = () => {
+    // Implement functionality to manage users (e.g., view, edit, delete)
+    // This could navigate to a separate screen for user management
+    navigation.navigate('ManageUser');
+  };
+
+  const handleManageSettings = () => {
+    // Implement functionality to manage app settings
+    // This could navigate to a screen for changing app configurations
+  };
+
+  const handleAddUser = () => {
+    // Navigate to the AddUser page for adding a new user
+    navigation.navigate('AddUser');
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.heading}>Admin Dashboard</Text>
-      <FlatList
-        data={users}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <View style={styles.userItem}>
-            <Text>{`User ID: ${item.id}`}</Text>
-            <Text>{`First Name: ${item.firstName}`}</Text>
-            <Text>{`Last Name: ${item.lastName}`}</Text>
-            <Text>{`Email: ${item.email}`}</Text>
-            <Text>{`Mobile Number: ${item.mobileNumber}`}</Text>
+      <Text style={styles.header}>Admin Dashboard</Text>
 
-            {expandedUserId === item.id ? (
-              // Show all details if expanded
-              <View>
-                <Text>{`College Name: ${item.collegeName}`}</Text>
-                <Text>{`Date of Birth: ${item.dayOfBirth}-${item.monthOfBirth}-${item.yearOfBirth}`}</Text>
-                <Text>{`Diet: ${item.diet}`}</Text>
-                <Text>{`Height: ${item.height}`}</Text>
-                {/* Add more details as needed */}
-              </View>
-            ) : null}
+      <TouchableOpacity style={styles.button} onPress={handleManageUsers}>
+        <Text style={styles.buttonText}>Manage Users</Text>
+      </TouchableOpacity>
 
-            <TouchableOpacity
-              style={styles.showMoreButton}
-              onPress={() => handleToggleDetails(item.id)}
-            >
-              <Text style={styles.showMoreButtonText}>
-                {expandedUserId === item.id ? 'Show Less' : 'Show More'}
-              </Text>
-            </TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={handleManageSettings}>
+        <Text style={styles.buttonText}>Manage Settings</Text>
+      </TouchableOpacity>
 
-            <TouchableOpacity
-              style={styles.deleteButton}
-              onPress={() => handleDeleteUser(item.id)}
-            >
-              <Text style={styles.deleteButtonText}>Delete User</Text>
-            </TouchableOpacity>
-          </View>
-        )}
-      />
+      <TouchableOpacity style={styles.addButton} onPress={handleAddUser}>
+        <Text style={styles.addButtonText}>Add User</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
+        <Text style={styles.logoutButtonText}>Logout</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -91,39 +50,54 @@ const AdminScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#e05654',
   },
-  heading: {
+  header: {
     fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 16,
+    color: '#ffffff',
+    marginBottom: 20,
+    fontFamily: 'Montserrat-SemiBold',
   },
-  userItem: {
-    marginBottom: 16,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    padding: 16,
-    borderRadius: 8,
+  button: {
+    backgroundColor: 'rgba(255, 255, 255, 0.7)',
+    padding: 15,
+    borderRadius: 10,
+    marginBottom: 20,
+    width: '80%',
+    alignItems: 'center',
   },
-  showMoreButton: {
-    marginTop: 8,
-    backgroundColor: '#3498db',
-    padding: 8,
-    borderRadius: 8,
+  buttonText: {
+    color: '#333',
+    fontFamily: 'Montserrat-SemiBold',
+    fontSize: 16,
   },
-  showMoreButtonText: {
-    color: '#fff',
-    textAlign: 'center',
+  addButton: {
+    backgroundColor: '#fff',
+    padding: 15,
+    borderRadius: 10,
+    marginBottom: 20,
+    width: '80%',
+    alignItems: 'center',
   },
-  deleteButton: {
-    marginTop: 8,
-    backgroundColor: 'red',
-    padding: 8,
-    borderRadius: 8,
+  addButtonText: {
+    color: '#e05654',
+    fontFamily: 'Montserrat-SemiBold',
+    fontSize: 16,
   },
-  deleteButtonText: {
-    color: '#fff',
-    textAlign: 'center',
+  logoutButton: {
+    backgroundColor: '#fff',
+    padding: 15,
+    borderRadius: 10,
+    marginTop: 20,
+    width: '80%',
+    alignItems: 'center',
+  },
+  logoutButtonText: {
+    color: '#e05654',
+    fontFamily: 'Montserrat-SemiBold',
+    fontSize: 16,
   },
 });
 
