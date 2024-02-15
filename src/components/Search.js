@@ -199,30 +199,33 @@ const Search = ({ navigation }) => {
     }
   };
 
-  const handleSearch = async () => {
+ 
+  const handleSearch = async (text) => {
     try {
-      const cleanedSearchTerm = searchTerm.trim().toLowerCase();
-
+      // Check if text is defined before calling trim()
+      const cleanedSearchTerm = text ? text.trim().toLowerCase() : '';
+  
       const profileForCollection = await firestore().collection('ProfileFor').get();
       const profileForUsers = profileForCollection.docs.map(doc => ({ docId: doc.id, ...doc.data() }));
-
+  
       const postCollection = await firestore().collection('Post').get();
       const postUsers = postCollection.docs.map(doc => ({ docId: doc.id, ...doc.data() }));
-
+  
       const allUsers = [...profileForUsers, ...postUsers];
-
+  
       const filteredUsers = allUsers.filter(user => {
-        const cleanedName = (user.name || user.firstName).trim().toLowerCase();
+        const cleanedName = (user.name || user.firstName || '').trim().toLowerCase();
         return cleanedName.includes(cleanedSearchTerm);
       });
-
+  
       const shuffledUsers = shuffleArray(filteredUsers);
-
+  
       setSearchResults(shuffledUsers);
     } catch (error) {
       console.error('Error searching users:', error);
     }
   };
+  
 
   const shuffleArray = (array) => {
     let currentIndex = array.length, randomIndex;
@@ -345,6 +348,7 @@ const styles = StyleSheet.create({
   },
   usernameText: {
     fontSize: 17,
+    
     // letterSpacing:3,
    fontFamily:'Montserrat-SemiBold',
   },

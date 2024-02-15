@@ -35,7 +35,7 @@ import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity, Linking } 
 const Premium = () => {
 
   const initiatePayment = (subscriptionType, amount) => {
-    const upiId = '9818908237@paytm'; // Your UPI ID
+    const upiId = '919310079927@paytm'; // Your UPI ID
     const brandName = 'Sanjog'; // Your brand name
 
     const paymentUrl = `upi://pay?pa=${upiId}&pn=${brandName}&am=${amount}&cu=INR`;

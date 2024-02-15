@@ -174,7 +174,7 @@ const Front = () => {
             }}>
             People Near You
           </Text>
-          <TouchableOpacity>
+          <TouchableOpacity   onPress={() => navigation.navigate('ChatCollection')}>
 
           <Image
             style={{
