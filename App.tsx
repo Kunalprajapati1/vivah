@@ -33,6 +33,10 @@ import AdminScreen from './src/components/AdminScreen';
 import Adminlogin from './src/components/Adminlogin';
 import ManageUser from './src/components/ManageUser';
 import AddUser from './src/components/AddUser';
+import Chatt from './src/components/Chatt';
+import ManageUserPost from './src/components/ManageUserPost';
+
+
 
 
 const Stack = createStackNavigator();
@@ -76,6 +80,10 @@ const App = () => {
       <Stack.Screen name="Adminlogin" component={Adminlogin}/>
       <Stack.Screen name="ManageUser" component={ManageUser}/>
       <Stack.Screen name="AddUser" component={AddUser}/>
+      <Stack.Screen name="Chatt" component={Chatt}/>
+      <Stack.Screen name="ManageUserPost" component={ManageUserPost}/>
+  
+      
 
 
      

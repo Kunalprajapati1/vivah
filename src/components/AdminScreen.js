@@ -12,6 +12,12 @@ const AdminScreen = ({ navigation }) => {
     navigation.navigate('ManageUser');
   };
 
+  const handleManageUsers2 = () => {
+    // Implement functionality to manage users (e.g., view, edit, delete)
+    // This could navigate to a separate screen for user management
+    navigation.navigate('ManageUserPost');
+  };
+
   const handleManageSettings = () => {
     // Implement functionality to manage app settings
     // This could navigate to a screen for changing app configurations
@@ -28,6 +34,9 @@ const AdminScreen = ({ navigation }) => {
 
       <TouchableOpacity style={styles.button} onPress={handleManageUsers}>
         <Text style={styles.buttonText}>Manage Users</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={handleManageUsers2}>
+        <Text style={styles.buttonText}>Manage Users by bicholia</Text>
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.button} onPress={handleManageSettings}>

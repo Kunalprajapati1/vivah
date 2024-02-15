@@ -1,7 +1,32 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const Landing = ({navigation}) => {
+const Landing = ({ navigation }) => {
+  useEffect(() => {
+    checkLoginStatus();
+  }, []);
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+
+  const checkLoginStatus = async () => {
+    try {
+      // Retrieve the userToken from AsyncStorage
+      const userToken = await AsyncStorage.getItem('userToken');
+
+
+      if (userToken) {
+        // User is logged in
+        setIsUserLoggedIn(true);
+        navigation.navigate('Land')
+      } else {
+        // User is not logged in
+        setIsUserLoggedIn(false);
+      
+      }
+    } catch (error) {
+      console.error('Error checking login status:', error);
+    }
+  };
   return (
     <>
       <View style={styles.container}>

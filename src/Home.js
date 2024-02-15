@@ -132,10 +132,10 @@ const Home = () => {
                   paddingHorizontal: 20,
                   fontFamily: 'Montserrat-SemiBold',
                 }}>
-                Sign up with Email
+                Register Yourself
               </Text>
             </TouchableOpacity>
-            <TouchableOpacity
+            {/* <TouchableOpacity
               onPress={() => navigation.navigate('Land')}
               style={{
                 flexDirection: 'row',
@@ -167,7 +167,7 @@ const Home = () => {
                 }}>
                 Sign up with Mobile
               </Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
             <Text
               onPress={() => navigation.navigate('Login')}
               style={{

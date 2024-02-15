@@ -24,7 +24,7 @@ const PersonDetails2 = ({ route, navigation }) => {
   }
 
   const navigateToChat = () => {
-    navigation.navigate('Chat');
+    navigation.navigate('Chatt', { personData });
   };
 
   const capitalizeFirstLetter = (string) => {
@@ -53,6 +53,7 @@ const PersonDetails2 = ({ route, navigation }) => {
 
           {personData && (
             <View style={styles.postContainer}>
+              <Text style={styles.B}>Uploded by bicholia</Text>
               <Text style={styles.nameText}>
                 {personData.name}
               </Text>
@@ -89,7 +90,7 @@ const PersonDetails2 = ({ route, navigation }) => {
                 style={styles.chatButton}
               >
                 <Text style={styles.chatButtonText}>
-                  Click to Chat to Person
+                  Connect With Bicholia/Mediator
                 </Text>
               </TouchableOpacity>
             </View>
@@ -162,6 +163,15 @@ const styles = StyleSheet.create({
       borderBottomColor: '#e2d0d0',
       width: '100%',
       marginBottom: 5,
+    },
+    B:{
+color:'#e05654',
+textAlign:'center',
+fontFamily: 'Montserrat-Regular',
+fontSize:29,
+marginBottom:30,
+fontWeight:'500',
+
     },
     chatButton: {
       backgroundColor: '#e05654',
