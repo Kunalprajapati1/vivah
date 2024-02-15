@@ -3,9 +3,7 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
 const AdminScreen = ({ navigation }) => {
   const handleLogout = () => {
-    // Implement logout functionality for the admin
-    // For demonstration purposes, you can navigate back to the login screen
-    // or perform any other actions necessary for logging out
+    navigation.navigate('Login');
   };
 
   const handleManageUsers = () => {
