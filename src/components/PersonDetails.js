@@ -65,20 +65,18 @@ const PersonDetails = ({route, navigation}) => {
                         styles.fieldText,
                         key === 'firstName' ||
                         key === 'lastName' ||
-                        key === 'selectedGender' ||
-                        key === 'dayOfBirth' ||
-                        key === 'monthOfBirth' ||
-                        key === 'yearOfBirth' ||
+                        key === 'Gender' ||
+                        key === 'dateOfBirth' ||
                         key === 'diet' ||
                         key === 'height' ||
                         key === 'collegeName' ||
                         key === 'maritalStatus' ||
                         key === 'qualification' ||
                         key === 'selectedState' ||
-                        key === 'selectedCity' ||
-                        key === 'selectedOption' ||
+                        key === 'city' ||
+                        key === 'Option' ||
                         key === 'selectedReligion' ||
-                        key === 'selectedSubCommunity' ||
+                        key === 'Community' ||
                         key === 'workAs' ||
                         key === 'workAsOtherDetails' ||
                         key === 'workWith' ||
