@@ -19,8 +19,8 @@ const AdminScreen = ({ navigation }) => {
   };
 
   const handleManageSettings = () => {
-    // Implement functionality to manage app settings
-    // This could navigate to a screen for changing app configurations
+   
+    navigation.navigate('AuthUser');
   };
 
   const handleAddUser = () => {

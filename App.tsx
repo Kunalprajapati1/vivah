@@ -35,6 +35,7 @@ import ManageUser from './src/components/ManageUser';
 import AddUser from './src/components/AddUser';
 import Chatt from './src/components/Chatt';
 import ManageUserPost from './src/components/ManageUserPost';
+import AuthUser from './src/components/AuthUser';
 
 
 
@@ -82,6 +83,7 @@ const App = () => {
       <Stack.Screen name="AddUser" component={AddUser}/>
       <Stack.Screen name="Chatt" component={Chatt}/>
       <Stack.Screen name="ManageUserPost" component={ManageUserPost}/>
+      <Stack.Screen name="AuthUser" component={AuthUser}/>
   
       
 

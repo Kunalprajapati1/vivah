@@ -1,8 +1,95 @@
+// import React, { useState, useEffect } from 'react';
+// import { StyleSheet, View, Text, Image, TextInput, TouchableOpacity, Alert, ScrollView } from 'react-native';
+
+// import { initializeApp } from '@react-native-firebase/app';
+// import firestore from '@react-native-firebase/firestore';
+// const NameDetail = ({ route, navigation }) => {
+//   const { uniqueId } = route.params;
+//   const [firstName, setFirstName] = useState('');
+//   const [lastName, setLastName] = useState('');
+//   const [dayOfBirth, setDayOfBirth] = useState('');
+//   const [monthOfBirth, setMonthOfBirth] = useState('');
+//   const [yearOfBirth, setYearOfBirth] = useState('');
+
+//   useEffect(() => {
+//     const firebaseConfig = {
+//         apiKey: "AIzaSyAAvxsDg18a7O7bVnc_JHFGoX8J3Bo18ZM",
+//         authDomain: 'Sanjog-57f3a.firebaseapp.com',
+//         projectId: "Sanjog-57f3a",
+//         storageBucket: "Sanjog-57f3a.appspot.com",
+//         messagingSenderId: '916285535946',
+//         appId: "1:916285535946:android:25db1a55a9bcf1dd916633",
+//       };
+//     initializeApp(firebaseConfig);
+//   }, []);
+
+
+
+//   const isContinueDisabled = !firstName || !lastName || !dayOfBirth || !monthOfBirth || !yearOfBirth;
+//   const handleContinue = async () => {
+//     if (isContinueDisabled) {
+//       Alert.alert('Incomplete Information', 'Please fill in all the fields.');
+//     } else {
+//       try {
+//         const donationRef = firestore().collection('ProfileFor');
+  
+//         // Use uniqueId when updating the document in Firestore
+//         await donationRef.doc(uniqueId).update({
+//           firstName: firstName,
+//           lastName: lastName,
+//           dayOfBirth: dayOfBirth,
+//           monthOfBirth: monthOfBirth,
+//           yearOfBirth: yearOfBirth,
+//         });
+  
+//         navigation.navigate('Email', { uniqueId});
+//       } catch (error) {
+//         console.error('Error updating donation', error);
+//         Alert.alert('Error', 'Failed to submit. Please try again.');
+//       }
+//     }
+//   };
+
+//   return (
+//     <ScrollView contentContainerStyle={styles.container}>
+
+//     <View style={{ marginTop:90}}>
+//       {/* <ProfileImage /> */}
+
+//       <View style={styles.inputSection}>
+//         <Text style={{   fontSize: 36,
+//     bottom: 5,
+//     color: '#e05654',
+//     fontFamily:'DMSerifDisplay-Regular'
+//     }}>Enter Your Details </Text>
+//     <View style={{ marginTop:20 }}>
+//         <InputLabel  label="First Name" value={firstName} onChangeText={setFirstName} />
+//         <InputLabel label="Last Name" value={lastName} onChangeText={setLastName} />
+
+//     </View>
+//       </View>
+
+//       <DOBInputContainer
+//         label="Date of Birth"
+//         dayValue={dayOfBirth}
+//         monthValue={monthOfBirth}
+//         yearValue={yearOfBirth}
+//         onDayChange={setDayOfBirth}
+//         onMonthChange={setMonthOfBirth}
+//         onYearChange={setYearOfBirth}
+//       />
+
+//       <ContinueButton onPress={handleContinue} disabled={isContinueDisabled} />
+//       </View>
+//     </ScrollView>
+//   );
+// };
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, Image, TextInput, TouchableOpacity, Alert, ScrollView } from 'react-native';
+import { StyleSheet, View, Text, Image, TextInput, TouchableOpacity, Alert, ScrollView, ActivityIndicator } from 'react-native';
 
 import { initializeApp } from '@react-native-firebase/app';
 import firestore from '@react-native-firebase/firestore';
+
 const NameDetail = ({ route, navigation }) => {
   const { uniqueId } = route.params;
   const [firstName, setFirstName] = useState('');
@@ -10,76 +97,84 @@ const NameDetail = ({ route, navigation }) => {
   const [dayOfBirth, setDayOfBirth] = useState('');
   const [monthOfBirth, setMonthOfBirth] = useState('');
   const [yearOfBirth, setYearOfBirth] = useState('');
+  const [loadingSubmit, setLoadingSubmit] = useState(false);
 
   useEffect(() => {
     const firebaseConfig = {
-        apiKey: "AIzaSyAAvxsDg18a7O7bVnc_JHFGoX8J3Bo18ZM",
-        authDomain: 'Sanjog-57f3a.firebaseapp.com',
-        projectId: "Sanjog-57f3a",
-        storageBucket: "Sanjog-57f3a.appspot.com",
-        messagingSenderId: '916285535946',
-        appId: "1:916285535946:android:25db1a55a9bcf1dd916633",
-      };
+      apiKey: "AIzaSyAAvxsDg18a7O7bVnc_JHFGoX8J3Bo18ZM",
+      authDomain: 'Sanjog-57f3a.firebaseapp.com',
+      projectId: "Sanjog-57f3a",
+      storageBucket: "Sanjog-57f3a.appspot.com",
+      messagingSenderId: '916285535946',
+      appId: "1:916285535946:android:25db1a55a9bcf1dd916633",
+    };
     initializeApp(firebaseConfig);
   }, []);
 
-
-
   const isContinueDisabled = !firstName || !lastName || !dayOfBirth || !monthOfBirth || !yearOfBirth;
+
+  const isValidDateOfBirth = () => {
+    const currentYear = new Date().getFullYear();
+    const enteredDay = parseInt(dayOfBirth, 10);
+    const enteredMonth = parseInt(monthOfBirth, 10);
+    const enteredYear = parseInt(yearOfBirth, 10);
+
+    const isValidDay = enteredDay >= 1 && enteredDay <= 31;
+    const isValidMonth = enteredMonth >= 1 && enteredMonth <= 12;
+    const isValidYear = enteredYear >= 1950 && enteredYear <= currentYear;
+
+    return isValidDay && isValidMonth && isValidYear;
+  };
+
   const handleContinue = async () => {
-    if (isContinueDisabled) {
-      Alert.alert('Incomplete Information', 'Please fill in all the fields.');
+    if (isContinueDisabled || !isValidDateOfBirth()) {
+      Alert.alert('Invalid Information', 'Please fill in all the fields and enter a valid date of birth.');
     } else {
       try {
         const donationRef = firestore().collection('ProfileFor');
   
-        // Use uniqueId when updating the document in Firestore
+        const dateOfBirth = `${dayOfBirth}-${monthOfBirth}-${yearOfBirth}`;
+  
+        setLoadingSubmit(true);
+
         await donationRef.doc(uniqueId).update({
           firstName: firstName,
           lastName: lastName,
-          dayOfBirth: dayOfBirth,
-          monthOfBirth: monthOfBirth,
-          yearOfBirth: yearOfBirth,
+          dateOfBirth: dateOfBirth,
         });
   
-        navigation.navigate('Email', { uniqueId});
+        navigation.navigate('Email', { uniqueId });
       } catch (error) {
         console.error('Error updating donation', error);
         Alert.alert('Error', 'Failed to submit. Please try again.');
+      } finally {
+        setLoadingSubmit(false);
       }
     }
   };
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
+      <View style={{ marginTop: 90 }}>
+        <View style={styles.inputSection}>
+          <Text style={{ fontSize: 36, bottom: 5, color: '#e05654', fontFamily: 'DMSerifDisplay-Regular' }}>Enter Your Details </Text>
+          <View style={{ marginTop: 20 }}>
+            <InputLabel label="First Name" value={firstName} onChangeText={setFirstName} />
+            <InputLabel label="Last Name" value={lastName} onChangeText={setLastName} />
+          </View>
+        </View>
 
-    <View style={{ marginTop:90}}>
-      {/* <ProfileImage /> */}
+        <DOBInputContainer
+          label="Date of Birth"
+          dayValue={dayOfBirth}
+          monthValue={monthOfBirth}
+          yearValue={yearOfBirth}
+          onDayChange={setDayOfBirth}
+          onMonthChange={setMonthOfBirth}
+          onYearChange={setYearOfBirth}
+        />
 
-      <View style={styles.inputSection}>
-        <Text style={{   fontSize: 36,
-    bottom: 5,
-    color: '#e05654',
-    fontFamily:'DMSerifDisplay-Regular'
-    }}>Enter Your Details </Text>
-    <View style={{ marginTop:20 }}>
-        <InputLabel  label="First Name" value={firstName} onChangeText={setFirstName} />
-        <InputLabel label="Last Name" value={lastName} onChangeText={setLastName} />
-
-    </View>
-      </View>
-
-      <DOBInputContainer
-        label="Date of Birth"
-        dayValue={dayOfBirth}
-        monthValue={monthOfBirth}
-        yearValue={yearOfBirth}
-        onDayChange={setDayOfBirth}
-        onMonthChange={setMonthOfBirth}
-        onYearChange={setYearOfBirth}
-      />
-
-      <ContinueButton onPress={handleContinue} disabled={isContinueDisabled} />
+        <ContinueButton onPress={handleContinue} disabled={isContinueDisabled || !isValidDateOfBirth()} loading={loadingSubmit} />
       </View>
     </ScrollView>
   );
@@ -187,15 +282,9 @@ const DOBInputContainer = ({ label, dayValue, monthValue, yearValue, onDayChange
   <View style={styles.dobContainer}>
     <Text style={styles.label2}>{label}</Text>
     <View style={styles.dobInputs}>
-      <DOBInput placeholder="DD" value={dayValue} 
-      placeholderTextColor='white'
-       onChangeText={onDayChange} />
-      <DOBInput placeholder="MM" value={monthValue} 
-      placeholderTextColor={styles.dobInputPlaceholder.color}
-       onChangeText={onMonthChange} />
-      <DOBInput placeholder="YYYY" value={yearValue} 
-      placeholderTextColor={styles.dobInputPlaceholder.color}
-       onChangeText={onYearChange} />
+      <DOBInput placeholder="DD" value={dayValue} placeholderTextColor='white' onChangeText={onDayChange} />
+      <DOBInput placeholder="MM" value={monthValue} placeholderTextColor={styles.dobInputPlaceholder.color} onChangeText={onMonthChange} />
+      <DOBInput placeholder="YYYY" value={yearValue} placeholderTextColor={styles.dobInputPlaceholder.color} onChangeText={onYearChange} />
     </View>
   </View>
 );
@@ -210,13 +299,21 @@ const DOBInput = ({ placeholder, value, onChangeText }) => (
   />
 );
 
-const ContinueButton = ({ onPress, disabled }) => (
+const ContinueButton = ({ onPress, disabled, loading }) => (
   <TouchableOpacity
-    onPress={onPress}
-    style={[styles.continueButton, { backgroundColor: disabled ? '#232337' : '#2e2c4d' }]}
-    disabled={disabled}
+    onPress={() => {
+      if (!loading) {
+        onPress();
+      }
+    }}
+    style={[styles.continueButton, { backgroundColor: disabled || loading ? '#232337' : '#2e2c4d' }]}
+    disabled={disabled || loading}
   >
-    <Text style={styles.continueButtonText}>Continue</Text>
+    {loading ? (
+      <ActivityIndicator size="small" color="#fff" />
+    ) : (
+      <Text style={styles.continueButtonText}>Continue</Text>
+    )}
   </TouchableOpacity>
 );
 

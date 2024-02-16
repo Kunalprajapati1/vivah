@@ -63,7 +63,7 @@ const User = ({ route,navigation }) => {
   if (!userData) {
     return (
       <View style={styles.container}>
-        <ActivityIndicator size="large" color="#34dbcd" />
+        <ActivityIndicator size="large" color="#e53371" />
       </View>
     );
   }
@@ -149,12 +149,15 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
+
+    backgroundColor: '#fbd1d1',
     marginBottom: 20,
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
   },
   title: {
+    color: '#e53371',
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20,
@@ -167,11 +170,12 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   fieldContainer: {
+
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     width: '100%',
-    paddingVertical: 10,
+    paddingVertical: 20,
     borderBottomWidth: 1,
     borderColor: '#ccc',
   },
@@ -194,7 +198,7 @@ const styles = StyleSheet.create({
     borderColor: '#ccc',
   },
   editButton: {
-    backgroundColor: '#34dbcd',
+    backgroundColor: '#ff0059',
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 8,
@@ -207,7 +211,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   saveButton: {
-    backgroundColor: '#34dbcd',
+    backgroundColor: '#ff0059',
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 8,

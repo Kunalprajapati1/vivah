@@ -87,7 +87,7 @@ const Front = ({ navigation }) => {
 
   const handleLogout = async () => {
     await AsyncStorage.clear();
-    navigation.navigate('Login');
+    navigation.navigate('Home');
   };
 
   const handleEditPress = () => {

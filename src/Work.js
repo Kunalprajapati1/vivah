@@ -191,7 +191,7 @@ const Work = ({navigation,route}) => {
 
       {/* Conditional rendering based on loading state */}
       {loading ? (
-        <ActivityIndicator style={styles.loadingIndicator} size="large" color="#34dbcd" />
+        <ActivityIndicator style={styles.loadingIndicator} size="large" color='#e05654' />
       ) : (
         // Conditional rendering based on profileCreated state
         profileCreated ? (
@@ -202,7 +202,7 @@ const Work = ({navigation,route}) => {
         ) : (
           <TouchableOpacity
             onPress={handleCreateProfile}
-            style={[styles.createProfileButton, { backgroundColor: workWith ? '#34dbcd' : '#95a5a6' }]}
+            style={[styles.createProfileButton, { backgroundColor: workWith ? '#e05654' : '#e05654' }]}
             disabled={!workWith }
           >
             <Text style={styles.createProfileButtonText}>Create Profile</Text>
@@ -216,15 +216,18 @@ const Work = ({navigation,route}) => {
 const styles = StyleSheet.create({
   container: {
     padding: 16,
+    backgroundColor: '#fbd1d1',
+    height:"100%",
   },
   head: {
     textAlign: "center",
     fontSize: 21,
-    color: "black",
+    color: '#e05654',
     marginBottom: 20,
   },
   image: {
     width: 100,
+    tintColor:'#e05654',
     height: 100,
     borderRadius: 50,
     marginBottom: 6,
@@ -235,7 +238,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 36,
-    color: 'black',
+    color: '#e05654',
     marginLeft: '7%',
   },
   pickerContainer: {
@@ -254,14 +257,14 @@ const styles = StyleSheet.create({
   },
   pickerText: {
     fontSize: 18,
-    color: '#000000',
+    color: '#e05654',
     marginHorizontal: 20,
   },
   additionalInput: {
     height: 60,
     borderWidth: 1,
     fontSize: 18,
-    color: '#000000',
+    color: '#e05654',
     borderRadius: 8,
     justifyContent: 'space-between',
     paddingHorizontal: 30,
@@ -293,11 +296,11 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     marginBottom: 16,
     paddingHorizontal: 40,
-    color: 'white',
+    color: '#e05654',
   },
   modalItem: {
     paddingVertical: 20,
-    color: 'black',
+    color: '#e05654',
     borderBottomWidth: 1,
     borderBottomColor: '#ddd',
   },
@@ -319,11 +322,12 @@ const styles = StyleSheet.create({
   },
   successText: {
     fontSize: 18,
-    color: '#34dbcd',
+    color: '#e05654',
     marginBottom: 10,
   },
   successImage: {
     width: 50,
+    tintColor:'#e05654',
     height: 50,
     marginTop: 10,
   },

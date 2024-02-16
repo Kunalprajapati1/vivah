@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, FlatList, M
 import { useNavigation } from '@react-navigation/native';
 import { initializeApp } from '@react-native-firebase/app';
 import firestore from '@react-native-firebase/firestore';
+import { ActivityIndicator } from 'react-native';
 
 
 const Highest = ({route,navigation}) => {
@@ -12,6 +13,7 @@ const Highest = ({route,navigation}) => {
   const [collegeName, setCollegeName] = useState('');
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [searchText, setSearchText] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
  
   const categories = [
@@ -32,7 +34,7 @@ const Highest = ({route,navigation}) => {
     switch (category) {
       case 'Engineering':
         return [
-          'Computer Science',
+   
           'Electrical Engineering',
           'Mechanical Engineering',
           'Civil Engineering',
@@ -48,7 +50,7 @@ const Highest = ({route,navigation}) => {
         return ['Medicine', 'Dentistry', 'Pharmacy', 'Nursing', 'Other Medical Fields'];
       case 'Humanities':
         return ['History', 'Philosophy', 'Literature', 'Other Humanities Fields'];
-      case 'Computer Science':
+      case 'Science':
         return ['Software Engineering', 'Data Science', 'Information Technology'];
       case 'Business Administration':
         return ['Management', 'Entrepreneurship', 'International Business'];
@@ -81,14 +83,15 @@ const Highest = ({route,navigation}) => {
   const handleOptionPress = (item) => {
     setSelectedOption(item);
     setIsModalVisible(false);
-  };
-  const handleContinuePress = async () => {
+  };const handleContinuePress = async () => {
     if (!selectedOption) {
       Alert.alert('Incomplete Information', 'Please select a qualification.');
       return;
     }
   
     try {
+      setIsLoading(true); // Set loading state
+  
       const highestEducationRef = firestore().collection('ProfileFor');
       await highestEducationRef.doc(uniqueId).update({
         qualification: qualification, // Replace with your state variable
@@ -96,12 +99,15 @@ const Highest = ({route,navigation}) => {
       });
   
       // Navigate to the next screen (adjust 'NextScreen' to your actual screen name)
-      navigation.navigate('Work', { uniqueId});
+      navigation.navigate('Work', { uniqueId });
     } catch (error) {
       console.error('Error adding highest education data:', error);
       Alert.alert('Error', 'Failed to submit. Please try again.');
+    } finally {
+      setIsLoading(false); // Reset loading state
     }
   };
+  
   return (
     <View style={styles.container}>
       <Image source={require('../assets/secure.png')} style={styles.image} />
@@ -128,13 +134,19 @@ const Highest = ({route,navigation}) => {
       )}
 
       {/* Continue Button */}
-      <TouchableOpacity
-        onPress={handleContinuePress}
-        style={[styles.continueButton, { backgroundColor: selectedOption ? '#34dbcd' : '#95a5a6' }]}
-        disabled={!selectedOption}
-      >
-        <Text style={styles.continueButtonText}>Continue</Text>
-      </TouchableOpacity>
+      {/* Continue Button */}
+<TouchableOpacity
+  onPress={handleContinuePress}
+  style={[styles.continueButton, { backgroundColor: selectedOption ? '#e05654' : '#e05654' }]}
+  disabled={!selectedOption}
+>
+  {isLoading ? (
+    <ActivityIndicator size="small" color="#fff" />
+  ) : (
+    <Text style={[styles.continueButtonText, { color: '#ffffff' }]}>Continue</Text>
+  )}
+</TouchableOpacity>
+
 
       {/* Custom Modal */}
       <Modal
@@ -173,10 +185,12 @@ const Highest = ({route,navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: '20%',
+    backgroundColor: '#fbd1d1',
+
     alignItems: 'center',
   },
   image: {
+    marginTop:80,
     width: 100,
     height: 100,
     borderRadius: 50,
@@ -186,7 +200,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: 'bold',
     marginBottom: 36,
-    color: 'black',
+    color: '#e53371',
   },
   pickerContainer: {
     height: 60,
@@ -204,12 +218,12 @@ const styles = StyleSheet.create({
   },
   pickerText: {
     fontSize: 20,
-    color: '#000000be',
+    color: '#e53371',
   },
   input: {
     height: 65,
     width: '80%',
-  
+    color: '#e53371',
     borderColor: '#000000',
     borderWidth: 1,
     fontSize:17,
