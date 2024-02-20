@@ -58,16 +58,18 @@ const Front = ({ navigation }) => {
   const displayOrder = [
     'firstName',
     'lastName',
-    'Gender',
-   'dateOfBirth',
+    'selectedGender',
+    'dayOfBirth',
+    'monthOfBirth',
+    'yearOfBirth',
     'diet',
     'height',
     'collegeName',
     'maritalStatus',
     'qualification',
     'selectedState',
-    'city',
-    'Option',
+    'selectedCity',
+    'selectedOption',
     'selectedReligion',
     'Community',
     'workAs',
@@ -85,7 +87,7 @@ const Front = ({ navigation }) => {
 
   const handleLogout = async () => {
     await AsyncStorage.clear();
-    navigation.navigate('Home');
+    navigation.navigate('Login');
   };
 
   const handleEditPress = () => {
