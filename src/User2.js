@@ -131,7 +131,7 @@ const User = ({ route,navigation }) => {
           </TouchableOpacity>
           
         )}
-        <TouchableOpacity onPress={()=> navigation.navigate('Land')  }>
+        <TouchableOpacity onPress={()=> navigation.navigate('Login')  }>
             <View style={styles.editButton}>
               <Text style={styles.editButtonText}>Continue </Text>
             </View>

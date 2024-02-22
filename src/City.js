@@ -497,7 +497,7 @@ const MyComponent = ({ route }) => {
         >
           <Picker.Item label="Community" value="" />
           <Picker.Item label="Prajapati" value="Prajapati" />
-          <Picker.Item label="Kumhar" value="Kumhar" />
+          {/* <Picker.Item label="Kumhar" value="Kumhar" /> */}
         </Picker>
       </View>
 

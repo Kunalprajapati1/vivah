@@ -53,36 +53,32 @@ const WatchUserScreen = ({ route }) => {
       {userDetails ? (
         <ScrollView>
           {/* Display photos if available */}
-          <View style={styles.imageContainer}>
-            {userDetails.photos && userDetails.photos.length > 0 ? (
-              <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-                {userDetails.photos.map((photo, index) => (
-                  <Image
-                    key={index}
-                    source={{ uri: photo }}
-                    style={styles.userImage}
-                    resizeMode="cover"
-                  />
-                ))}
-              </ScrollView>
-            ) : (
-              <Image
-                source={require('../../assets/user.png')}
-                style={styles.userImage}
-                resizeMode="cover"
-              />
-            )}
-          </View>
+       <View style={styles.imageContainer}>
+  {userDetails.photos && userDetails.photos.length > 0 ? (
+    <Image
+      source={{ uri: userDetails.photos[0] }}
+      style={styles.userImage}
+      resizeMode="cover"
+    />
+  ) : (
+    <Image
+      source={require('../../assets/user.png')}
+      style={styles.userImage}
+      resizeMode="cover"
+    />
+  )}
+</View>
+
           
           {/* Display other user details based on your data structure */}
           <Text style={styles.usernameText}>{userDetails.name || userDetails.firstName}</Text>
-          <Text style={styles.userInfoText}> {userDetails.email}</Text>
-          <Text style={styles.userInfoText}> {userDetails.age}</Text>
-          <Text style={styles.userInfoText}> {userDetails.religion}</Text>
+          <Text style={styles.userInfoText}> {userDetails.height}</Text>
+          <Text style={styles.userInfoText}> {userDetails.age || userDetails.dateOfBirth  }</Text>
+          <Text style={styles.userInfoText}> {userDetails.religion || userDetails.Community}</Text>
           {/* <Text style={styles.userInfoText}> {userDetails.community}</Text> */}
           <Text style={styles.userInfoText}> {userDetails.education}</Text>
           <Text style={styles.userInfoText}> {userDetails.caste}</Text>
-          <Text style={styles.userInfoText}> {userDetails.mobile}</Text>
+          <Text style={styles.userInfoText}> {userDetails.height}</Text>
           
           {/* Follow/Unfollow button */}
           <TouchableOpacity

@@ -107,7 +107,7 @@ const Home = () => {
               style={{
                 flexDirection: 'row',
                 width: '85%',
-                marginTop: 19,
+             
                 alignItems: 'center',
                 backgroundColor: '#ffffff',
                 borderRadius: 25,
@@ -135,6 +135,43 @@ const Home = () => {
                 Register Yourself
               </Text>
             </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('ProfileFor')}
+              style={{
+                flexDirection: 'row',
+                width: '85%',
+           
+                alignItems: 'center',
+                backgroundColor: '#ffffff',
+                borderRadius: 25,
+                marginBottom: 20,
+                fontFamily: 'Montserrat-SemiBold',
+              }}>
+              <Image
+                source={require('../assets/email.png')}
+                style={{
+                  width: 30,
+                  height: 30,
+                  margin: 10,
+                  marginLeft: 30,
+                  tintColor: '#e41310',
+                }}
+              />
+              <Text
+                style={{
+                  flex: 1,
+                  color: '#ef6f6f',
+                  fontSize: 18,
+                  paddingHorizontal: 20,
+                  fontFamily: 'Montserrat-SemiBold',
+                }}>
+                Register As Bicholia
+              </Text>
+            </TouchableOpacity>
+
+
+
+
             {/* <TouchableOpacity
               onPress={() => navigation.navigate('Land')}
               style={{

@@ -266,7 +266,7 @@ const Search = ({ navigation }) => {
         value={searchTerm}
       /> */}
 
-      <FlatList
+      {/* <FlatList
         data={searchResults}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => (
@@ -298,7 +298,37 @@ const Search = ({ navigation }) => {
             </View>
           </TouchableOpacity>
         )}
-      />
+      /> */}
+
+<FlatList
+  data={searchResults}
+  keyExtractor={(item, index) => index.toString()}
+  renderItem={({ item }) => (
+    <TouchableOpacity
+      onPress={() => navigation.navigate('WatchUser', { userId: item.docId })}
+    >
+      <View style={styles.userContainer}>
+        {item.photos && item.photos.length > 0 ? (
+          <Image
+            source={{ uri: item.photos[0] }}
+            style={styles.userImage}
+            resizeMode="cover"
+          />
+        ) : (
+          <Image
+            source={require('../../assets/user.png')}
+            style={styles.userImage}
+            resizeMode="cover"
+          />
+        )}
+        <View>
+          <Text style={styles.usernameText}>{item.name || item.firstName}</Text>
+        </View>
+      </View>
+    </TouchableOpacity>
+  )}
+/>
+
     </View>
   );
 };
