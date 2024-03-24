@@ -1280,7 +1280,7 @@ const EditSaveProfile = ({ navigation }) => {
       <ScrollView contentContainerStyle={styles.container}>
         {displayedUserData ? (
           <>
-            <TouchableOpacity onPress={() => handleImageClick(displayedUserData.photos)}>
+            {/* <TouchableOpacity onPress={() => handleImageClick(displayedUserData.photos)}> */}
               {isEditing && (
                 <TouchableOpacity onPress={handleSelectImage} style={styles.changeImageButton}>
                   <Text style={styles.changeImageButtonText}>Change Image</Text>
@@ -1309,7 +1309,7 @@ const EditSaveProfile = ({ navigation }) => {
                   <Text style={styles.logoutButtonText}>Add more Photos</Text>
                 </TouchableOpacity>
               </View>
-            </TouchableOpacity>
+            {/* </TouchableOpacity> */}
             <View style={styles.profileContainer}>
               <View style={styles.headerContainer}></View>
 
@@ -1423,10 +1423,10 @@ const styles = StyleSheet.create({
   changeImageButton: {
     backgroundColor: '#4285f4',
     paddingVertical: 10,
-    width: '60%',
+    width: '40%',
     top: 160,
     borderRadius: 8,
-    marginLeft: '20%',
+    marginLeft: '40%',
   },
   changeImageButtonText: {
     color: 'white',

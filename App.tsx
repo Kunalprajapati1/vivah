@@ -37,6 +37,9 @@ import Chatt from './src/components/Chatt';
 import ManageUserPost from './src/components/ManageUserPost';
 import AuthUser from './src/components/AuthUser';
 import Images from './src/Images';
+import Bicholia from './src/components/Bicholia';
+import BicholiaLogin from './src/components/BicholiaLogin';
+import BicholiaProfile from './src/components/BicholiaProfile';
 
 
 
@@ -86,6 +89,9 @@ const App = () => {
       <Stack.Screen name="ManageUserPost" component={ManageUserPost}/>
       <Stack.Screen name="AuthUser" component={AuthUser}/>
       <Stack.Screen name="Images" component={Images}/>
+      <Stack.Screen name="Bicholia" component={Bicholia}/>
+      <Stack.Screen name="BicholiaLogin" component={BicholiaLogin}/>
+      <Stack.Screen name="BicholiaProfile" component={BicholiaProfile}/>
   
       
 

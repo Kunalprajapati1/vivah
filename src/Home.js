@@ -136,7 +136,7 @@ const Home = () => {
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => navigation.navigate('ProfileFor')}
+              onPress={() => navigation.navigate('Bicholia')}
               style={{
                 flexDirection: 'row',
                 width: '85%',
