@@ -47,12 +47,11 @@ const styles = StyleSheet.create({
   menuItemBox: {
     marginTop:40,
     // width:20,
-    height: '190%',
-    // paddingHorizontal:0,
-    // padding: 10,
+    height: '130%',
+    
     borderRadius: 15,
     backgroundColor: '#e65257', // Background color for the individual box
-    margin: 5, // Adjust spacing between boxes
+    margin: 15, // Adjust spacing between boxes
     flex: 1,
   },
   menuItemText: {
