@@ -249,7 +249,7 @@ paddingHorizontal:20,
   },
   continueButtonText: {
     color: '#fff',
-    fontSize: 18,
+    fontSize: 14,
     paddingHorizontal:80,
     textAlign: 'center',
   },

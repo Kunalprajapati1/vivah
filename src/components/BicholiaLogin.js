@@ -259,14 +259,14 @@ const BicholiaLogin = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigation = useNavigation();
 
-  useEffect(() => {
-    checkIfLoggedIn();
-    const backHandler = BackHandler.addEventListener('hardwareBackPress', handleBackPress);
+  // useEffect(() => {
+  //   checkIfLoggedIn();
+  //   const backHandler = BackHandler.addEventListener('hardwareBackPress', handleBackPress);
 
-    return () => {
-      backHandler.remove();
-    };
-  }, []);
+  //   return () => {
+  //     backHandler.remove();
+  //   };
+  // }, []);
 
   const handleBackPress = () => {
     navigation.navigate('Land');
@@ -277,7 +277,7 @@ const BicholiaLogin = () => {
     try {
       const userToken = await AsyncStorage.getItem('userToken');
       if (userToken) {
-        navigation.navigate('User', { uniqueId: userToken });
+        navigation.navigate('EditSaveProfile', { uniqueId: userToken });
       }
     } catch (error) {
       console.error('Error checking login status:', error);

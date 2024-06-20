@@ -168,6 +168,11 @@
 
 // Search.js
 
+
+
+
+
+
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TextInput, FlatList, Image, TouchableOpacity } from 'react-native';
 import firestore from '@react-native-firebase/firestore';
@@ -256,49 +261,7 @@ const Search = ({ navigation }) => {
         value={searchTerm}
       />
           </View>
-           {/* <TextInput
-        style={styles.input}
-        placeholder="Search for users"
-        onChangeText={(text) => {
-          setSearchTerm(text);
-          handleSearch(text);
-        }}
-        value={searchTerm}
-      /> */}
-
-      {/* <FlatList
-        data={searchResults}
-        keyExtractor={(item, index) => index.toString()}
-        renderItem={({ item }) => (
-          <TouchableOpacity
-            onPress={() => navigation.navigate('WatchUser', { userId: item.docId })}
-          >
-            <View style={styles.userContainer}>
-              {item.photos && item.photos.length > 0 ? (
-                <View>
-                  {item.photos.map((photo, index) => (
-                    <Image
-                      key={index}
-                      source={{ uri: photo }}
-                      style={styles.userImage}
-                      resizeMode="cover"
-                    />
-                  ))}
-                </View>
-              ) : (
-                <Image
-                  source={require('../../assets/user.png')}
-                  style={styles.userImage}
-                  resizeMode="cover"
-                />
-              )}
-              <View>
-                <Text style={styles.usernameText}>{item.name || item.firstName}</Text>
-              </View>
-            </View>
-          </TouchableOpacity>
-        )}
-      /> */}
+           
 
 <FlatList
   data={searchResults}
@@ -358,8 +321,7 @@ const styles = StyleSheet.create({
     fontFamily:'Montserrat-Regular',
     borderRadius: 30,
     height: 50,
-    // borderColor: 'gray',
-    // borderWidth: 1,
+
     marginBottom: 28,
     paddingHorizontal: 39,
   },

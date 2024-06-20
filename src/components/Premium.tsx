@@ -1,42 +1,63 @@
 
-// import React from 'react';
-// import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity, Linking } from 'react-native';
+
+
+
+// import React, { useEffect, useState } from 'react';
+// import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity, Alert } from 'react-native';
+// import AsyncStorage from '@react-native-async-storage/async-storage';
+// import RazorpayCheckout from 'react-native-razorpay';
+
 
 // const Premium = () => {
+//   const [userEmail, setUserEmail] = useState('');
 
-//   const initiatePayment = (subscriptionType, amount) => {
-//     const upiId = '919310079927@paytm'; // Your UPI ID
-//     const brandName = 'Sanjog'; // Your brand name
-
-//     const paymentUrl = `upi://pay?pa=${upiId}&pn=${brandName}&am=${amount}&cu=INR`;
-//     Linking.openURL(paymentUrl)
-//     .then((res) => {
-//       // Payment app opened successfully
-//     })
-//     .catch((err) => {
-//       console.error('Error opening UPI:', err);
-//       // Handle error (e.g., UPI app not installed)
-//       alert('Error opening UPI');
-//     });
-//   };
-
-//   const handleSubscription = async (subscriptionType) => {
-//     try {
-//       let amount, description;
-//       if (subscriptionType === 'premium') {
-//         amount = 99.0;
-//         description = 'Unlock Premium Chat';
-//       } else if (subscriptionType === 'openChat') {
-//         amount = 199.0;
-//         description = 'Open Chat Access';
+//   useEffect(() => {
+//     const fetchUserEmail = async () => {
+//       try {
+//         const email = await AsyncStorage.getItem('userEmail');
+//         if (email !== null) {
+//           setUserEmail(email);
+//         }
+//       } catch (error) {
+//         console.error('Failed to fetch user email:', error);
 //       }
+//     };
 
-//       // Launch UPI transaction
-//       await initiatePayment(subscriptionType, amount);
-//     } catch (error) {
-//       console.error('Error launching UPI transaction:', error);
-//       alert('Error launching UPI transaction');
+//     fetchUserEmail();
+//   }, []);
+
+//   const handleSubscription = (subscriptionType) => {
+//     let amount, description;
+//     if (subscriptionType === 'premium') {
+//       amount = 9900; // Amount in paisa
+//       description = 'Unlock Premium Chat';
+//     } else if (subscriptionType === 'openChat') {
+//       amount = 19900; // Amount in paisa
+//       description = 'Open Chat Access';
 //     }
+
+//     const options = {
+//       description: description,
+//       // image: 'https://your-logo-url.png',
+//       currency: 'INR',
+//       key: '', // Your Razorpay API key
+//       amount: amount,
+//       name: 'Sanjog',
+//       prefill: {
+//         email: userEmail,
+//         contact: '919999999999',
+//         name: 'Customer Name'
+//       },
+//       theme: { color: '#007bff' }
+//     };
+
+//     RazorpayCheckout.open(options).then((data) => {
+//       // Handle successful payment
+//       Alert.alert('Success', `Payment Successful: ${data.razorpay_payment_id}`);
+//     }).catch((error) => {
+//       // Handle payment failure
+//       Alert.alert('Error', `Payment Failed: ${error.code} | ${error.description}`);
+//     });
 //   };
 
 //   return (
@@ -86,11 +107,11 @@
 //   scrollContainer: {
 //     flexDirection: 'row',
 //     paddingVertical: 20,
-//     paddingHorizontal: 10, // Adjust this based on your needs
+//     paddingHorizontal: 10,
 //   },
 //   optionContainer: {
 //     marginRight: 20,
-//     maxWidth: 300, // Adjust this based on your needs
+//     maxWidth: 300,
 //     borderWidth: 1,
 //     borderColor: '#ddd',
 //     borderRadius: 10,
@@ -112,7 +133,7 @@
 //     fontSize: 20,
 //     fontWeight: 'bold',
 //     marginBottom: 10,
-//     color: '#333', // Adjust color based on your design
+//     color: '#333',
 //   },
 //   description: {
 //     fontSize: 14,
@@ -147,53 +168,65 @@
 //     fontWeight: 'bold',
 //     textAlign: 'center',
 //   },
-//   // Add more styles for additional components
 // });
 
 
 
-
-
-
-
-import React from 'react';
-import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity, Linking } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity, Alert } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import RazorpayCheckout from 'react-native-razorpay';
 
 const Premium = () => {
+  const [userEmail, setUserEmail] = useState('');
 
-  const initiatePayment = (subscriptionType, amount) => {
-    const upiId = '919310079927@paytm'; // Your UPI ID
-    const brandName = 'Sanjog'; // Your brand name
-
-    const paymentUrl = `upi://pay?pa=${upiId}&pn=${brandName}&am=${amount}&cu=INR`;
-    Linking.openURL(paymentUrl)
-    .then((res) => {
-      // Payment app opened successfully
-    })
-    .catch((err) => {
-      console.error('Error opening UPI:', err);
-      // Handle error (e.g., UPI app not installed)
-      alert('Error opening UPI');
-    });
-  };
-
-  const handleSubscription = async (subscriptionType) => {
-    try {
-      let amount, description;
-      if (subscriptionType === 'premium') {
-        amount = 99.0;
-        description = 'Unlock Premium Chat';
-      } else if (subscriptionType === 'openChat') {
-        amount = 199.0;
-        description = 'Open Chat Access';
+  useEffect(() => {
+    const fetchUserEmail = async () => {
+      try {
+        const email = await AsyncStorage.getItem('userEmail');
+        if (email !== null) {
+          setUserEmail(email);
+        }
+      } catch (error) {
+        console.error('Failed to fetch user email:', error);
       }
+    };
 
-      // Launch UPI transaction
-      await initiatePayment(subscriptionType, amount);
-    } catch (error) {
-      console.error('Error launching UPI transaction:', error);
-      alert('Error launching UPI transaction');
+    fetchUserEmail();
+  }, []);
+
+  const handleSubscription = (subscriptionType) => {
+    let amount, description;
+    if (subscriptionType === 'premium') {
+      amount = 1000; // Amount in paisa
+      description = 'Unlock Premium Chat';
+    } else if (subscriptionType === 'openChat') {
+      amount = 19900; // Amount in paisa
+      description = 'Open Chat Access';
     }
+
+    const options = {
+      description: description,
+      // image: 'https://your-logo-url.png',
+      currency: 'INR',
+      key: 'rzp_test_UQmJWTRN9cd2Zz', // Your Razorpay API key
+      amount: amount,
+      name: 'Sanjog',
+      prefill: {
+        email: userEmail,
+        contact: '919999999999',
+        name: 'Customer Name'
+      },
+      theme: { color: '#007bff' }
+    };
+
+    RazorpayCheckout.open(options).then((data) => {
+      console.log('Payment Success:', data);
+      Alert.alert('Success', `Payment Successful: ${data.razorpay_payment_id}`);
+    }).catch((error) => {
+      console.error('Payment Error:', error);
+      Alert.alert('Error', `Payment Failed: ${error.code} | ${error.description}`);
+    });
   };
 
   return (
@@ -243,11 +276,11 @@ const styles = StyleSheet.create({
   scrollContainer: {
     flexDirection: 'row',
     paddingVertical: 20,
-    paddingHorizontal: 10, // Adjust this based on your needs
+    paddingHorizontal: 10,
   },
   optionContainer: {
     marginRight: 20,
-    maxWidth: 300, // Adjust this based on your needs
+    maxWidth: 300,
     borderWidth: 1,
     borderColor: '#ddd',
     borderRadius: 10,
@@ -269,7 +302,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 10,
-    color: '#333', // Adjust color based on your design
+    color: '#333',
   },
   description: {
     fontSize: 14,
@@ -304,5 +337,4 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
   },
-  // Add more styles for additional components
 });

@@ -10,7 +10,7 @@ import City from './src/City';
 import Status from './src/Status';
 import Highest from './src/Highest';
 import Work from './src/Work';
-import Image from './src/Image';
+// import Image from './src/Image';
 import Land from './src/Land';
 import Front from './src/Front';
 import Upload from './src/Upload';
@@ -68,7 +68,7 @@ const App = () => {
       <Stack.Screen name="Status" component={Status}/>
       <Stack.Screen name="Highest" component={Highest}/>
       <Stack.Screen name="Work" component={Work}/>
-      <Stack.Screen name="Image" component={Image}/>
+      {/* <Stack.Screen name="Image" component={Image}/> */}
       <Stack.Screen name="Land" component={Land}/>
       <Stack.Screen name="Front" component={Front}/>
       <Stack.Screen name="Upload" component={Upload}/>

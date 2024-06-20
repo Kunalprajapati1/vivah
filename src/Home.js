@@ -165,7 +165,7 @@ const Home = () => {
                   paddingHorizontal: 20,
                   fontFamily: 'Montserrat-SemiBold',
                 }}>
-                Register As Bicholia
+                Register As Parents
               </Text>
             </TouchableOpacity>
 

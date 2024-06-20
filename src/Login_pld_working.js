@@ -10,17 +10,17 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  useEffect(() => {
-    checkIfLoggedIn();
+  // useEffect(() => {
+  //   checkIfLoggedIn();
 
-    // Add event listener for hardware back button
-    const backHandler = BackHandler.addEventListener('hardwareBackPress', handleBackPress);
+  //   // Add event listener for hardware back button
+  //   const backHandler = BackHandler.addEventListener('hardwareBackPress', handleBackPress);
 
-    return () => {
-      // Remove event listener when component is unmounted
-      backHandler.remove();
-    };
-  }, []);
+  //   return () => {
+  //     // Remove event listener when component is unmounted
+  //     backHandler.remove();
+  //   };
+  // }, []);
 
   const checkIfLoggedIn = async () => {
     try {
