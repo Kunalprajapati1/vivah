@@ -134,6 +134,7 @@ const ButtonContainer = () => {
             />
           </View>
             )}
+
              {!emailExists && (
           <View style={styles.centerIconContainer}>
             <IconButton
@@ -151,6 +152,7 @@ const ButtonContainer = () => {
               <IconButton onPress={() => console.log('Button 3 pressed')} source={require('../assets/upload.gif')} focused={isFocused} style={[styles.donateButton, styles.donateIcon]} rotate={true} />
             </View>
           )} */}
+
           <IconButton
             onPress={() => navigateToPage('Premium')}
             focused={isFocused}
@@ -192,7 +194,7 @@ const styles = StyleSheet.create({
         zIndex: 2,
         bottom: 0,},
   men:{
-    zIndex: 3,
+    zIndex: 5,
 
   },
   centerIconContainer: {
