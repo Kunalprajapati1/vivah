@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     position: 'absolute',
-    top: '20%',
+    // top: '10%',
     left: 20,
   },
   text: {
@@ -142,10 +142,11 @@ const styles = StyleSheet.create({
     // marginTop: 20,
   },
   imageStyle: {
-    width: 60, // Adjust the width of the image
-    height: 50, // Adjust the height of the image
+    width: 80, // Adjust the width of the image
+    height: 70, // Adjust the height of the image
     // marginTop: 5,
     marginLeft:25, // Add margin as needed
+    right:50,
   },
 });
 

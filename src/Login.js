@@ -81,7 +81,7 @@ const Login = () => {
         await AsyncStorage.setItem('userEmail', email);
   
         // Navigate to 'User' screen
-        navigation.navigate('EditSaveProfile', { uniqueId: userToken });
+        navigation.navigate('Land', { uniqueId: userToken });
       }
   
       setLoading(false);
