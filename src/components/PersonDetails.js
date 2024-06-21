@@ -272,6 +272,10 @@ const PersonDetails = ({ route, navigation }) => {
     navigation.navigate('Chat', { personData });
   };
 
+  const navigateToSearch = () => {
+    navigation.navigate('Search');
+  };
+
   const capitalizeFirstLetter = string => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
@@ -354,11 +358,18 @@ const PersonDetails = ({ route, navigation }) => {
                   {showContactDetails ? 'Hide' : 'Show'} Contact Details
                 </Text>
               </TouchableOpacity>
-              <TouchableOpacity
+              {/* <TouchableOpacity
                 onPress={navigateToChat}
                 style={styles.chatButton}>
                 <Text style={styles.chatButtonText}>
                   Click to Chat to Person
+                </Text>
+              </TouchableOpacity> */}
+              <TouchableOpacity
+                onPress={navigateToSearch}
+                style={styles.chatButton}>
+                <Text style={styles.chatButtonText}>
+                See more Photos
                 </Text>
               </TouchableOpacity>
             </View>
