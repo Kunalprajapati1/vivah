@@ -41,6 +41,7 @@ import Bicholia from './src/components/Bicholia';
 import BicholiaLogin from './src/components/BicholiaLogin';
 import BicholiaProfile from './src/components/BicholiaProfile';
 import Contact from './src/components/Contact';
+import ChangePassword from './src/components/ChangePassword';
 
 
 
@@ -94,6 +95,7 @@ const App = () => {
       <Stack.Screen name="Contact" component={Contact}/>
       <Stack.Screen name="BicholiaLogin" component={BicholiaLogin}/>
       <Stack.Screen name="BicholiaProfile" component={BicholiaProfile}/>
+      <Stack.Screen name="ChangePassword" component={ChangePassword}/>
   
       
 
