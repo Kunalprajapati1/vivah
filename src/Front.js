@@ -903,10 +903,16 @@ const Front = () => {
   return (
     <>
       <View>
-        <View style={{ marginTop: 40, flexDirection: 'row', marginLeft: 30 }}>
+        <View style={{ marginTop: 40, flexDirection: 'row', marginLeft: 20 }}>
+        <Image
+        source={require('./assets/app_images/logo.png')}
+        style={styles.logo}
+        
+      />
           <Text style={{ flex: 1, fontFamily: 'DMSerifDisplay-Regular', color: '#e05654', fontSize: 50 }}>
             Sanjog
           </Text>
+        
           <TouchableOpacity
             onPress={() => {
               navigation.navigate('Menu');
@@ -975,9 +981,9 @@ const Front = () => {
               color: 'black',
               marginTop: '5%',
             }}>
-            People Near You
+            People For You
           </Text>
-          <TouchableOpacity onPress={() => navigation.navigate('Search')}>
+          <TouchableOpacity onPress={() => navigation.navigate('Connected')}>
             <Image
               style={{
                 tintColor: '#e27272',
@@ -1078,6 +1084,14 @@ const styles = StyleSheet.create({
   postContainer: {
     // marginTop:20,
     position: 'relative',
+  },
+  logo: {
+    top:18,
+right:10,
+    width: "11%",
+    height:  "60%",
+    borderRadius:30,
+   
   },
   profilePhoto: {
     width: 100, // Adjust as needed

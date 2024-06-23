@@ -59,6 +59,10 @@ const Login = () => {
     // navigation.navigate('Land');
     return true; // Prevent default behavior (closing the app)
   };
+  const handleRecover = () => {
+    navigation.navigate('Recover');
+
+  };
   const handleLogin = async () => {
     try {
       if (!email || !password) {
@@ -121,6 +125,9 @@ const Login = () => {
         />
         <TouchableOpacity onPress={handleForgotPassword}>
           <Text style={styles.for}>Forgot Password?</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={handleRecover}>
+          <Text style={styles.for}>Recover Old Account</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
           {loading ? <ActivityIndicator size="small" color="#ffffff" /> : <Text style={styles.loginButtonText}>Login</Text>}

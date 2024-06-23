@@ -102,11 +102,11 @@ const menuList = [
   },
   {
     id: 3,
-    name: 'Your Profile',
+    name: 'Recover Old Account',
   },
   {
     id: 4,
-    name: 'Settings',
+    name: 'Update Password',
   },
   {
     id: 5,
@@ -114,7 +114,7 @@ const menuList = [
   },
   {
     id: 6,
-    name: 'Your Profile',
+    name: 'Delete Your Profile',
   },
 ];
 
@@ -138,11 +138,18 @@ const Menu = ({ navigation }) => {
                 onPress={() => {
                   if (menuItem.name === 'Contact Us') {
                     navigation.navigate('Contact');
-                  } else if (menuItem.name === 'Your Profile') {
-                    navigation.navigate('EditSaveProfile');
-                  } else if (menuItem.name === 'Settings') {
+                  } else if (menuItem.name === 'Recover Old Account') {
+                    navigation.navigate('Recover');
+                  } else if (menuItem.name === 'Delete Your Profile') {
+                    navigation.navigate('ProfileDelete');
+                  }
+                  else if (menuItem.name === 'Update Password') {
                     navigation.navigate('ChangePassword');
                   }
+                  else if (menuItem.name === 'About Sanjog') {
+                    navigation.navigate('About');
+                  }
+                  
                 }}
               >
                 <Text style={styles.menuItemText}>{menuItem.name}</Text>

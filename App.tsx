@@ -42,6 +42,11 @@ import BicholiaLogin from './src/components/BicholiaLogin';
 import BicholiaProfile from './src/components/BicholiaProfile';
 import Contact from './src/components/Contact';
 import ChangePassword from './src/components/ChangePassword';
+import ProfileDelete from './src/components/ProfileDelete';
+import Recover from './src/components/Recover';
+import About from './src/components/About';
+import Connected from './src/components/Connected';
+
 
 
 
@@ -96,6 +101,11 @@ const App = () => {
       <Stack.Screen name="BicholiaLogin" component={BicholiaLogin}/>
       <Stack.Screen name="BicholiaProfile" component={BicholiaProfile}/>
       <Stack.Screen name="ChangePassword" component={ChangePassword}/>
+      <Stack.Screen name="ProfileDelete" component={ProfileDelete}/>
+      <Stack.Screen name="Recover" component={Recover}/>
+      <Stack.Screen name="About" component={About}/>
+      <Stack.Screen name="Connected" component={Connected}/>
+     
   
       
 

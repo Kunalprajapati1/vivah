@@ -1,4 +1,5 @@
-// import React from 'react';
+
+// import React, { useState, useEffect } from 'react';
 // import {
 //   StyleSheet,
 //   Text,
@@ -6,12 +7,49 @@
 //   ImageBackground,
 //   ScrollView,
 //   TouchableOpacity,
+  
 // } from 'react-native';
+// import AsyncStorage from '@react-native-async-storage/async-storage';
+// import firestore from '@react-native-firebase/firestore';
 
-// const PersonDetails = ({route, navigation}) => {
-//   const {params} = route;
+// const PersonDetails = ({ route, navigation }) => {
+//   const { params } = route;
 //   const personData = params ? params.personData : null;
 //   const profileForDisplayOrder = params ? params.profileForDisplayOrder : null;
+//   const [emailExists, setEmailExists] = useState(false);
+
+//   const [showContactDetails, setShowContactDetails] = useState(false);
+//   const [userEmail, setUserEmail] = useState('');
+
+//   useEffect(() => {
+//     const fetchUserEmail = async () => {
+//       try {
+//         const email = await AsyncStorage.getItem('userEmail');
+//         setUserEmail(email);
+//         checkEmailInDatabase(email);
+
+//       } catch (error) {
+//         console.error('Error fetching user email from AsyncStorage:', error);
+//       }
+//     };
+
+//     fetchUserEmail();
+//   }, []);
+
+//   const checkEmailInDatabase = async (email) => {
+//     try {
+//       const snapshot = await firestore().collection('Preminum').where('email', '==', email).get();
+//       if (snapshot.empty) {
+//         console.log('Email not found in database.');
+//         setEmailExists(false);
+//       } else {
+//         console.log('Email found in database.');
+//         setEmailExists(true);
+//       }
+//     } catch (error) {
+//       console.error('Error checking email in database:', error);
+//     }
+//   };
 
 //   if (!personData || !profileForDisplayOrder) {
 //     return (
@@ -22,12 +60,19 @@
 //       </View>
 //     );
 //   }
-
-//   // const navigateToChat = () => {
-//   //   navigation.navigate('Chat');
-//   // };
+//   const handleToggleDetails = () => {
+//     if (emailExists) {
+//       setShowContactDetails(!showContactDetails);
+//     } else {
+//       navigation.navigate('Premium'); // Navigate to Home page if email not found
+//     }
+//   };
 //   const navigateToChat = () => {
 //     navigation.navigate('Chat', { personData });
+//   };
+
+//   const navigateToSearch = () => {
+//     navigation.navigate('Search');
 //   };
 
 //   const capitalizeFirstLetter = string => {
@@ -39,7 +84,7 @@
 //       <ImageBackground
 //         source={
 //           personData.photos && personData.photos.length > 0
-//             ? {uri: personData.photos[0]}
+//             ? { uri: personData.photos[0] }
 //             : require('../assets/app_images/user.png')
 //         }
 //         style={styles.backgroundImage}>
@@ -82,25 +127,36 @@
 //                         key === 'workWith' ||
 //                         key === 'workWithOtherDetails' ||
 //                         key === 'email' ||
-//                         key === 'mobileNumber' ||
-//                         /* Add more conditions for questionable fields */ false
-//                           ? {color: '#e88a8a'}
+//                         key === 'mobileNumber'
+//                           ? { color: '#e88a8a' }
 //                           : null,
-//                       ]}>
+//                       ]}
+//                     >
 //                       {capitalizeFirstLetter(key)}:
 //                     </Text>
 //                     <Text style={styles.valueText}>
-//                       {personData[key] || 'N/A'}
+//                       {showContactDetails || (key !== 'email' && key !== 'mobileNumber')
+//                         ? personData[key] || 'N/A'
+//                         : '********'}
 //                     </Text>
 //                     <View style={styles.line} />
 //                   </View>
 //                 ))}
 //               </View>
+           
 //               <TouchableOpacity
-//                 onPress={navigateToChat}
+//                 onPress={handleToggleDetails} // Updated onPress handler
+//                 style={styles.toggleButton}>
+//                 <Text style={styles.toggleButtonText}>
+//                   {showContactDetails ? 'Hide' : 'Show'} Contact Details
+//                 </Text>
+//               </TouchableOpacity>
+           
+//               <TouchableOpacity
+//                 onPress={navigateToSearch}
 //                 style={styles.chatButton}>
 //                 <Text style={styles.chatButtonText}>
-//                   Click to Chat to Person
+//                 See more Photos
 //                 </Text>
 //               </TouchableOpacity>
 //             </View>
@@ -154,21 +210,18 @@
 //     flexDirection: 'column',
 //     alignItems: 'flex-start',
 //     marginRight: 20,
-
 //     marginBottom: 15,
 //   },
 //   fieldText: {
 //     fontFamily: 'Montserrat-Regular',
 //     fontSize: 17,
 //     lineHeight: 45,
-    
 //     marginBottom: 5,
 //   },
 //   valueText: {
 //     fontFamily: 'Montserrat-Regular',
 //     color: '#e2d0d0',
 //     fontSize: 19,
-    
 //     lineHeight: 25,
 //   },
 //   line: {
@@ -194,9 +247,25 @@
 //     textAlign: 'center',
 //     fontFamily: 'Montserrat-Regular',
 //   },
+//   toggleButton: {
+//     backgroundColor: '#e05654',
+//     padding: 10,
+//     borderRadius: 35,
+//     marginTop: 10,
+//   },
+//   toggleButtonText: {
+//     color: 'white',
+//     textAlign: 'center',
+//     fontFamily: 'Montserrat-Regular',
+//   },
 // });
 
 // export default PersonDetails;
+
+
+
+
+
 
 
 
@@ -208,7 +277,7 @@ import {
   ImageBackground,
   ScrollView,
   TouchableOpacity,
-  
+  ActivityIndicator,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import firestore from '@react-native-firebase/firestore';
@@ -218,19 +287,22 @@ const PersonDetails = ({ route, navigation }) => {
   const personData = params ? params.personData : null;
   const profileForDisplayOrder = params ? params.profileForDisplayOrder : null;
   const [emailExists, setEmailExists] = useState(false);
-
   const [showContactDetails, setShowContactDetails] = useState(false);
   const [userEmail, setUserEmail] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchUserEmail = async () => {
       try {
         const email = await AsyncStorage.getItem('userEmail');
         setUserEmail(email);
-        checkEmailInDatabase(email);
-
+        await checkEmailInDatabase(email);
       } catch (error) {
         console.error('Error fetching user email from AsyncStorage:', error);
+        setError('Error fetching user email.');
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -249,6 +321,7 @@ const PersonDetails = ({ route, navigation }) => {
       }
     } catch (error) {
       console.error('Error checking email in database:', error);
+      setError('Error checking email in database.');
     }
   };
 
@@ -261,6 +334,7 @@ const PersonDetails = ({ route, navigation }) => {
       </View>
     );
   }
+
   const handleToggleDetails = () => {
     if (emailExists) {
       setShowContactDetails(!showContactDetails);
@@ -268,6 +342,7 @@ const PersonDetails = ({ route, navigation }) => {
       navigation.navigate('Premium'); // Navigate to Home page if email not found
     }
   };
+
   const navigateToChat = () => {
     navigation.navigate('Chat', { personData });
   };
@@ -276,9 +351,29 @@ const PersonDetails = ({ route, navigation }) => {
     navigation.navigate('Search');
   };
 
-  const capitalizeFirstLetter = string => {
+  const navigateToConnected = () => {
+    navigation.navigate('Connected', { personData });
+  };
+
+  const capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
+
+  if (loading) {
+    return (
+      <View style={styles.container}>
+        <ActivityIndicator size="large" color="#e88a8a" />
+      </View>
+    );
+  }
+
+  if (error) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.errorText}>{error}</Text>
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
@@ -288,14 +383,16 @@ const PersonDetails = ({ route, navigation }) => {
             ? { uri: personData.photos[0] }
             : require('../assets/app_images/user.png')
         }
-        style={styles.backgroundImage}>
+        style={styles.backgroundImage}
+      >
         <ScrollView contentContainerStyle={styles.overlayContainer}>
           <TouchableOpacity
             style={styles.backButton}
             onPress={() => {
               navigation.navigate('Land');
-            }}>
-            {/* Your back button content */}
+            }}
+          >
+            {/* <Text style={styles.backButtonText}>Back</Text> Wrap "Back" text in a <Text> component */}
           </TouchableOpacity>
 
           {personData && (
@@ -304,7 +401,7 @@ const PersonDetails = ({ route, navigation }) => {
                 {personData.firstName} {personData.lastName}
               </Text>
               <View style={styles.detailsContainer}>
-                {profileForDisplayOrder.map(key => (
+                {profileForDisplayOrder.map((key) => (
                   <View key={key} style={styles.columnContainer}>
                     <Text
                       style={[
@@ -344,33 +441,19 @@ const PersonDetails = ({ route, navigation }) => {
                   </View>
                 ))}
               </View>
-              {/* <TouchableOpacity
-                onPress={() => setShowContactDetails(!showContactDetails)}
-                style={styles.toggleButton}>
-                <Text style={styles.toggleButtonText}>
-                  {showContactDetails ? 'Hide' : 'Show'} Contact Details
-                </Text>
-              </TouchableOpacity> */}
-              <TouchableOpacity
-                onPress={handleToggleDetails} // Updated onPress handler
-                style={styles.toggleButton}>
+
+              <TouchableOpacity onPress={handleToggleDetails} style={styles.toggleButton}>
                 <Text style={styles.toggleButtonText}>
                   {showContactDetails ? 'Hide' : 'Show'} Contact Details
                 </Text>
               </TouchableOpacity>
-              {/* <TouchableOpacity
-                onPress={navigateToChat}
-                style={styles.chatButton}>
-                <Text style={styles.chatButtonText}>
-                  Click to Chat to Person
-                </Text>
-              </TouchableOpacity> */}
-              <TouchableOpacity
-                onPress={navigateToSearch}
-                style={styles.chatButton}>
-                <Text style={styles.chatButtonText}>
-                See more Photos
-                </Text>
+
+              <TouchableOpacity onPress={navigateToSearch} style={styles.chatButton}>
+                <Text style={styles.chatButtonText}>See more Photos</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity onPress={navigateToConnected} style={styles.connectButton}>
+                <Text style={styles.connectButtonText}>Connect</Text>
               </TouchableOpacity>
             </View>
           )}
@@ -402,6 +485,11 @@ const styles = StyleSheet.create({
     top: 20,
     left: 20,
     zIndex: 1,
+  },
+  backButtonText: {
+    color: 'white',
+    fontSize: 16,
+    fontFamily: 'Montserrat-Regular',
   },
   postContainer: {
     backgroundColor: 'rgba(0, 0, 0, 0.768)',
@@ -450,6 +538,17 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   chatButtonText: {
+    color: 'white',
+    textAlign: 'center',
+    fontFamily: 'Montserrat-Regular',
+  },
+  connectButton: {
+    backgroundColor: '#34a853',
+    padding: 10,
+    borderRadius: 35,
+    marginTop: 10,
+  },
+  connectButtonText: {
     color: 'white',
     textAlign: 'center',
     fontFamily: 'Montserrat-Regular',

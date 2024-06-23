@@ -4,15 +4,17 @@
 
 // ButtonContainer.js
 import React, { useRef, useState,useEffect } from 'react';
-import { View, TouchableOpacity, TouchableHighlight, Image, StyleSheet, Animated, ScrollView } from 'react-native';
+import { View, TouchableOpacity, TouchableHighlight, Image, StyleSheet, Animated, ScrollView,BackHandler } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Front from './Front';
 import { useIsFocused } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import firestore from '@react-native-firebase/firestore';
 
+
 const IconButton = ({ onPress, source, style, rotate, focused }) => {
   const rotateValue = useRef(new Animated.Value(rotate ? 1 : 0)).current;
+  const navigation = useNavigation();
 
   const handlePress = () => {
     Animated.timing(rotateValue, {
@@ -26,7 +28,18 @@ const IconButton = ({ onPress, source, style, rotate, focused }) => {
     inputRange: [0, 1],
     outputRange: ['0deg', '360deg'],
   });
+  useEffect(() => {
+    const handleBackPress = () => {
+      navigation.navigate('Land');
+      return true; // Prevent default behavior (closing the app)
+    };
 
+    const backHandler = BackHandler.addEventListener('hardwareBackPress', handleBackPress);
+
+    return () => {
+      backHandler.remove(); // Cleanup the event listener
+    };
+  }, [navigation]);
   return (
     <TouchableHighlight
       style={[styles.button, style]}
@@ -44,21 +57,7 @@ const IconButton = ({ onPress, source, style, rotate, focused }) => {
   );
 };
 
-// const ButtonContainer = () => {
-//   const navigation = useNavigation();
-//   const isFocused = useIsFocused();
-//   const [landScreenKey, setLandScreenKey] = useState(0);
-//   const [storedEmail, setStoredEmail] = useState('');
-//   const [emailExists, setEmailExists] = useState(false);
 
-//   const navigateToPage = (pageName) => {
-//     if (pageName === 'Land') {
-//       // Increment the key to force a refresh of the "Land" screen
-//       setLandScreenKey((prevKey) => prevKey + 1);
-//     }
-
-//     navigation.navigate(pageName);
-//   };
 
   
 const ButtonContainer = () => {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,
   Text,
@@ -6,12 +6,51 @@ import {
   ImageBackground,
   ScrollView,
   TouchableOpacity,
+  
 } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import firestore from '@react-native-firebase/firestore';
 
 const PersonDetails2 = ({ route, navigation }) => {
   const { params } = route;
   const personData = params ? params.personData : null;
   const postDisplayOrder = params ? params.postDisplayOrder : null;
+  const [emailExists, setEmailExists] = useState(false);
+  const [showContactDetails, setShowContactDetails] = useState(false);
+  const [userEmail, setUserEmail] = useState('');
+
+
+  useEffect(() => {
+    const fetchUserEmail = async () => {
+      try {
+        const email = await AsyncStorage.getItem('userEmail');
+        setUserEmail(email);
+        checkEmailInDatabase(email);
+
+      } catch (error) {
+        console.error('Error fetching user email from AsyncStorage:', error);
+      }
+    };
+
+    fetchUserEmail();
+  }, []);
+  const checkEmailInDatabase = async (email) => {
+    try {
+      const snapshot = await firestore().collection('Preminum').where('email', '==', email).get();
+      if (snapshot.empty) {
+        console.log('Email not found in database.');
+        setEmailExists(false);
+      } else {
+        console.log('Email found in database.');
+        setEmailExists(true);
+      }
+    } catch (error) {
+      console.error('Error checking email in database:', error);
+    }
+  };
+
+
+
 
   if (!personData || !postDisplayOrder) {
     return (
@@ -24,13 +63,20 @@ const PersonDetails2 = ({ route, navigation }) => {
   }
 
   const navigateToChat = () => {
-    navigation.navigate('Chatt', { personData });
+    navigation.navigate('Search');
+
   };
 
   const capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
-
+  const handleToggleDetails = () => {
+    if (emailExists) {
+      setShowContactDetails(!showContactDetails);
+    } else {
+      navigation.navigate('Premium'); // Navigate to Home page if email not found
+    }
+  };
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -79,18 +125,29 @@ const PersonDetails2 = ({ route, navigation }) => {
                       {capitalizeFirstLetter(key)}:
                     </Text>
                     <Text style={styles.valueText}>
-                      {personData[key] || 'N/A'}
+                      {showContactDetails || (key !== 'email' && key !== 'mobileNumber')
+                        ? personData[key] || 'N/A'
+                        : '********'}
                     </Text>
                     <View style={styles.line} />
                   </View>
                 ))}
               </View>
+
+              <TouchableOpacity
+                onPress={handleToggleDetails} // Updated onPress handler
+                style={styles.toggleButton}>
+                <Text style={styles.toggleButtonText}>
+                  {showContactDetails ? 'Hide' : 'Show'} Contact Details
+                </Text>
+              </TouchableOpacity>
+
               <TouchableOpacity
                 onPress={navigateToChat}
                 style={styles.chatButton}
               >
                 <Text style={styles.chatButtonText}>
-                  Connect With Bicholia/Mediator
+                  Search User to View More Photos
                 </Text>
               </TouchableOpacity>
             </View>
@@ -187,6 +244,17 @@ fontWeight:'500',
     errorText: {
       color: 'white',
       fontSize: 18,
+      textAlign: 'center',
+      fontFamily: 'Montserrat-Regular',
+    },
+    toggleButton: {
+      backgroundColor: '#e05654',
+      padding: 10,
+      borderRadius: 35,
+      marginTop: 10,
+    },
+    toggleButtonText: {
+      color: 'white',
       textAlign: 'center',
       fontFamily: 'Montserrat-Regular',
     },
