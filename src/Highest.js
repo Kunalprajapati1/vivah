@@ -110,7 +110,7 @@ const Highest = ({route,navigation}) => {
   
   return (
     <View style={styles.container}>
-      <Image source={require('../assets/secure.png')} style={styles.image} />
+      {/* <Image source={require('../assets/secure.png')} style={styles.image} /> */}
       <Text style={styles.title}>Highest Education Level</Text>
 
       {/* Picker for Selecting Option */}
@@ -197,37 +197,41 @@ const styles = StyleSheet.create({
     marginBottom: 36,
   },
   title: {
-    fontSize: 30,
-    fontWeight: 'bold',
-    marginBottom: 36,
-    color: '#e53371',
+    marginTop:120,
+    marginBottom: '8%',
+    fontSize: 28,
+    fontFamily: 'Montserrat-Regular',
+    textAlign: 'center',
+    color: '#000000',
   },
   pickerContainer: {
-    height: 60,
-    borderWidth: 1,
-    borderRadius: 8,
+    height: 50,
+    
+    borderRadius: 30,
     justifyContent: 'space-between',
     paddingHorizontal: 50,
     flexDirection: 'row',
     alignItems: 'center',
     width: '80%',
     borderColor: '#000000',
-    borderWidth: 3,
+    borderWidth: 2,
     marginBottom: 56,
 
   },
   pickerText: {
     fontSize: 20,
-    color: '#e53371',
+    color: '#9a2d53',
+
   },
   input: {
-    height: 65,
+    height: 50,
     width: '80%',
-    color: '#e53371',
+    color: '#9a2d53',
     borderColor: '#000000',
-    borderWidth: 1,
+    borderWidth: 2,
+
     fontSize:17,
-    borderRadius: 8,
+    borderRadius: 30,
     marginBottom: 16,
     paddingHorizontal: 30,
   },
@@ -258,7 +262,7 @@ const styles = StyleSheet.create({
   searchInput: {
     height: 50,
     borderColor: 'gray',
-    borderWidth: 1,
+    
     backgroundColor: '#0000002d',
     borderRadius: 15,
     marginBottom: 16,

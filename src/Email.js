@@ -349,7 +349,7 @@ const Email = ({ navigation, route }) => {
   };
   
   return (
-    <ScrollView style={{backgroundColor: '#1c1827'}}>
+    <ScrollView style={{      backgroundColor: '#fbd1d1',   }}>
       <View style={styles.container}>
         <Text style={styles.title}>
           An Active Email and Mobile is important for registration
@@ -361,7 +361,7 @@ const Email = ({ navigation, route }) => {
           <TextInput
             style={styles.input}
             placeholder="Enter your email"
-            placeholderTextColor='#ffffff33'
+            placeholderTextColor='#000000ff'
 
             value={email}
             onChangeText={text => setEmail(text)}
@@ -373,7 +373,7 @@ const Email = ({ navigation, route }) => {
           
           <TextInput
             style={styles.input}
-            placeholderTextColor='#ffffff33'
+            placeholderTextColor='#000000ff'
             
             placeholder="Password"
             secureTextEntry={!isPasswordVisible}
@@ -396,7 +396,7 @@ const Email = ({ navigation, route }) => {
             <TextInput
               style={[styles.input, styles.mobileInput]}
               placeholder="Enter your mobile number"
-              placeholderTextColor='#ffffff33'
+              placeholderTextColor='#000000ff'
               
               value={mobileNumber}
               onChangeText={text => setMobileNumber(text)}
@@ -413,8 +413,8 @@ const Email = ({ navigation, route }) => {
             onValueChange={itemValue => setSelectedReligion(itemValue)}
             style={styles.picker}
             accessibilityLabel="Religion Picker">
-            <Picker.Item style={{ color:'#e05654', fontFamily:'Montserrat-Regular'}} label="Select your religion →"  />
-            <Picker.Item style={{ color:'#e05654', fontFamily:'Montserrat-Regular'}}  label="Hindu" value="Hindu" />
+            <Picker.Item style={{ color:'#000000', fontFamily:'Montserrat-Regular'}} label="Select your religion →"  />
+            <Picker.Item style={{ color:'#000000', fontFamily:'Montserrat-Regular'}}  label="Hindu" value="Hindu" />
            
           </Picker>
         </View>
@@ -447,9 +447,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   container: {
-    marginTop:40,
+    
+    marginTop:60,
     flex: 1,
-    padding: 50,
+    // padding: 50,
     alignItems: 'center',
   },
   profileImage: {
@@ -461,19 +462,21 @@ const styles = StyleSheet.create({
   },
   inputSection: {
     marginTop:20,
-    marginBottom: 20,
-    width: '100%',
-    height: 50,
+    // marginBottom: 20,
+    width: '90%',
+    height: 40,
     borderRadius: 30,
   },
   inputSection2: {
-    marginTop: '60%',
-    marginBottom: 30,
-    width: '100%',
-    height: 50, // Set a consistent height
+    marginTop: '50%',
+    // marginBottom: 30,
+    width: '90%',
+    height: 40, // Set a consistent height
     borderRadius: 30,
   },
   inputSection3: {
+    padding:10,
+    left:10,
     marginTop: 60,
     width: '100%',
     height: 50, // Set a consistent height
@@ -484,44 +487,39 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   countryCodeInput: {
-    width: 70,
-    height: 60,
-    borderWidth: 1,
-    borderRadius: 15,
-    padding: 10,
-    marginRight: 10,
+   
   },
   title: {
     marginBottom: '8%',
-    fontSize: 19,
+    fontSize: 22,
     fontFamily: 'Montserrat-Regular',
     textAlign: 'center',
-    color: '#e6716f',
+    color: '#000000',
   },
   label: {
     fontSize: 16,
     marginBottom: 10,
-    color: '#fbd1d1',
+    color: '#000000',
     fontFamily: 'Montserrat-Regular',
 
   },
   input: {
-    height: 60,
+    height: 50,
     borderWidth: 1,
     borderRadius: 15,
-    marginBottom: 30,
+    marginBottom: 10,
     padding: 10,
     fontSize: 16,
     width: '100%',
-    color: 'white', // Set text color to white
-    borderColor: 'white', // Set border color to white
-    placeholderTextColor: 'white', // Set a consistent width
+    color: '#000000', // Set text color to white
+    borderColor: '#000000', // Set border color to white
+    placeholderTextColor: '#000000', // Set a consistent width
     fontFamily: 'Montserrat-Regular'
   },
   mobileInput: {
     fontFamily: 'Montserrat-Regular',
     flex: 1,
-    height: 60,
+    height: 50,
   },
   picker: {
     borderWidth: 5,

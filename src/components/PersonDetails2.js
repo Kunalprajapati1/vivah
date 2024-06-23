@@ -6,10 +6,11 @@ import {
   ImageBackground,
   ScrollView,
   TouchableOpacity,
-  
+  Alert,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import firestore from '@react-native-firebase/firestore';
+
 
 const PersonDetails2 = ({ route, navigation }) => {
   const { params } = route;
@@ -50,7 +51,51 @@ const PersonDetails2 = ({ route, navigation }) => {
   };
 
 
+  const handleConnect = async () => {
+    try {
+      // Save personData to AsyncStorage
+      await AsyncStorage.setItem('connectedUser', JSON.stringify(personData));
+      console.log('User details saved to AsyncStorage:', personData);
 
+      // Show alert after saving
+      Alert.alert(
+        'Added!!!',
+        'User details Added successfully!',
+        [
+          { text: 'OK', onPress: () => console.log('OK Pressed') }
+        ],
+        { cancelable: false }
+      );
+
+      // Update connected users list
+      updateConnectedUsers(personData);
+    } catch (error) {
+      console.error('Error saving user details to AsyncStorage:', error);
+    }
+  };
+
+  const updateConnectedUsers = async (newUser) => {
+    try {
+      // Fetch existing connected users from AsyncStorage
+      const connectedUsersJSON = await AsyncStorage.getItem('connectedUsers');
+      let connectedUsersArray = [];
+
+      if (connectedUsersJSON) {
+        connectedUsersArray = JSON.parse(connectedUsersJSON);
+      }
+
+      // Add new user to the array (assuming personData has unique identifier like ID)
+      connectedUsersArray.push(newUser);
+
+      // Store updated connected users array back to AsyncStorage
+      await AsyncStorage.setItem('connectedUsers', JSON.stringify(connectedUsersArray));
+
+      // Navigate to Connected screen or do further actions as needed
+      navigation.navigate('Connected');
+    } catch (error) {
+      console.error('Error updating connected users in AsyncStorage:', error);
+    }
+  };
 
   if (!personData || !postDisplayOrder) {
     return (
@@ -62,9 +107,31 @@ const PersonDetails2 = ({ route, navigation }) => {
     );
   }
 
-  const navigateToChat = () => {
-    navigation.navigate('Search');
+  const navigateToChat = async () => {
+    try {
+      await AsyncStorage.setItem('ChatUser', JSON.stringify(personData));
+   
+      updateChatUsers(personData);
+      if (emailExists) {
+        navigation.navigate('Chat', { personData });
 
+      } else {
+        navigation.navigate('Premium'); // Navigate to Home page if email not found
+      }
+    } catch (error) {
+      console.error('Error saving user details to AsyncStorage:', error);
+    }
+  };
+
+  const updateChatUsers = async (newUser) => {
+    try {
+      let chatUsersArray = JSON.parse(await AsyncStorage.getItem('ChatUsers')) || [];
+      chatUsersArray.push(newUser);
+      await AsyncStorage.setItem('ChatUsers', JSON.stringify(chatUsersArray));
+   
+    } catch (error) {
+      console.error('Error updating chat users in AsyncStorage:', error);
+    }
   };
 
   const capitalizeFirstLetter = (string) => {
@@ -96,6 +163,12 @@ const PersonDetails2 = ({ route, navigation }) => {
           >
             {/* Your back button content */}
           </TouchableOpacity>
+          <TouchableOpacity
+                onPress={handleConnect}
+                style={styles.connectButton}>
+                <Text style={styles.connectButtonText}>Add as Favorite</Text>
+              </TouchableOpacity>
+
 
           {personData && (
             <View style={styles.postContainer}>
@@ -147,7 +220,7 @@ const PersonDetails2 = ({ route, navigation }) => {
                 style={styles.chatButton}
               >
                 <Text style={styles.chatButtonText}>
-                  Search User to View More Photos
+                  Chat
                 </Text>
               </TouchableOpacity>
             </View>
@@ -254,6 +327,18 @@ fontWeight:'500',
       marginTop: 10,
     },
     toggleButtonText: {
+      color: 'white',
+      textAlign: 'center',
+      fontFamily: 'Montserrat-Regular',
+    },
+    connectButton: {
+      backgroundColor: '#e05654',
+  alignSelf:'flex-end',
+      padding: 10,
+      borderRadius: 35,
+      marginTop: 10,
+    },
+    connectButtonText: {
       color: 'white',
       textAlign: 'center',
       fontFamily: 'Montserrat-Regular',

@@ -976,24 +976,33 @@ const Front = () => {
           <Text
             style={{
               fontSize: 35,
-              marginLeft: 20,
+              marginLeft: 5,
               fontFamily: 'DMSerifDisplay-Regular',
               color: 'black',
               marginTop: '5%',
             }}>
             People For You
           </Text>
-          <TouchableOpacity onPress={() => navigation.navigate('Connected')}>
+          <TouchableOpacity onPress={() => navigation.navigate('ChatCollection')}>
             <Image
               style={{
                 tintColor: '#e27272',
-                width: 20,
-                height: 20,
-                marginLeft: '35%',
+                width: 40,
+                height: 40,
+                marginLeft: '25%',
                 marginTop: '20%',
               }}
-              source={require('./assets/app_images/ellipsis.png')}
+              source={require('./assets/app_images/chat.png')}
             />
+            {/* <Text style={{
+                // tintColor: '#e27272',
+                color:'#e27272',
+                fontSize:29,
+              
+              
+                marginLeft: '25%',
+                marginTop: '17%',
+              }}>💬</Text> */}
           </TouchableOpacity>
         </View>
         {filteredProfileForData.length > 0 &&

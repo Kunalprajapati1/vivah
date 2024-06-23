@@ -1701,6 +1701,10 @@ const EditSaveProfile = ({ navigation }) => {
     await AsyncStorage.clear();
     navigation.navigate('Landing');
   };
+  const handleFavorite = async () => {
+  
+    navigation.navigate('Connected');
+  };
 
   if (loading) {
     return (
@@ -1755,6 +1759,9 @@ const EditSaveProfile = ({ navigation }) => {
             <View style={styles.fieldRow}>
               <Text style={styles.fieldValue}>Mobile: {displayedUserData.mobileNumber || 'N/A'}</Text>
             </View>
+            <TouchableOpacity style={styles.logoutButton2} onPress={handleFavorite}>
+        <Text style={styles.logoutButtonText2}>Show Favorite 📑</Text>
+      </TouchableOpacity>
           </View>
 
           {/* User photos */}
@@ -1802,7 +1809,7 @@ const EditSaveProfile = ({ navigation }) => {
       )}
 
       <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
-        <Text style={styles.logoutButtonText}>Log Out</Text>
+        <Text style={styles.logoutButtonText}>Log Out  👋</Text>
       </TouchableOpacity>
     </View>
   );
@@ -1880,8 +1887,9 @@ const styles = StyleSheet.create({
     marginTop: 20,
     padding: 10,
     paddingHorizontal: 70,
-    backgroundColor: 'red',
-    borderRadius: 5,
+    backgroundColor: '#d31e1ec6',
+
+    borderRadius: 35,
     alignSelf: 'center',
     marginBottom:30,
   },
@@ -1896,6 +1904,7 @@ const styles = StyleSheet.create({
     marginLeft:10,
     width: '90%',
     height: 120,
+    right:10,
     borderRadius: 8,
     marginHorizontal:100,
   },
@@ -1923,5 +1932,18 @@ flexDirection:'row',
   closeButtonText: {
     color: '#fff',
     fontWeight: 'bold',
+  },
+
+  logoutButton2: {
+    marginTop:10,
+   paddingVertical:5,
+  paddingHorizontal:20,
+    backgroundColor: '#d31e1ec6',
+    borderRadius: 5,
+   
+  },
+  logoutButtonText2: {
+    color: 'white',
+    fontSize: 14,
   },
 });

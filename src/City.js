@@ -461,10 +461,13 @@ const MyComponent = ({ route }) => {
 
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.scrollContainer}>
-      <Image
+      {/* <Image
         source={require('../assets/map.png')}
         style={styles.image}
-      />
+      /> */}
+         <Text style={styles.title}>
+          Add Further Details of YourSelf to get search by peoples
+        </Text>
 
       <View style={styles.inputContainer}>
         <Text style={styles.label}>Select State:</Text>
@@ -546,22 +549,30 @@ const MyComponent = ({ route }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f4c2c2',
+    backgroundColor: '#f4c2c285',
   },
   scrollContainer: {
-    padding: 16,
+  
   },
   inputContainer: {
-    marginTop: 20,
-    marginBottom: 26,
+    padding:10,
+  
     borderRadius: 8,
     paddingVertical: 10,
   },
+  title: {
+    marginTop:80,
+    marginBottom: '8%',
+    fontSize: 22,
+    fontFamily: 'Montserrat-Regular',
+    textAlign: 'center',
+    color: '#000000',
+  },
   image: {
-    width: 120,
+    width: 110,
     height: 120,
     marginTop: 40,
-    borderRadius: 60,
+    borderRadius: 0,
     alignSelf: 'center',
   },
   continueButton: {
@@ -579,7 +590,7 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 16,
-    color: '#ec1f4c',
+    color: '#000000',
     marginBottom: 8,
   },
   pickerContainer: {
@@ -592,11 +603,11 @@ const styles = StyleSheet.create({
   },
   pickerText: {
     fontSize: 18,
-    color: '#cc7676b8',
+    color: '#000000ff',
   },
   picker: {
     height: 40,
-    borderColor: '#a12020',
+    borderColor: '#000000',
     borderWidth: 1,
     borderRadius: 8,
   },
@@ -604,14 +615,15 @@ const styles = StyleSheet.create({
     marginTop: '100%',
     flex: 1,
     justifyContent: 'flex-end',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundColor: 'rgba(255, 255, 255, 1)',
   },
   modalContent: {
     borderWidth: 2,
-    backgroundColor: '#f4c2c2',
+    backgroundColor: '#ffffffdc',
     borderTopLeftRadius: 40,
     borderTopRightRadius: 40,
     padding: 26,
+    zIndex:5,
   },
   searchInput: {
     height: 50,
@@ -624,7 +636,7 @@ const styles = StyleSheet.create({
   },
   modalItem: {
     paddingVertical: 30,
-    color: '#a11c1c',
+    color: '#ffffff',
     borderBottomWidth: 1,
     borderBottomColor: '#000000',
   },

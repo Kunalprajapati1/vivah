@@ -101,7 +101,7 @@ const Data = ({ navigation }) => {
         setProfileCreated(true);
 
         setTimeout(() => {
-          navigation.navigate('User2', { uniqueId });
+          navigation.navigate('Login', { uniqueId });
         }, 1000);
       } catch (error) {
         console.error('Error:', error);
@@ -140,27 +140,28 @@ const Data = ({ navigation }) => {
       backgroundColor: '#fbd1d1',
       justifyContent: 'center',
       alignItems: 'center',
-      paddingHorizontal: 20,
+      // paddingHorizontal: 20,
       paddingTop: 20,
     },
     title: {
-      fontSize: 30,
-      letterSpacing: 2,
+      padding:3,
+      marginTop:30,
+      marginBottom: '8%',
+      fontSize: 22,
+      fontFamily: 'Montserrat-Regular',
       textAlign: 'center',
-      textDecorationLine: 'underline',
-      fontWeight: '600',
-   
-      color: '#e53371',
-      marginBottom: 20,
+      color: '#000000',
     },
     fieldContainer: {
+      paddingHorizontal: 20,
+
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
       lineHeight:10,
       paddingVertical: 20,
-      borderBottomWidth: 5,
-      borderColor: '#ff0011',
+      borderBottomWidth: 2,
+      borderColor: '#000000',
     },
     fieldName: {
       fontWeight: '500',

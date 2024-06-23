@@ -240,7 +240,7 @@ const Status = ({ navigation, route }) => {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Image source={require('../assets/map.png')} style={styles.image} />
+      {/* <Image source={require('../assets/map.png')} style={styles.image} /> */}
 
       <ProfileInfo title="Marital Status" options={maritalStatusOptions} onSelect={setMaritalStatus} />
       <ProfileInfo title="Height" options={heightOptions} onSelect={setHeight} />
@@ -270,23 +270,23 @@ const styles = StyleSheet.create({
     marginLeft: '35%',
   },
   inputContainer: {
-    marginBottom: 16,
+
     borderWidth: 1,
     top: 50,
     borderColor: '#ddd',
     borderRadius: 8,
-    paddingVertical: 20,
+    paddingVertical: 10,
     flexDirection: 'column',
   },
   label: {
     fontSize: 22,
-    color: '#e53371',
+    color: '#000000',
     marginBottom: '8%',
   },
   pickerContainer: {
-    height: 60,
+    height: 50,
     borderWidth: 1,
-    borderRadius: 8,
+    borderRadius: 28,
     justifyContent: 'space-between',
     paddingHorizontal: 10,
     flexDirection: 'row',
@@ -294,7 +294,7 @@ const styles = StyleSheet.create({
   },
   pickerText: {
     fontSize: 18,
-    color: '#e53371',
+    color: '#000000',
   },
   modalContainer: {
     flex: 1,
@@ -327,7 +327,7 @@ const styles = StyleSheet.create({
   continueButton: {
     padding: 15,
     borderRadius: 35,
-    marginTop: 40,
+    marginTop: 90,
     backgroundColor: '#e05654',
   },
   continueButtonText: {
