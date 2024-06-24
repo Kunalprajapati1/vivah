@@ -163,15 +163,16 @@ const PersonDetails2 = ({ route, navigation }) => {
           >
             {/* Your back button content */}
           </TouchableOpacity>
-          <TouchableOpacity
-                onPress={handleConnect}
-                style={styles.connectButton}>
-                <Text style={styles.connectButtonText}>Add as Favorite</Text>
-              </TouchableOpacity>
+     
 
 
           {personData && (
             <View style={styles.postContainer}>
+                   <TouchableOpacity
+                onPress={handleConnect}
+                style={styles.connectButton}>
+                <Text style={styles.connectButtonText}>Add as Favorite 📑</Text>
+              </TouchableOpacity>
               <Text style={styles.B}>Uploded by bicholia</Text>
               <Text style={styles.nameText}>
                 {personData.name}
@@ -298,9 +299,9 @@ const styles = StyleSheet.create({
 color:'#e05654',
 textAlign:'center',
 fontFamily: 'Montserrat-Regular',
-fontSize:29,
-marginBottom:30,
-fontWeight:'500',
+fontSize:24,
+marginBottom:10,
+
 
     },
     chatButton: {
@@ -332,11 +333,13 @@ fontWeight:'500',
       fontFamily: 'Montserrat-Regular',
     },
     connectButton: {
+      marginBottom:20,
+      right:20,
       backgroundColor: '#e05654',
-  alignSelf:'flex-end',
+  alignSelf:'flex-start',
       padding: 10,
       borderRadius: 35,
-      marginTop: 10,
+     
     },
     connectButtonText: {
       color: 'white',

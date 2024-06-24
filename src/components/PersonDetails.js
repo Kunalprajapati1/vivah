@@ -732,13 +732,15 @@ const PersonDetails = ({ route, navigation }) => {
             }}>
             {/* Your back button content */}
           </TouchableOpacity>
-          <TouchableOpacity
+          
+          {personData && (
+            
+            <View style={styles.postContainer}>
+              <TouchableOpacity
                 onPress={handleConnect}
                 style={styles.connectButton}>
-                <Text style={styles.connectButtonText}>Add as Favorite</Text>
+                <Text style={styles.connectButtonText}>Add as Favorite 📑</Text>
               </TouchableOpacity>
-          {personData && (
-            <View style={styles.postContainer}>
               <Text style={styles.nameText}>
                 {personData.firstName} {personData.lastName}
               </Text>
@@ -894,11 +896,13 @@ const styles = StyleSheet.create({
     fontFamily: 'Montserrat-Regular',
   },
   connectButton: {
+    marginBottom:20,
+    right:20,
     backgroundColor: '#e05654',
-alignSelf:'flex-end',
+alignSelf:'flex-start',
     padding: 10,
     borderRadius: 35,
-    marginTop: 10,
+   
   },
   connectButtonText: {
     color: 'white',

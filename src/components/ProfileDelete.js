@@ -1,10 +1,10 @@
-
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Alert, TextInput, TouchableOpacity, ScrollView, Modal, ActivityIndicator,Image } from 'react-native';
+import { StyleSheet, Text, View, Alert, TextInput, TouchableOpacity, ScrollView, Modal, ActivityIndicator, Image, BackHandler, ToastAndroid } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 import { useNavigation } from '@react-navigation/native';
+
 const getUserDetails = async (email) => {
   try {
     const snapshot = await firestore().collection('ProfileFor').where('email', '==', email).get();
@@ -30,6 +30,7 @@ const ProfileDelete = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isModalLoading, setIsModalLoading] = useState(false);
   const navigation = useNavigation();
+
   useEffect(() => {
     const fetchUserDetails = async () => {
       setIsLoading(true);
@@ -41,46 +42,18 @@ const ProfileDelete = () => {
     fetchUserDetails();
   }, []);
 
-//   const handleDelete = async () => {
-//     if (!password) {
-//       setPasswordError('Password is required');
-//       return;
-//     }
+  useEffect(() => {
+    const handleBackPress = () => {
+      navigation.goBack(); // Navigate to the previous page
+      return true; // Prevent default behavior (closing the app)
+    };
 
-//     setIsModalLoading(true);
+    const backHandler = BackHandler.addEventListener('hardwareBackPress', handleBackPress);
 
-//     Alert.alert(
-//       'Delete Profile',
-//       'Are you sure you want to delete your profile? This action cannot be undone.',
-//       [
-//         { text: 'Cancel', style: 'cancel', onPress: () => setIsModalLoading(false) },
-//         {
-//           text: 'OK',
-//           onPress: async () => {
-//             try {
-//               const email = await AsyncStorage.getItem('userEmail');
-//               await auth().signInWithEmailAndPassword(email, password);
-
-//               const user = await getUserDetails(email);
-//               if (user) {
-//                 await firestore().collection('ProfileFor').doc(user.docId).delete();
-//                 await firestore().collection('ProfileDeleted').add(user);
-//                 console.log('Profile Deleted and Data Added to ProfileDeleted Collection');
-//                 Alert.alert('Success', 'Your profile has been deleted.');
-//                 setPassword('');
-//                 setModalVisible(false);
-//               }
-//             } catch (error) {
-//               console.error('Error deleting profile:', error);
-//               Alert.alert('Error', 'Failed to delete profile. Please try again.');
-//             } finally {
-//               setIsModalLoading(false);
-//             }
-//           },
-//         },
-//       ]
-//     );
-//   };
+    return () => {
+      backHandler.remove(); // Cleanup the event listener
+    };
+  }, [navigation]);
 
 const handleDelete = async () => {
     if (!password) {

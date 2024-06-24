@@ -2,8 +2,10 @@
 
 
 import React, { useEffect, useState } from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView, Modal, Dimensions, FlatList } from 'react-native';
+import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView, Modal, Dimensions, FlatList,BackHandler,ToastAndroid } from 'react-native';
 import firestore from '@react-native-firebase/firestore';
+import { useNavigation } from '@react-navigation/native';
+
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -14,6 +16,20 @@ const WatchUserScreen = ({ route }) => {
   const [isFollowing, setIsFollowing] = useState(false);
   const [viewImageModal, setViewImageModal] = useState(false);
   const [selectedImageUri, setSelectedImageUri] = useState('');
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    const handleBackPress = () => {
+      navigation.goBack(); // Navigate to the previous page
+      return true; // Prevent default behavior (closing the app)
+    };
+
+    const backHandler = BackHandler.addEventListener('hardwareBackPress', handleBackPress);
+
+    return () => {
+      backHandler.remove(); // Cleanup the event listener
+    };
+  }, [navigation]);
 
   useEffect(() => {
     const fetchUserDetails = async () => {

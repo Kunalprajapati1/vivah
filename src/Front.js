@@ -824,6 +824,7 @@ import {
   ScrollView,
   TouchableOpacity,
   Modal,
+  BackHandler,
 } from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import {useNavigation} from '@react-navigation/native';
@@ -838,6 +839,20 @@ const Front = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [genderFilter, setGenderFilter] = useState('');
 
+
+  useEffect(() => {
+    const handleBackPress = () => {
+      navigation.navigate('Land');
+      return true; // Prevent default behavior (closing the app)
+    };
+
+    const backHandler = BackHandler.addEventListener('hardwareBackPress', handleBackPress);
+
+    return () => {
+      backHandler.remove(); // Cleanup the event listener
+    };
+  }, [navigation]);
+  
   useEffect(() => {
     const fetchProfileForData = () => {
       const unsubscribe = firestore()

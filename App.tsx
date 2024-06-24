@@ -46,6 +46,7 @@ import ProfileDelete from './src/components/ProfileDelete';
 import Recover from './src/components/Recover';
 import About from './src/components/About';
 import Connected from './src/components/Connected';
+import Terms from './src/components/Terms';
 
 
 
@@ -105,6 +106,7 @@ const App = () => {
       <Stack.Screen name="Recover" component={Recover}/>
       <Stack.Screen name="About" component={About}/>
       <Stack.Screen name="Connected" component={Connected}/>
+      <Stack.Screen name="Terms" component={Terms}/>
      
   
       

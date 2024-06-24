@@ -1,7 +1,24 @@
-import React from 'react';
-import { StyleSheet, Text, View, ScrollView, Image } from 'react-native';
+import React, { useState,useEffect } from 'react';
+
+import { StyleSheet, Text, View, ScrollView, Image,BackHandler,ToastAndroid } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+
 
 const About = () => {
+  const navigation = useNavigation();
+  useEffect(() => {
+    const handleBackPress = () => {
+      navigation.goBack(); // Navigate to the previous page
+      return true; // Prevent default behavior (closing the app)
+    };
+
+    const backHandler = BackHandler.addEventListener('hardwareBackPress', handleBackPress);
+
+    return () => {
+      backHandler.remove(); // Cleanup the event listener
+    };
+  }, [navigation]);
+
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Image

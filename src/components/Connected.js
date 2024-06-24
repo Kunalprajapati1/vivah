@@ -615,7 +615,7 @@
 
 
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, FlatList, TouchableOpacity, ActivityIndicator, Modal, Button } from 'react-native';
+import { StyleSheet, Text, View, FlatList, TouchableOpacity, ActivityIndicator, Modal, Button,BackHandler,ToastAndroid } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import FastImage from 'react-native-fast-image';
 import { useNavigation } from '@react-navigation/native';
@@ -629,6 +629,19 @@ const Connected = () => {
   const [navigating, setNavigating] = useState(false);
   const [deleting, setDeleting] = useState(false);
   const navigation = useNavigation();
+
+  useEffect(() => {
+    const handleBackPress = () => {
+      navigation.goBack(); // Navigate to the previous page
+      return true; // Prevent default behavior (closing the app)
+    };
+
+    const backHandler = BackHandler.addEventListener('hardwareBackPress', handleBackPress);
+
+    return () => {
+      backHandler.remove(); // Cleanup the event listener
+    };
+  }, [navigation]);
 
   const fetchConnectedUsers = async () => {
     try {

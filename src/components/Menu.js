@@ -149,6 +149,9 @@ const Menu = ({ navigation }) => {
                   else if (menuItem.name === 'About Sanjog') {
                     navigation.navigate('About');
                   }
+                  else if (menuItem.name === 'Terms & Conditions') {
+                    navigation.navigate('Terms');
+                  }
                   
                 }}
               >

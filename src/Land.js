@@ -28,18 +28,7 @@ const IconButton = ({ onPress, source, style, rotate, focused }) => {
     inputRange: [0, 1],
     outputRange: ['0deg', '360deg'],
   });
-  useEffect(() => {
-    const handleBackPress = () => {
-      navigation.navigate('Land');
-      return true; // Prevent default behavior (closing the app)
-    };
-
-    const backHandler = BackHandler.addEventListener('hardwareBackPress', handleBackPress);
-
-    return () => {
-      backHandler.remove(); // Cleanup the event listener
-    };
-  }, [navigation]);
+  
   return (
     <TouchableHighlight
       style={[styles.button, style]}

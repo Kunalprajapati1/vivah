@@ -1,11 +1,11 @@
 
 
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Alert,Image } from 'react-native';
+import React, { useState ,useEffect} from 'react';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Alert,Image,BackHandler,ToastAndroid } from 'react-native';
 import firestore from '@react-native-firebase/firestore'; // Import Firestore from Firebase
 import { Linking } from 'react-native';
 import { useColorScheme } from 'react-native';
-
+import { useNavigation } from '@react-navigation/native';
 const Contact = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -14,6 +14,19 @@ const Contact = () => {
   const colorScheme = useColorScheme();
   // const textColor = colorScheme === 'dark' ? '#000000' : '#ffffff';
   const textColor = colorScheme === 'dark' ? '#000000' : '#000000';
+  const navigation = useNavigation();
+  useEffect(() => {
+    const handleBackPress = () => {
+      navigation.goBack(); // Navigate to the previous page
+      return true; // Prevent default behavior (closing the app)
+    };
+
+    const backHandler = BackHandler.addEventListener('hardwareBackPress', handleBackPress);
+
+    return () => {
+      backHandler.remove(); // Cleanup the event listener
+    };
+  }, [navigation]);
 
 
   const handleSubmit = () => {
