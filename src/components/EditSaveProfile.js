@@ -1697,8 +1697,12 @@ const EditSaveProfile = ({ navigation }) => {
     fetchUserData();
   }, []);
 
+  // const handleLogout = async () => {
+  //   await AsyncStorage.clear();
+  //   navigation.navigate('Landing');
+  // };
   const handleLogout = async () => {
-    await AsyncStorage.clear();
+    await AsyncStorage.removeItem('userEmail');
     navigation.navigate('Landing');
   };
   const handleFavorite = async () => {
