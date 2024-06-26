@@ -706,11 +706,13 @@
 
 
 import React, { useState, useEffect } from 'react';
-import { View, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Image, StyleSheet, TouchableOpacity,BackHandler,ToastAndroid } from 'react-native';
 import { GiftedChat, Bubble, InputToolbar } from 'react-native-gifted-chat';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import firestore from '@react-native-firebase/firestore';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { useNavigation } from '@react-navigation/native';
+
 
 const Chat = ({ route }) => {
   const [messages, setMessages] = useState([]);
@@ -721,6 +723,19 @@ const Chat = ({ route }) => {
   const [colorChangeModalVisible, setColorChangeModalVisible] = useState(false);
   const { personData } = route.params;
   const defaultAvatar = require('../assets/user.png');
+  const navigation = useNavigation();
+  useEffect(() => {
+    const handleBackPress = () => {
+      navigation.goBack(); // Navigate to the previous page
+      return true; // Prevent default behavior (closing the app)
+    };
+
+    const backHandler = BackHandler.addEventListener('hardwareBackPress', handleBackPress);
+
+    return () => {
+      backHandler.remove(); // Cleanup the event listener
+    };
+  }, [navigation]);
 
   useEffect(() => {
     const getUserEmail = async () => {
@@ -772,23 +787,7 @@ const Chat = ({ route }) => {
       }
     };
 
-    // const fetchUserBackgroundColor = async () => {
-    //   try {
-       
-
-    //     if (userProfileSnapshot.exists) {
-    //       const userData = userProfileSnapshot.data();
-    //       setUserBackgroundColor(userData.backgroundColor || '#761515dd');
-    //     } else {
-    //       await firestore().collection('ProfileFor').doc(userEmail).set({
-    //         backgroundColor: '#761515dd',
-    //       });
-    //     }
-    //   } catch (error) {
-    //     console.error('Error fetching user background color:', error);
-    //   }
-    // };
-
+  
     getUserEmail();
     const unsubscribeMessages = subscribeToMessages();
     fetchUserAvatar();
@@ -846,6 +845,83 @@ const Chat = ({ route }) => {
     } catch (error) {
       console.error('Error sending message:', error);
     }
+
+    // try {
+    
+
+    //   const messageRef = await firestore()
+    //     .collection('chk')
+     
+    //     .add({
+    //       senderEmail:userEmail,
+    //       receiverEmail: personData.email,
+    //       _id: newMessage._id,
+    //       text: newMessage.text,
+    //       createdAt: newMessage.createdAt,
+    //       user: {
+    //         _id: userId,
+    //         name: userName,
+    //         avatar: userAvatar || defaultAvatar,
+    //       },
+         
+    //     });
+
+    //   await messageRef.update({
+    //     received: true,
+    //   });
+
+    //   // Simulate a delay before updating the seen status (replace this with actual logic)
+    //   await new Promise(resolve => setTimeout(resolve, 3000));
+
+    //   await messageRef.update({
+    //     seen: true,
+    //   });
+
+    //   setText('');
+    // } catch (error) {
+    //   console.error('Error sending message:', error);
+    // }
+
+    try {
+      // Check if a document already exists with the same senderEmail and receiverEmail
+      const existingMessage = await firestore()
+        .collection('chk')
+        .where('senderEmail', '==', userEmail)
+        .where('receiverEmail', '==', personData.email)
+        .get();
+    
+      if (existingMessage.empty) {
+        // No existing message found, so add a new one
+        const messageRef = await firestore()
+          .collection('chk')
+          .add({
+            senderEmail: userEmail,
+            receiverEmail: personData.email,
+            _id: newMessage._id,
+            text: newMessage.text,
+            createdAt: newMessage.createdAt,
+            user: {
+              _id: userId,
+              name: userName,
+              avatar: userAvatar || defaultAvatar,
+            },
+          });
+    
+        // Update received and seen status
+        await messageRef.update({
+          received: true,
+          seen: true,
+        });
+    
+        setText('');
+      } else {
+        console.log('Message already exists for this sender and receiver.');
+        // Handle or ignore duplicate message scenario as per your application's logic
+      }
+    } catch (error) {
+      console.error('Error sending message:', error);
+    }
+    
   };
 
   const renderBubble = (props) => {
@@ -895,19 +971,11 @@ const Chat = ({ route }) => {
   const renderInputToolbar = (props) => {
     return (
       <InputToolbar
-        {...props}
-        containerStyle={styles.inputToolbar}
-        primaryStyle={{ alignItems: 'center' }}
+      {...props}
+      containerStyle={styles.inputToolbar}
+      primaryStyle={{ alignItems: 'center' }}
       >
-        <TouchableOpacity
-          style={styles.sendButtonContainer}
-          onPress={() => props.onSend({ text: props.text })}
-        >
-          <Image
-            source={require('../assets/msg.png')}
-            style={styles.sendButtonIcon}
-          />
-        </TouchableOpacity>
+       
       </InputToolbar>
     );
   };
@@ -938,6 +1006,10 @@ const styles = StyleSheet.create({
   },
   inputToolbar: {
     backgroundColor: '#f4f4f4',
+    borderTopWidth: StyleSheet.hairlineWidth,
+    borderTopColor: '#000000',
+    paddingVertical: 5,
+    paddingHorizontal: 12,
   },
   textInput: {
     color: '#000',
@@ -946,11 +1018,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginLeft: 10,
+    alignSelf:"center",
   },
   sendButtonIcon: {
     width: 24,
     height: 24,
-    bottom: 10,
+    bottom: 90,
     right: 30,
     tintColor: '#761515dd',
   },
